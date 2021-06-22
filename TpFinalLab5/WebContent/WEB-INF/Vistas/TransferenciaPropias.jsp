@@ -1,44 +1,4 @@
 <%@ include file="HeaderMenu.jsp"%>
-<script>
-	$(document).ready(function() {
-		$('#tablaTransacciones').DataTable({
-			"lengthChange" : false,
-			"info" : false,
-			"pageLength" : 5
-		});
-	});
-</script>
-<title>Transferencias Propias</title>
-</head>
-<header class="header-container">
-	<div class="container">
-		<div class="row">
-			<div class="cool-sm-12">
-				<ul>
-					<li><h5>
-							<a class="header-nav-anchor" href="redirectMenuPrincipal.do">Menu
-								Principal</a>
-						</h5></li>
-					<li><h5>
-							<a class="header-nav-anchor"
-								href="redirectTransferenciaCliente.do">Transferencias a
-								clientes</a>
-						</h5></li>
-					<li><h5>
-							<a class="header-nav-anchor"
-								href="redirectTransferenciaPropias.do">Transferencias a
-								cuentas propias</a>
-						</h5></li>
-					<li><h5>
-							<a class="header-nav-anchor" href="redirectOperacionesCuenta.do">Operaciones
-								por cuenta</a>
-						</h5></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</header>
-<body>
 	<div class="main-container">
 		<div class="container content-container">
 			<div class="title-container" id="titulo">
@@ -46,6 +6,9 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-3">
+				<div>
+				<h4>Seleccione el Tipo de cuenta</h4>
+				</div>
 				<div>
 				<select>
 					<option>Cuenta en Pesos</option>
