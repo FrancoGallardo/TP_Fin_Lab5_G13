@@ -14,6 +14,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectMenu() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("MenuPrincipal");
+		mv.addObject("PageTitle", "Menu Principal");
 		return mv;
 	}
 	
@@ -22,14 +23,16 @@ public class LoginController {
 	public ModelAndView eventoRegister() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("MenuPrincipal");
+		mv.addObject("PageTitle", "Registrarse");
 		return mv;
 	}
 	
-	//Cambiar contrase�a redirecciona al login
+	//Cambiar contrase�a redirecciona al login
 	@RequestMapping("forgotPassword.do")
 	public ModelAndView eventoForgotPassword() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("Login");
+		mv.addObject("PageTitle", "Cambiar Contraseña");
 		return mv;
 	}
 	
@@ -38,6 +41,7 @@ public class LoginController {
 	public ModelAndView eventoInicarAplicaciones() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("Login");
+		mv.addObject("PageTitle", "Login");
 		return mv;
 	}
 	
@@ -45,7 +49,7 @@ public class LoginController {
 	@RequestMapping("redirectRegister.do")
 	public ModelAndView eventoRedirectRegister() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("Register");
+		mv.setViewName("Registrarse");
 		return mv;
 	}
 	
@@ -54,6 +58,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectForgotPassword() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("ForgotPassword");
+		mv.addObject("PageTitle", "Cambiar Contraseña");
 		return mv;
 	}
 	
@@ -62,6 +67,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectOperecionesCuenta() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("OperacionesCuenta");
+		mv.addObject("PageTitle", "Operaciones Cuenta");
 		return mv;
 	}
 	
@@ -69,6 +75,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectMenuPrincipal() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("MenuPrincipal");
+		mv.addObject("PageTitle", "Menu Principal");
 		return mv;
 	}
 	
@@ -76,6 +83,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectTransferenciaClientes() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("TransferenciaClientes");
+		mv.addObject("PageTitle", "Transferencia a Clientes");
 		return mv;
 	}
 	
@@ -83,6 +91,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectTransferenciaPropias() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("TransferenciaPropias");
+		mv.addObject("PageTitle", "Transferencias a Cuentas Propias");
 		return mv;
 	}
 	
