@@ -30,11 +30,11 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.1.0.Final</version>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
-        </dependency>
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.20</version>
+	</dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -42,25 +42,29 @@
         </dependency>
         	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-core</artifactId>
-	    <version>4.2.5.RELEASE</version>
-	</dependency>
-	
-	  <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->  
-	<dependency>  
-	    <groupId>org.springframework</groupId>  
-	    <artifactId>spring-webmvc</artifactId>  
-	    <version>4.2.5.RELEASE</version>  
-	</dependency>  
-	
-	<dependency>
-	  <groupId>jstl</groupId>
-	  <artifactId>jstl</artifactId>
-	  <version>1.2</version>
-	</dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.1.1.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.1.1.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+    <version>5.1.1.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.1.1.RELEASE</version>
+</dependency>
+
 	</dependencies>
 	<build>
+	   <sourceDirectory>src/main/java</sourceDirectory>
 		<finalName>Tp_final_lab5</finalName>
 	</build>
 </project>

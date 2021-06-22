@@ -30,3 +30,9 @@
 	</div>
 </body>
 </html>
+
+	<dependency>
+    <groupId>org.webjars.bower</groupId>
+    <artifactId>jquery</artifactId>
+    <version>3.5.1</version>
+</dependency>

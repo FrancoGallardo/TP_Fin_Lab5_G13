@@ -21,7 +21,8 @@
         <mvc:resources mapping="/Multimedia/**" location="/Multimedia/" />
     <!-- Define Spring MVC view resolver -->  
     
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>  
             <property name="prefix" value="WEB-INF/Vistas/"></property>  
             <property name="suffix" value=".jsp"></property>          
          </bean>  
