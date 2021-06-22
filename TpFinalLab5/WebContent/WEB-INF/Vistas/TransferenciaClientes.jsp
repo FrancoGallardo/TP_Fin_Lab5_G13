@@ -8,7 +8,7 @@
 		});
 	});
 </script>
-<title>Operaciones</title>
+<title>Transferencias Clientes</title>
 </head>
 <header class="header-container">
 	<div class="container">
@@ -47,11 +47,15 @@
 			<div class="row">
 				<div class="col-sm-12">
 				<form method="get" action="" class="form-content-container text-center">
-						<div class="">
-							<label for="txtCBU" class="label-cbu">Ingrese el CBU</label> <input
-								class="form-input" id="txtCBU" name="txtCBU" type="number" />
+						<div class="form-content">
+							<label for="txtCBU" class="label-cbu">Ingrese el CBU</label> 
+							<input class="form-input" id="txtCBU" name="txtCBU" type="number" />
+								</div>
+								<div class="form-content">
+							<label for="txtMonto" class="label-cbu">Ingrese el Monto</label>
+							<input class="form-input" id="txtMonto" name="txtMonto" type="number" />
 						</div>
-						<input class="form-input" id="search-client" name="search-client"
+						<input class="form-input" id="paid-button" name="paid-button"
 							type="submit" />
 					</form>
 				</div>
@@ -84,19 +88,6 @@
 						</tbody>
 					</table>
 					${Msg}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<form method="get" action="" class="form-content-container text-center">
-						<div class="">
-							<label for="txtMonto" class="label-cbu">Ingrese el Monto</label>
-							<input class="form-input" id="txtMonto" name="txtMonto"
-								type="number" />
-						</div>
-						<input class="form-input" id="paid-button" name="paid-button"
-							type="submit" />
-					</form>
 				</div>
 			</div>
 		</div>

@@ -65,5 +65,26 @@ public class LoginController {
 		return mv;
 	}
 	
+	@RequestMapping("redirectMenuPrincipal.do")
+	public ModelAndView eventoRedirectMenuPrincipal() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("MenuPrincipal");
+		return mv;
+	}
+	
+	@RequestMapping("redirectTransferenciaCliente.do")
+	public ModelAndView eventoRedirectTransferenciaClientes() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("TransferenciaClientes");
+		return mv;
+	}
+	
+	@RequestMapping("redirectTransferenciaPropias.do")
+	public ModelAndView eventoRedirectTransferenciaPropias() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("TransferenciaPropias");
+		return mv;
+	}
+	
 	
 }

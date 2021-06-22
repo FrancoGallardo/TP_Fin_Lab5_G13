@@ -25,6 +25,7 @@
 						</div>
 </header>
 <body>
+<div class="main-container">
 	<div class="container content-container">
 		<div class="title-container" id="titulo">
 			<h1 class="title">Operaciones</h1>
@@ -71,4 +72,5 @@
 			</div>
 		</div>
 	</div>
+		</div>
 	<%@ include file="FooterMenu.jsp"%>

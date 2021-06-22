@@ -7,12 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="redireccionar_pag2.html" method="get">
-Ingrese su nombre: <input type="text" name="txtNombre"><br/>
-Ingrese su edad: <input type="text" name="txtEdad">
-
-<input type="submit" value="Redireccion a pagina 2" name="btnRedirigir">
-
-</form>
+Este es el login
 </body>
 </html>
