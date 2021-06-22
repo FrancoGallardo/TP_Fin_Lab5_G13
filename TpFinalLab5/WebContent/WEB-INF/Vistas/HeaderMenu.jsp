@@ -24,7 +24,7 @@
 
 <script>
 	$(document).ready(function() {
-		$('#tablaTransacciones').DataTable({
+		$('#bankTable').DataTable({
 			"lengthChange" : false,
 			"info" : false,
 			"pageLength" : 5

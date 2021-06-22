@@ -1,30 +1,4 @@
 <%@ include file="HeaderMenu.jsp"%>
-<script>
-	$(document).ready(function() {
-		$('#tablaOperaciones').DataTable({
-			"lengthChange" : false,
-			"info" : false,
-			"pageLength" : 5
-		});
-	});
-</script>
-<title>Operaciones</title>
-</head>
-<header class="header-container">
-<div class="container">
-<div class="row">
-<div class="cool-sm-12">
-					<ul>
-						<li><h5><a href="redirectMenuPrincipal.do">Menu Principal</a></h5></li>
-						<li><h5><a href="redirectTransferenciaCliente.do">Transferencias a clientes</a></h5></li>
-						<li><h5><a href="redirectTransferenciaPropias.do">Transferencias a cuentas propias</a></h5></li>
-						<li><h5><a href="redirectOperacionesCuenta.do">Operaciones por cuenta</a></h5></li>
-					</ul>
-				</div>
-				</div>
-						</div>
-</header>
-<body>
 <div class="main-container">
 	<div class="container content-container">
 		<div class="title-container" id="titulo">
@@ -32,7 +6,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<table id="tablaOperaciones">
+				<table id="bankTable">
 					<thead>
 						<tr>
 							<th>Numero Transacción</th>

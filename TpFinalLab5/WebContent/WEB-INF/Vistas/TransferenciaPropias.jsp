@@ -17,7 +17,7 @@
 				</div>
 				</div>
 				<div class="col-sm-9">
-					<table id="tablaTransacciones">
+					<table id="bankTable">
 						<thead>
 							<tr>
 								<th>Numero Transacción</th>

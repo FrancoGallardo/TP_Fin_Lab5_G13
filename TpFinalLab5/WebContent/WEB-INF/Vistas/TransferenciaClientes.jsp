@@ -7,22 +7,22 @@
 			<div class="row">
 				<div class="col-sm-12">
 				<form method="get" action="" class="form-content-container text-center">
-						<div class="form-content">
+						<div class="form-content col-md-6">
 							<label for="txtCBU" class="label-cbu">Ingrese el CBU</label> 
 							<input class="form-input" id="txtCBU" name="txtCBU" type="number" />
 								</div>
-								<div class="form-content">
+								<div class="form-content col-md-6">
 							<label for="txtMonto" class="label-cbu">Ingrese el Monto</label>
 							<input class="form-input" id="txtMonto" name="txtMonto" type="number" />
-						</div>
-						<input class="form-input" id="paid-button" name="paid-button"
-							type="submit" />
+						</div >
+						<input class="form-input col-md-4 col-md-offset-4" id="paid-button" name="paid-button"
+							type="submit"  style="margin-top:2%; margin-bottom:2%; padding:5px"/>
 					</form>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<table id="tablaTransacciones">
+					<table id="bankTable">
 						<thead>
 							<tr>
 								<th>Numero Transacción</th>
