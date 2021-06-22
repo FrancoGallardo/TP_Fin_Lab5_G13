@@ -1,0 +1,62 @@
+/* Header */
+
+.header-container{
+	padding: 10px 0;
+}
+
+.header-container ul{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0;
+}
+
+.header-container ul li{
+	    width: 20%;
+    text-align: center;
+}
+
+.header-container .header-nav-anchor{
+	color: #000000;
+}
+
+/* Menu Principal */
+
+.main-container{
+	    color: #ffffff;
+    background-color: #308fb9;
+}
+
+.content-container{
+	padding-bottom: 3%;
+}
+
+.form-content-container{
+	padding: 20px 0
+}
+
+.label-cbu{
+	padding-right: 10px;
+}
+
+.dataTables_wrapper .dataTables_filter,
+.dataTables_paginate{
+	display: none;
+}
+
+/* Footer */
+
+.footer-container,
+.header-container{
+	    background-color: #f7f7f7;
+}
+
+.footer-container li,
+.header-container li{
+	    list-style-type: none;
+}
+
+.menu-footer-location,
+.menu-footer-email,
+.menu-footer-telephone{
+	padding: 10px 0;
+}

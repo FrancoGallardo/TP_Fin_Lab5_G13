@@ -1,0 +1,87 @@
+.header-title{
+	text-align: center;
+}
+
+.form-label{
+	font-size:22px;
+	color:#000000;
+	margin-right: 10px;
+	    display: none;
+}
+
+.title-container{
+	text-align: center;
+    margin-bottom: 20px;
+}
+
+.title-container .fa-user-circle{
+	font-size: 120px;
+}
+
+.login-button{
+	text-transform: uppercase;
+    font-size: 12px;
+    padding: 10px 20px;
+        background-color: #0000004a;
+        color: #ffffff;
+}
+
+.user-container,
+.password-container{
+	margin-bottom: 10px;
+}
+
+.login-container{
+	    color: #ffffff;
+    background-color: #308fb9;
+}
+
+.column-container{
+	margin-top: 10%;
+}
+
+.form-input{
+font-size: 14px;
+    border: none;
+    background-color: #ededed;
+    padding: 5px 5px 5px 25px;
+    width: 280px;
+    outline: none;
+    border-bottom: 2px solid #ededed;
+}
+
+
+input[type="text"]:hover, input[type="password"]:hover{
+	animation-name: Cambio_Color;
+  	animation-duration: 1s;
+  	border-bottom: 2px solid red;
+}
+
+input[type="text"]:hover:after, input[type="password"]:hover:after{
+  	animation-name: Sale_Color;
+  	animation-duration: 1s;
+  	border-bottom: 2px solid black;
+}
+
+
+input[type="button"],input[type="submit"]{
+    margin-top: 10px;
+}
+
+.buttons-container{
+	    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+	}
+
+	.button-container{
+	padding: 10px
+	}
+	
+	.buttons-container a {
+	padding: 10px;
+    border: 1px solid;
+    text-decoration: none;
+    color: #ffffff;
+	}
