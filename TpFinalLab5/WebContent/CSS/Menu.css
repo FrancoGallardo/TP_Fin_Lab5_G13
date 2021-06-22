@@ -36,6 +36,7 @@
 
 .main-container{
      background-color: #f7f7f7;
+     min-height: 66vh;
 }
 
 .content-container{
@@ -70,9 +71,16 @@
 .menu-footer-location,
 .menu-footer-email,
 .menu-footer-telephone{
-	padding: 10px 0;
+	    padding-bottom: 15px;
 	display: flex;
 	align-items: flex-start;
+}
+
+.footer-first-column,
+.footer-second-column,
+.footer-third-column{
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 
 
@@ -81,6 +89,11 @@
 .footer-container h5,
 .footer-container p{
 	color: #ffffff;
+}
+
+
+.footer-container h5:first-of-type{
+	margin-top: 0;
 }
 
 .footer-third-column span{
