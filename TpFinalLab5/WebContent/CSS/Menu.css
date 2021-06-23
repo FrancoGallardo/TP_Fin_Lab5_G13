@@ -6,17 +6,20 @@
 
 .header-container ul{
 	display: flex;
-	justify-content: center;
+  justify-content: flex-end;
 	margin-bottom: 0;
+	padding: 0;
 }
 
 .header-container ul li{
-	    width: 25%;
+	    width: 20%;
     text-align: center;
 }
 
 .header-container .header-nav-anchor{
 	color: #ffffff;
+	    font-size: 13px;
+    font-weight: bold;
 }
 
 .header-container ul .home-nav-item{
@@ -24,12 +27,35 @@
 }
 
 .header-container ul .transfer-nav-item{
-	width: 32%
+	width: 28%
 }
 
+.header-container ul .header-user-name{
+	    color: #ffffff;
+    font-weight: bold;
+    text-decoration: underline;
+     font-size: 13px;
+margin-right: 5px
+}
+
+.header-container ul .nav-user-item{
+	width: 15%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.header-user-icon{
+	color: #ffffff;
+}
+   
 .header-row{
 	display: flex;
 	align-items: center;
+}
+
+.header-row img{
+    max-width: 90%;
 }
 
 /* Menu Principal */
@@ -54,6 +80,12 @@
 .dataTables_wrapper .dataTables_filter,
 .dataTables_paginate{
 	display: none;
+}
+
+.paid-button{
+	width: 30%;
+    margin: 2% auto;
+    padding: 5px;
 }
 
 /* Footer */

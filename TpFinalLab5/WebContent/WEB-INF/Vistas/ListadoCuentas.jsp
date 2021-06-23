@@ -1,23 +1,12 @@
 <%@ include file="HeaderMenu.jsp"%>
-<script>
-	$(document).ready(function() {
-		$('#tablaCuentas').DataTable({
-			"lengthChange" : false,
-			"info" : false,
-			"pageLength" : 5
-		});
-	});
-</script>
-<title>Listado Cuenta</title>
-</head>
-<body>
+<div class="main-container">
 	<div class="container content-container">
-		<div class="title-container" id="titulo">
-			<h1 class="title">Lista de Cuentas</h1>
-		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<table id="tablaCuentas">
+				<div class="title-container col-sm-12" id="titulo">
+					<h1 class="title">Lista de Cuentas</h1>
+				</div>
+				<table id="bankTable">
 					<thead>
 						<tr>
 							<th>Numero Transacción</th>
@@ -41,7 +30,7 @@
 							<td>21/06/2021</td>
 							<td>Realizado</td>
 						</tr>
-							<tr>
+						<tr>
 							<td>2</td>
 							<td>455484512</td>
 							<td>121524510</td>
@@ -57,4 +46,5 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="FooterMenu.jsp"%>
+</div>
+<%@ include file="FooterMenu.jsp"%>

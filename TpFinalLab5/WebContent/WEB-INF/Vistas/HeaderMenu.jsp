@@ -43,24 +43,28 @@
 			</div>
 			<div class="col-sm-9">
 				<ul>
-					<li class="home-nav-item"><h5>
+					<li class="home-nav-item"><h6>
 							<a class="header-nav-anchor" href="redirectMenuPrincipal.do">Menu
 								Principal</a>
-						</h5></li>
-					<li><h5>
+						</h6></li>
+					<li><h6>
 							<a class="header-nav-anchor"
 								href="redirectTransferenciaCliente.do">Transferencias a
 								clientes</a>
-						</h5></li>
-					<li class="transfer-nav-item"><h5>
+						</h6></li>
+					<li class="transfer-nav-item"><h6>
 							<a class="header-nav-anchor"
 								href="redirectTransferenciaPropias.do">Transferencias a
 								cuentas propias</a>
-						</h5></li>
-					<li><h5>
+						</h6></li>
+					<li><h6>
 							<a class="header-nav-anchor" href="redirectOperacionesCuenta.do">Operaciones
 								por cuenta</a>
-						</h5></li>
+						</h6></li>
+						<li class="nav-user-item">
+							<h6 class="header-user-name">Usuario</h6>
+								<i class="fa fa-user-circle header-user-icon" aria-hidden="true"></i>
+						</li>
 				</ul>
 			</div>
 		</div>

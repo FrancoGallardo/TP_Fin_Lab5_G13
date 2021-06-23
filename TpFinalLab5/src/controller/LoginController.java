@@ -49,7 +49,7 @@ public class LoginController {
 	@RequestMapping("redirectRegister.do")
 	public ModelAndView eventoRedirectRegister() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("Registrarse");
+		mv.setViewName("Register");
 		return mv;
 	}
 	
@@ -95,5 +95,28 @@ public class LoginController {
 		return mv;
 	}
 	
+	@RequestMapping("redirectListadoCuentas.do")
+	public ModelAndView eventoRedirectListadoCuentas() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("ListadoCuentas");
+		mv.addObject("PageTitle", "Listado Cuentas");
+		return mv;
+	}
+	
+	@RequestMapping("redirectListadoClientes.do")
+	public ModelAndView eventoRedirectListadoClientes() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("ListadoClientes");
+		mv.addObject("PageTitle", "Listado Clientes");
+		return mv;
+	}
+	
+	@RequestMapping("redirectAltaCuentaCliente.do")
+	public ModelAndView eventoRedirectAltaCuentaCliente() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("AltaCuentaCliente");
+		mv.addObject("PageTitle", "Alta Cuenta");
+		return mv;
+	}
 	
 }

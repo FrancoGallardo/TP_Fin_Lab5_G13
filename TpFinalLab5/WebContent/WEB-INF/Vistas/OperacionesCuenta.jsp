@@ -1,8 +1,10 @@
 <%@ include file="HeaderMenu.jsp"%>
 <div class="main-container">
 	<div class="container content-container">
-		<div class="title-container" id="titulo">
+			<div class="row">
+		<div class="title-container col-sm-12" id="titulo">
 			<h1 class="title">Operaciones</h1>
+		</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
