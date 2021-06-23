@@ -9,16 +9,26 @@
 		<div class="row">
 			<form method="get" action=""
 				class="form-content-container text-center">
-				<div class="form-content col-md-6">
-					<label for="txtCBU" class="label-cbu">Ingrese el CBU</label> <input
-						class="form-input" id="txtCBU" name="txtCBU" type="number" />
+				<div class="form-content col-md-4">
+				<label for="txtCBUOrigen" class="label-cbu">Seleccione Cuenta Origen</label>
+					<select id="ddlCBUOrigen" class="label-cbu">
+						<option id="txtCBU" value="0" >Seleccione</option>
+					</select> 
 				</div>
-				<div class="form-content col-md-6">
+			<div class="form-content col-md-4">
 					<label for="txtMonto" class="label-cbu">Ingrese el Monto</label> <input
 						class="form-input" id="txtMonto" name="txtMonto" type="number" />
 				</div>
-				<input class="form-input paid-button" id="paid-button"
-					name="paid-button" type="submit" />
+				<div class="form-content col-md-4">
+					<label for="txtCBUDestino" class="label-cbu">Seleccione Cuenta Destino</label> 					
+					<select id="ddlCBUDestino" class="label-cbu">
+						<option id="txtCBU" value="0" >Seleccione</option>
+					</select> 
+				</div>
+				<div>
+					<input class="form-input paid-button" id="paid-button"
+						name="paid-button" type="submit" />
+				</div>
 			</form>
 		</div>
 		<div class="row">
