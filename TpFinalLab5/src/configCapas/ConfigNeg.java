@@ -1,4 +1,4 @@
-package DAO;
+package configCapas;
 
 public class ConfigNeg {
 

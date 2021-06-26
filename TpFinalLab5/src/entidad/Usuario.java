@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,12 +21,15 @@ public class Usuario implements Serializable{
 	@Column(name="Password")
 	private String Password;
 	@Column(name="TipoUsuario")
-	private Boolean TipoUsuario;
+	private String TipoUsuario;
 	@Column(name="Estado")
 	private Boolean Estado;
+	@Column(name="idUsuario")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUsuario;
 	
 	
-	public Usuario(String username, String password, Boolean tipoUsuario, Boolean estado) {
+	public Usuario(String username, String password, String tipoUsuario, Boolean estado) {
 		Username = username;
 		Password = password;
 		TipoUsuario = tipoUsuario;
@@ -50,11 +55,11 @@ public class Usuario implements Serializable{
 		Password = password;
 	}
 	
-	public Boolean getTipoUsuario() {
+	public String getTipoUsuario() {
 		return TipoUsuario;
 	}
 
-	public void setTipoUsuario(Boolean tipoUsuario) {
+	public void setTipoUsuario(String tipoUsuario) {
 		TipoUsuario = tipoUsuario;
 	}
 
@@ -65,13 +70,23 @@ public class Usuario implements Serializable{
 	public void setEstado(Boolean estado) {
 		Estado = estado;
 	}
+	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Usuario [Username=" + Username + ", Password=" + Password + ", TipoUsuario=" + TipoUsuario + ", Estado="
-				+ Estado + "]";
+				+ Estado + ", idUsuario=" + idUsuario + "]";
 	}
-	
+
 	public boolean equals(Usuario user) {
 		if (this.Username.equals(user.getUsername())) {
 			return true;

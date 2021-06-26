@@ -3,6 +3,7 @@ package entidad;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+
+
 
 @Entity
 @Table(name="Cliente")
@@ -38,10 +41,10 @@ public class Cliente implements Serializable{
 	private Date Fecha_Nac;
 	@Column(name="Direccion")
 	private String Direccion;
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="IdProvincia")
 	private Provincia provincia;
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="IdLocalidad")
 	private Localidad localidad;
 	

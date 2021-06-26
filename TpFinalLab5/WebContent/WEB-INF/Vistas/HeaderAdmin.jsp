@@ -45,22 +45,15 @@
 			<div class="col-sm-9">
 				<ul>
 					<li class="home-nav-item"><h6>
-							<a class="header-nav-anchor" href="redirectMenuPrincipal.do">Menu
-								Principal</a>
+							<a class="header-nav-anchor" href="redirectListaClientes.do">Lista de Clientes</a>
 						</h6></li>
 					<li><h6>
 							<a class="header-nav-anchor"
-								href="redirectTransferenciaCliente.do">Transferencias a
-								clientes</a>
+								href="redirectListaUsuarios.do">Lista de Usuarios</a>
 						</h6></li>
 					<li class="transfer-nav-item"><h6>
 							<a class="header-nav-anchor"
-								href="redirectTransferenciaPropias.do">Transferencias a
-								cuentas propias</a>
-						</h6></li>
-					<li><h6>
-							<a class="header-nav-anchor" href="redirectOperacionesCuenta.do">Operaciones
-								por cuenta</a>
+								href="redirectListaCuentas.do">Lista de Cuentas</a>
 						</h6></li>
 						<li class="nav-user-item">
 							<h6 class="header-user-name">${Usuario}</h6>

@@ -8,11 +8,10 @@
 		<div class="col-md-12 text-center column-container">
 			<div class="title-container ">
 		<i class="fa fa-user-circle" aria-hidden="true"></i>
-				<!-- <h1 class="header-title">Registrarse</h1> -->
 			</div>
 			<div class="form-container">
 				<form action="register.do" method="post">
-					<div id="divPadre">
+									<div id="divPadre">
 						<div class="user-container">
 							<label class="form-label" for="txtUsuario">Nombre de Usuario :</label>
 					<input
@@ -24,15 +23,16 @@
 								:</label> <input class="form-input" id="txtContrasenia"
 								name="txtContrasenia" type="password" placeholder="Contraseña" />
 						</div>
-							<div class="email-container">
-							<label class="form-label" for="txtEmail">Contraseña
-								:</label> <input class="form-input" id="txtEmail"
-								name="txtEmail" type="email" placeholder="Email" />
+							<div class="repeit-password-container">
+							<label class="form-label" for="txtRepitPassword">Repetir Contraseña
+								:</label> <input class="form-input" id="txtRepitPassword"
+								name="txtRepitPassword" type="password" placeholder="Repetir Contraseña" />
 						</div>
-						<input class="login-button" id="btnAceptar" type="button"
-							value="Registrarse" /> ${Msg}
-					</div>
+						<input class="login-button" id="btnAceptar" type="submit"
+							value="Registrarse" /> 
+								</div>
 				</form>
+				${Msg}
 			</div>
 			<div class="options-container">
 				<div class=" buttons-container">
