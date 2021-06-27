@@ -16,24 +16,11 @@ public class UsuarioDAOImp implements UsuarioDAO{
 	private Conexion con;
 	private Session session;
 	private Query query;
-	
-	@Override
-	public void Finalizar() {
-		con.cerrarSession();
-		((ConfigurableApplicationContext)(appContext)).close();
-	}
 
-	@Override
-	public void Inicializar() {
-		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
-		con = (Conexion) appContext.getBean("ConexionBD");
-		session=con.abrirConexion();
-	}
 	
 	@Override
 	public boolean insertarUsuario(Usuario user) {
 		Inicializar();
-		System.out.println(user.getUsername());
 		session.beginTransaction();
 		session.save(user);
 		session.getTransaction().commit();
@@ -108,9 +95,22 @@ public class UsuarioDAOImp implements UsuarioDAO{
 		Conexion con = new Conexion();
 		Session session = con.abrirConexion();
 		session.beginTransaction();
-		Usuario user = (Usuario)session.get(Usuario.class, "admin");
+		Usuario user = (Usuario)session.get(Usuario.class, Username);
 		con.cerrarSession();
 		return user;
+	}
+	
+	@Override
+	public void Finalizar() {
+		con.cerrarSession();
+		((ConfigurableApplicationContext)(appContext)).close();
+	}
+
+	@Override
+	public void Inicializar() {
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		con = (Conexion) appContext.getBean("ConexionBD");
+		session=con.abrirConexion();
 	}
 
 }

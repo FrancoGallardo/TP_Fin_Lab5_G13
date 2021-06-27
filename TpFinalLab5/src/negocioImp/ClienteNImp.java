@@ -9,12 +9,6 @@ import funcionesDAOImp.ClienteDAOImp;
 public class ClienteNImp implements ClienteN{
 
 	ClienteDAOImp clientDAO = new ClienteDAOImp();
-	
-	@Override
-	public Cliente verificarCliente(String Username, String Password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean insertarCliente(Cliente cli) {
@@ -28,7 +22,7 @@ public class ClienteNImp implements ClienteN{
 	}
 
 	@Override
-	public List<Cliente> obtenerCliente() {
+	public List<Cliente> obtenerClientes() {
 		return clientDAO.obtenerClientes();
 	}
 

@@ -32,6 +32,7 @@ public class UsuarioNImp implements UsuarioN{
 
 	@Override
 	public boolean insertarUsuario(Usuario user) {
+		System.out.println(user.getUsername());
 		return userDAO.insertarUsuario(user);
 	}
 	

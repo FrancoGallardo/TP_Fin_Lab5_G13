@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import negocioImp.ClienteNImp;
+import negocioImp.LocalidadNImp;
+import negocioImp.ProvinciaNImp;
 import negocioImp.UsuarioNImp;
 
 import entidad.Cliente;
@@ -23,17 +25,48 @@ public class LoginController {
 	ModelAndView mv = new ModelAndView();
 	UsuarioNImp nUser = new UsuarioNImp();
 	ClienteNImp nCli = new ClienteNImp();
+	LocalidadNImp nLoc = new LocalidadNImp();
+	ProvinciaNImp nProv = new ProvinciaNImp();
 	Usuario user = new Usuario();
 	Cliente cli  = new Cliente();
+	Localidad loc = new Localidad();
+	Provincia prov  = new Provincia();
+	
+	public void insertarLocalidades() {
+		prov.setIdProvincia(0);
+		prov.setDescripcion("Buenos Aires");
+		
+		loc.setDescripcion("San Fernando");
+		loc.setProvincia(prov);
+		nLoc.insertarLocalidad(loc);
+		loc.setDescripcion("Tigre");
+		loc.setProvincia(prov);
+		nLoc.insertarLocalidad(loc);
+	}
+	
+	public void insertarProvincia() {
+		prov.setDescripcion("Buenos Aires");
+		nProv.insertarProvincia(prov);
+		prov.setDescripcion("Salta");
+		nProv.insertarProvincia(prov);
+		prov.setDescripcion("Cordoba");
+		nProv.insertarProvincia(prov);
+		prov.setDescripcion("Entre Ríos");
+		nProv.insertarProvincia(prov);
+	}
 	
 	//redireccionar al menu principal por el login
 	@RequestMapping("login.do")
 	public ModelAndView eventoRedirectMenu(String txtUsuario , String txtPassword) {
 		user = nUser.verificarUsuario(txtUsuario, txtPassword);	
-		if(user.getUsername() == "admin") {
+		System.out.println(user.getUsername());
+		if(user.getUsername().equals("admin")) {
+			List<Cliente> lstCliente = nCli.obtenerClientes();
 			mv.setViewName("ListadoClientes");
+			mv.addObject("ListadoClientes", lstCliente);
 			mv.addObject("PageTitle", "Listado Clientes");
 		} else {
+			System.out.println("else");
 			mv.setViewName("MenuPrincipal");
 			mv.addObject("PageTitle", "Menu Principal");
 		}
@@ -83,9 +116,7 @@ public class LoginController {
 	@RequestMapping("register.do")
 	public ModelAndView eventoRegister(String txtUsuario , String txtContrasenia , String txtRepitPassword) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(txtContrasenia);
-		System.out.println(txtRepitPassword);
-		if(txtContrasenia == txtRepitPassword) {
+		if(txtContrasenia.equals(txtRepitPassword)) {
 			user.setPassword(txtContrasenia);
 			user.setUsername(txtUsuario);
 			user.setEstado(true);
@@ -114,6 +145,8 @@ public class LoginController {
 	@RequestMapping("redirectLogin.do")
 	public ModelAndView eventoInicarAplicaciones() {
 		ModelAndView mv = new ModelAndView();
+		insertarProvincia();
+		insertarLocalidades();
 		mv.setViewName("Login");
 		mv.addObject("PageTitle", "Login");
 		return mv;
@@ -198,7 +231,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectListaClientes() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("ListadoClientes");
-		List<Cliente> lstCliente = nCli.obtenerCliente();
+		List<Cliente> lstCliente = nCli.obtenerClientes();
 		mv.addObject("ListadoClientes", lstCliente);
 		mv.addObject("PageTitle", "Listado Clientes");
 		return mv;
@@ -219,4 +252,14 @@ public class LoginController {
 		mv.addObject("PageTitle", "Listado Cuentas");
 		return mv;
 	}
+	
+	@RequestMapping("redirectAltaCliente.do")
+	public ModelAndView eventoRedirectAltaCliente() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("AltaCliente");
+		mv.addObject("PageTitle", "Registrar Cliente");
+		return mv;
+	}
+	
+
 }

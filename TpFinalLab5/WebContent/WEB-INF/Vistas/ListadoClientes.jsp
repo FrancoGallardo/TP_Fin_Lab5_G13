@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="title-container" id="titulo">
-					<h1 class="title">Lista de Clientes</h1>
+					<h1 class="title">Listado de Clientes</h1>
 				</div>
 				<table id="bankTable">
 					<thead>
@@ -22,7 +22,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${lstCliente}" var="cli">
+					<c:forEach items="${ListadoClientes}" var="cli">
 						<tr>
 							<td>${cli.getDNI()}</td>
 							<td>${cli.getUsuario().getUsername()}</td>

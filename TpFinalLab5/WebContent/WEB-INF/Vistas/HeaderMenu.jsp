@@ -62,6 +62,9 @@
 							<a class="header-nav-anchor" href="redirectOperacionesCuenta.do">Operaciones
 								por cuenta</a>
 						</h6></li>
+						<li><h6>
+							<a class="header-nav-anchor" href="redirectAltaCliente.do">Datos Cliente</a>
+						</h6></li>
 						<li class="nav-user-item">
 							<h6 class="header-user-name">${Usuario}</h6>
 								<i class="fa fa-user-circle header-user-icon" aria-hidden="true"></i>

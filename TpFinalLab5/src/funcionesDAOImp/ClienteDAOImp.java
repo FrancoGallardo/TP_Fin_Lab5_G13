@@ -72,6 +72,7 @@ public class ClienteDAOImp implements ClienteDAO{
 		try {
 		query=session.createQuery("FROM Cliente");
 		lstClientes=query.list();
+		System.out.println(lstClientes.get(0));
 		}
 		catch(Exception e){
 			lstClientes=null;
@@ -80,6 +81,7 @@ public class ClienteDAOImp implements ClienteDAO{
 		finally {
 			Finalizar();
 		}
+		System.out.println(lstClientes);
 		return lstClientes;
 	}
 

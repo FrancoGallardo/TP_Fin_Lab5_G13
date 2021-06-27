@@ -10,4 +10,6 @@ public interface ProvinciaDAO {
 	public boolean buscarProvincia(int id);
 	public List<Provincia> obtenerProvincia();
 	public boolean modificar(Provincia provincia);
+	public void Finalizar();
+	public void Inicializar();
 }

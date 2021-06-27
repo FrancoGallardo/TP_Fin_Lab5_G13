@@ -10,4 +10,6 @@ public interface TipoCuentaDAO {
 	public boolean buscarTipoCuenta(int id);
 	public List<TipoCuenta> obtenerTipoCuenta();
 	public boolean modificar(TipoCuenta provincia);
+	public void Finalizar();
+	public void Inicializar();
 }

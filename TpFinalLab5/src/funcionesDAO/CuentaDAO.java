@@ -10,5 +10,7 @@ public interface CuentaDAO {
 	public boolean buscarCuenta(int id);
 	public List<Cuenta> obtenerCuentas();
 	public boolean modificar(Cuenta cuenta);
+	public void Finalizar();
+	public void Inicializar();
 	
 }
