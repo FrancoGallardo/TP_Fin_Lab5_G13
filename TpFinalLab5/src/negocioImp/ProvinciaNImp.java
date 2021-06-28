@@ -4,9 +4,12 @@ import java.util.List;
 
 import entidad.Provincia;
 import negocio.ProvinciaN;
+import funcionesDAOImp.ProvinciaDAOImp;
 
 public class ProvinciaNImp implements ProvinciaN{
 
+	ProvinciaDAOImp provDAO = new ProvinciaDAOImp();
+	
 	@Override
 	public Provincia verificarProvincia(int id) {
 		// TODO Auto-generated method stub
@@ -14,9 +17,8 @@ public class ProvinciaNImp implements ProvinciaN{
 	}
 
 	@Override
-	public boolean insertarProvincia(Provincia cli) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insertarProvincia(Provincia prov) {
+		return provDAO.insertarProvincia(prov);
 	}
 
 	@Override

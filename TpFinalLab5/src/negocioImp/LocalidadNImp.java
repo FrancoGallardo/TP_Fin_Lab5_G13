@@ -3,10 +3,13 @@ package negocioImp;
 import java.util.List;
 
 import entidad.Localidad;
+import funcionesDAOImp.LocalidadDAOImp;
 import negocio.LocalidadN;
 
 public class LocalidadNImp implements LocalidadN{
 
+	LocalidadDAOImp locDAO = new LocalidadDAOImp();
+	
 	@Override
 	public Localidad verificarLocalidad(int id) {
 		// TODO Auto-generated method stub
@@ -15,8 +18,7 @@ public class LocalidadNImp implements LocalidadN{
 
 	@Override
 	public boolean insertarLocalidad(Localidad loc) {
-		// TODO Auto-generated method stub
-		return false;
+		return locDAO.insertarLocalidad(loc);
 	}
 
 	@Override

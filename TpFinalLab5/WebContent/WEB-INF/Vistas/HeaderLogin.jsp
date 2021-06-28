@@ -10,3 +10,6 @@
 <script type='text/javascript' src='<%= org.webjars.AssetLocator.getWebJarPath("jquery.min.js") %>'></script>
 <script type='text/javascript' src='<%= org.webjars.AssetLocator.getWebJarPath("js/bootstrap.min.js") %>'></script>
 <link rel='stylesheet' href='<%= org.webjars.AssetLocator.getWebJarPath("css/font-awesome.min.css") %>'>
+<title>${PageTitle}</title>
+</head>
+<body class="login-container">

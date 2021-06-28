@@ -1,8 +1,5 @@
 
 <%@ include file="HeaderLogin.jsp"%>
-<title>Iniciar sesión</title>
-</head>
-<body class="login-container">
 	<div class="container">
 		<div class="row">
 		<div class="col-md-12 text-center column-container">

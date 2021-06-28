@@ -33,7 +33,7 @@ public class LoginController {
 	Provincia prov  = new Provincia();
 	
 	public void insertarLocalidades() {
-		prov.setIdProvincia(0);
+		prov.setIdProvincia(1);
 		prov.setDescripcion("Buenos Aires");
 		
 		loc.setDescripcion("San Fernando");
@@ -44,7 +44,7 @@ public class LoginController {
 		nLoc.insertarLocalidad(loc);
 	}
 	
-	public void insertarProvincia() {
+	public void insertarProvincias() {
 		prov.setDescripcion("Buenos Aires");
 		nProv.insertarProvincia(prov);
 		prov.setDescripcion("Salta");
@@ -145,7 +145,7 @@ public class LoginController {
 	@RequestMapping("redirectLogin.do")
 	public ModelAndView eventoInicarAplicaciones() {
 		ModelAndView mv = new ModelAndView();
-		insertarProvincia();
+		//insertarProvincias();
 		insertarLocalidades();
 		mv.setViewName("Login");
 		mv.addObject("PageTitle", "Login");

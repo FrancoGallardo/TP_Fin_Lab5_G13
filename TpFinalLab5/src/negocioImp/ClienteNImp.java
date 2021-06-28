@@ -16,7 +16,7 @@ public class ClienteNImp implements ClienteN{
 	}
 
 	@Override
-	public boolean buscarCliente(int id) {
+	public boolean buscarCliente(int DNI) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -33,7 +33,7 @@ public class ClienteNImp implements ClienteN{
 	}
 
 	@Override
-	public Cliente verificarCliente(String Username) {
+	public Cliente verificarCliente(int DNI) {
 		// TODO Auto-generated method stub
 		return null;
 	}
