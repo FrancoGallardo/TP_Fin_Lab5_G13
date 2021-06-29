@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,17 +20,21 @@ public class Cuenta implements Serializable{
 	@Id
 	@Column(name="CBU")
 	private int CBU;
+	@Column(name="Usuario")
+	private Usuario Usuario;
 	@Column(name="Fecha_Creacion")
 	@Type(type="date")
 	private Date Fecha_Creacion;
 	@Column(name="CodTipoCuenta")
 	private int CodTipoCuenta;
 	@Column(name = "NumeroCuenta")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int NumeroCuenta;
 	@Column(name="Saldo")
 	private Double Saldo;
 	@Column(name="Estado")
 	private Boolean Estado;
+	
 	
 	public Cuenta(int cbu, Date fecha, int codTipoCuenta, int numeroCuenta, Double saldo, Boolean estado) {
 		CBU = cbu;
@@ -48,14 +54,6 @@ public class Cuenta implements Serializable{
 
 	public void setCBU(int cBU) {
 		CBU = cBU;
-	}
-
-	public Date getFecha() {
-		return Fecha_Creacion;
-	}
-
-	public void setFecha(Date fecha) {
-		Fecha_Creacion = fecha;
 	}
 
 	public int getCodTipoCuenta() {
@@ -90,11 +88,28 @@ public class Cuenta implements Serializable{
 		Estado = estado;
 	}
 
+	public Usuario getUsuario() {
+		return Usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		Usuario = usuario;
+	}
+
+	public Date getFecha_Creacion() {
+		return Fecha_Creacion;
+	}
+
+	public void setFecha_Creacion(Date fecha_Creacion) {
+		Fecha_Creacion = fecha_Creacion;
+	}
+
 	@Override
 	public String toString() {
-		return "Cuenta [CBU=" + CBU + ", Fecha_Creacion=" + Fecha_Creacion + ", CodTipoCuenta=" + CodTipoCuenta
-				+ ", NumeroCuenta=" + NumeroCuenta + ", Saldo=" + Saldo + ", Estado=" + Estado
-				+ "]";
+		return "Cuenta [CBU=" + CBU + ", Usuario=" + Usuario + ", Fecha_Creacion=" + Fecha_Creacion + ", CodTipoCuenta="
+				+ CodTipoCuenta + ", NumeroCuenta=" + NumeroCuenta + ", Saldo=" + Saldo + ", Estado=" + Estado + "]";
 	}
+
+	
 	
 }

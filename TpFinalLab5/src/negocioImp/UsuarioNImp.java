@@ -1,4 +1,6 @@
 package negocioImp;
+import java.util.List;
+
 import entidad.Usuario;
 import negocio.UsuarioN;
 import funcionesDAOImp.UsuarioDAOImp;
@@ -9,7 +11,7 @@ public class UsuarioNImp implements UsuarioN{
 	UsuarioDAOImp userDAO = new UsuarioDAOImp();
 	
 	@Override
-	public Usuario verificarUsuario(String Username, String Password) {
+	public Usuario verificarUsuario(String Username) {
 		try {
 			Usuario user = new Usuario();
 			user = userDAO.verificarUsuario(Username);
@@ -34,6 +36,17 @@ public class UsuarioNImp implements UsuarioN{
 	public boolean insertarUsuario(Usuario user) {
 		System.out.println(user.getUsername());
 		return userDAO.insertarUsuario(user);
+	}
+
+	@Override
+	public List<Usuario> obtenerUsuarios() {
+		return userDAO.obtenerUsuarios();
+	}
+
+	@Override
+	public boolean modificar(Usuario cli) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

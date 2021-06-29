@@ -9,6 +9,7 @@
   justify-content: flex-end;
 	margin-bottom: 0;
 	padding: 0;
+	align-items: center;
 }
 
 .header-container ul li{
@@ -86,6 +87,12 @@ margin-right: 5px
 	width: 30%;
     margin: 2% auto;
     padding: 5px;
+}
+
+/* Alta cuenta cliente */
+
+.account-form{
+	display: none;
 }
 
 /* Footer */

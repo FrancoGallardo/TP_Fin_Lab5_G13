@@ -29,8 +29,7 @@ public class ProvinciaNImp implements ProvinciaN{
 
 	@Override
 	public List<Provincia> obtenerProvincias() {
-		// TODO Auto-generated method stub
-		return null;
+		return provDAO.obtenerProvincias();
 	}
 
 	@Override

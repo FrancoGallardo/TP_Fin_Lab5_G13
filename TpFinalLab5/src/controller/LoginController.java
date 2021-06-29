@@ -1,36 +1,54 @@
 package controller;
 
 import javax.jws.WebParam.Mode;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 import java.util.List;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import negocioImp.ClienteNImp;
+import negocioImp.CuentaNImp;
 import negocioImp.LocalidadNImp;
 import negocioImp.ProvinciaNImp;
+import negocioImp.TipoCuentaNImp;
 import negocioImp.UsuarioNImp;
 
 import entidad.Cliente;
+import entidad.Cuenta;
 import entidad.Localidad;
 import entidad.Provincia;
 import entidad.TipoCuenta;
 import entidad.Usuario;
 
 @Controller
+@SessionAttributes("Username")
 public class LoginController {
 	ModelAndView mv = new ModelAndView();
 	UsuarioNImp nUser = new UsuarioNImp();
 	ClienteNImp nCli = new ClienteNImp();
 	LocalidadNImp nLoc = new LocalidadNImp();
 	ProvinciaNImp nProv = new ProvinciaNImp();
+	CuentaNImp nCuenta = new CuentaNImp();
+	 TipoCuentaNImp nTipoCuenta = new TipoCuentaNImp();
+	
 	Usuario user = new Usuario();
 	Cliente cli  = new Cliente();
 	Localidad loc = new Localidad();
 	Provincia prov  = new Provincia();
+	Cuenta cuenta = new Cuenta();
+	TipoCuenta tCuenta = new TipoCuenta();
+	
 	
 	public void insertarLocalidades() {
 		prov.setIdProvincia(1);
@@ -55,11 +73,17 @@ public class LoginController {
 		nProv.insertarProvincia(prov);
 	}
 	
+	public void insertarTipoCuenta() {		
+		tCuenta.setTipoCuenta("Pesos");
+		nTipoCuenta.insertarTipoCuenta(tCuenta);
+		tCuenta.setTipoCuenta("Dolares");
+		nTipoCuenta.insertarTipoCuenta(tCuenta);
+	}
+	
 	//redireccionar al menu principal por el login
-	@RequestMapping("login.do")
+	@RequestMapping(value = "login.do" , method = RequestMethod.POST)
 	public ModelAndView eventoRedirectMenu(String txtUsuario , String txtPassword) {
-		user = nUser.verificarUsuario(txtUsuario, txtPassword);	
-		System.out.println(user.getUsername());
+		user = nUser.verificarUsuario(txtUsuario);	
 		if(user.getUsername().equals("admin")) {
 			List<Cliente> lstCliente = nCli.obtenerClientes();
 			mv.setViewName("ListadoClientes");
@@ -70,7 +94,7 @@ public class LoginController {
 			mv.setViewName("MenuPrincipal");
 			mv.addObject("PageTitle", "Menu Principal");
 		}
-		mv.addObject("Usuario", user.getUsername());
+		mv.addObject("Username", user.getUsername());
 		return mv;
 	}
 	
@@ -113,7 +137,7 @@ public class LoginController {
 	}
 	
 	//redireccionar al menu principal tras registrarse
-	@RequestMapping("register.do")
+	@RequestMapping(value="register.do" , method = RequestMethod.POST)
 	public ModelAndView eventoRegister(String txtUsuario , String txtContrasenia , String txtRepitPassword) {
 		ModelAndView mv = new ModelAndView();
 		if(txtContrasenia.equals(txtRepitPassword)) {
@@ -124,7 +148,7 @@ public class LoginController {
 			nUser.insertarUsuario(user);
 			mv.setViewName("MenuPrincipal");
 			mv.addObject("PageTitle", "Menu Principal");
-			mv.addObject("Usuario", user.getUsername());
+			mv.addObject("Username", user.getUsername());
 		} else {
 			mv.setViewName("Register");
 			mv.addObject("PageTitle", "Registrarse");
@@ -132,12 +156,29 @@ public class LoginController {
 		return mv;
 	}
 	
-	//Cambiar contraseï¿½a redirecciona al login
+	//Cambiar contrasena redirecciona al login
 	@RequestMapping("forgotPassword.do")
 	public ModelAndView eventoForgotPassword() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("Login");
-		mv.addObject("PageTitle", "Cambiar ContraseÃ±a");
+		mv.addObject("PageTitle", "Cambiar Contraseña");
+		return mv;
+	}
+	
+	@RequestMapping("registerAccount.do")
+	public ModelAndView eventoRegistrarCuenta(String txtCBU , Date txtFechaCreacion , String ddlTipoCuenta, String txtSaldo) {
+		ModelAndView mv = new ModelAndView();
+		//insertarTipoCuenta();
+		cuenta.setCBU(Integer.parseInt(txtCBU));
+		cuenta.setCodTipoCuenta(Integer.parseInt(ddlTipoCuenta));
+		cuenta.setSaldo(Double.parseDouble(txtSaldo));
+		cuenta.setFecha_Creacion(txtFechaCreacion);
+		cuenta.setEstado(true);
+		nCuenta.insertarCuenta(cuenta);
+		List<Cliente> lstCliente = nCli.obtenerClientes();
+		mv.addObject("ListadoClientes", lstCliente);
+		mv.setViewName("AltaCuentaCliente");
+		mv.addObject("PageTitle", "Alta Cuenta");
 		return mv;
 	}
 	
@@ -146,7 +187,7 @@ public class LoginController {
 	public ModelAndView eventoInicarAplicaciones() {
 		ModelAndView mv = new ModelAndView();
 		//insertarProvincias();
-		insertarLocalidades();
+		//insertarLocalidades();
 		mv.setViewName("Login");
 		mv.addObject("PageTitle", "Login");
 		return mv;
@@ -166,7 +207,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectForgotPassword() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("ForgotPassword");
-		mv.addObject("PageTitle", "Cambiar ContraseÃ±a");
+		mv.addObject("PageTitle", "Cambiar Contraseña");
 		return mv;
 	}
 	
@@ -223,6 +264,8 @@ public class LoginController {
 	public ModelAndView eventoRedirectAltaCuentaCliente() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("AltaCuentaCliente");
+		List<Cliente> lstCliente = nCli.obtenerClientes();
+		mv.addObject("ListadoClientes", lstCliente);
 		mv.addObject("PageTitle", "Alta Cuenta");
 		return mv;
 	}
@@ -240,7 +283,9 @@ public class LoginController {
 	@RequestMapping("redirectListaUsuarios.do")
 	public ModelAndView eventoRedirectListaUsuarios() {
 		ModelAndView mv = new ModelAndView();
+		List<Usuario> lstUsuario = nUser.obtenerUsuarios();
 		mv.setViewName("ListadoUsuarios");
+		mv.addObject("lstUsuarios", lstUsuario);
 		mv.addObject("PageTitle", "Listado Usuarios");
 		return mv;
 	}
@@ -248,6 +293,8 @@ public class LoginController {
 	@RequestMapping("redirectListaCuentas.do")
 	public ModelAndView eventoRedirectListaCuentas() {
 		ModelAndView mv = new ModelAndView();
+		List<Cuenta> lstCuentas = nCuenta.obtenerCuentas();
+		mv.addObject("lstCuentas", lstCuentas);
 		mv.setViewName("ListadoCuentas");
 		mv.addObject("PageTitle", "Listado Cuentas");
 		return mv;
@@ -256,6 +303,10 @@ public class LoginController {
 	@RequestMapping("redirectAltaCliente.do")
 	public ModelAndView eventoRedirectAltaCliente() {
 		ModelAndView mv = new ModelAndView();
+		List<Localidad> lstLoc = nLoc.obtenerLocalidades();
+		List<Provincia> lstProv = nProv.obtenerProvincias();
+		mv.addObject("lstLoc", lstLoc);
+		mv.addObject("lstProv", lstProv);
 		mv.setViewName("AltaCliente");
 		mv.addObject("PageTitle", "Registrar Cliente");
 		return mv;

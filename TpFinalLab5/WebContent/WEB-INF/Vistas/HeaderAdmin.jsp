@@ -22,6 +22,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+ <script type="text/javascript" charset="utf8"
+	src="Assets/js/account.js"></script>
+
 
 <script>
 	$(document).ready(function() {
@@ -32,6 +35,11 @@
 		});
 	});
 </script>
+
+
+     
+
+
 <title>${PageTitle}</title>
 </head>
 
@@ -40,7 +48,7 @@
 	<div class="container">
 		<div class="row header-row">
 			<div class="col-sm-3">
-				<img src="Assets/logo-utn.png" alt="logo">
+				<img src="Assets/img/logo-utn.png" alt="logo">
 			</div>
 			<div class="col-sm-9">
 				<ul>
@@ -55,8 +63,12 @@
 							<a class="header-nav-anchor"
 								href="redirectListaCuentas.do">Lista de Cuentas</a>
 						</h6></li>
+						<li class="account-nav-item"><h6>
+							<a class="header-nav-anchor"
+								href="redirectAltaCuentaCliente.do">Alta Cuenta</a>
+						</h6></li>
 						<li class="nav-user-item">
-							<h6 class="header-user-name">${Usuario}</h6>
+							<h6 class="header-user-name">${sessionScope.Username}</h6>
 								<i class="fa fa-user-circle header-user-icon" aria-hidden="true"></i>
 						</li>
 				</ul>

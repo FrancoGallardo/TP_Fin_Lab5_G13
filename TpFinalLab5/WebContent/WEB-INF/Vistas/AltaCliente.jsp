@@ -11,19 +11,11 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="client-data-container">
-					<form action="addClient.do?User=${Usuario}" method="post">
+					<form action="addClient.do?User=${sessionScope.Username}" method="post">
 						<label>Numero de Documento:</label> 
 						<input type="number"
 							id="txtDocumento" name="txtDocumento" style="margin-right: 1%"
 							placeholder="Documento" /> 
-						<label>Usuario:</label> 
-						<select
-							id="ddlUsuario" name="ddlUsuario" style="margin-right: 1%"
-							placeholder="Usuario">
-							<c:forEach items="${lstUserSinCli}" var="user">
-								<option value="${user.getUsername()}">${user.getUsername()}</option>
-							</c:forEach>
-						</select> 
 						<label>Nombre:</label> 
 						<input type="text" id="txtNombre"
 							name="txtNombre" style="margin-right: 1%" placeholder="Nombre" />
@@ -54,8 +46,7 @@
 							name="ddlLocalidad" placeholder="Localidad">
 							<option></option>
 							<c:forEach items="${lstLoc}" var="loc">
-								<option name="${loc.getProvincia().getIdProvincia()}"
-									value="${loc.getIdLocalidad()}" hidden>${loc.getDescripcion()}</option>
+								<option value="${loc.getIdLocalidad()}">${loc.getDescripcion()}</option>
 							</c:forEach>
 						</select> 
 						<label>Provincia:</label> 

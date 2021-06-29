@@ -54,7 +54,7 @@ public class ProvinciaDAOImp implements ProvinciaDAO{
 	}
 
 	@Override
-	public List<Provincia> obtenerProvincia() {
+	public List<Provincia> obtenerProvincias() {
 		Inicializar();
 		List<Provincia> lstProv;
 		try {

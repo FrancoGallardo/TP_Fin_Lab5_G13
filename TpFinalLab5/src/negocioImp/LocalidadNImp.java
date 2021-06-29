@@ -29,8 +29,7 @@ public class LocalidadNImp implements LocalidadN{
 
 	@Override
 	public List<Localidad> obtenerLocalidades() {
-		// TODO Auto-generated method stub
-		return null;
+		return locDAO.obtenerLocalidades();
 	}
 
 	@Override

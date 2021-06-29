@@ -55,7 +55,7 @@ public class LocalidadDAOImp implements LocalidadDAO{
 	}
 
 	@Override
-	public List<Localidad> obtenerLocalidad() {
+	public List<Localidad> obtenerLocalidades() {
 		Inicializar();
 		List<Localidad> lstLoc;
 		try {

@@ -32,6 +32,8 @@
 		});
 	});
 </script>
+
+
 <title>${PageTitle}</title>
 </head>
 
@@ -40,7 +42,7 @@
 	<div class="container">
 		<div class="row header-row">
 			<div class="col-sm-3">
-				<img src="Assets/logo-utn.png" alt="logo">
+				<img src="Assets/img/logo-utn.png" alt="logo">
 			</div>
 			<div class="col-sm-9">
 				<ul>
@@ -66,7 +68,7 @@
 							<a class="header-nav-anchor" href="redirectAltaCliente.do">Datos Cliente</a>
 						</h6></li>
 						<li class="nav-user-item">
-							<h6 class="header-user-name">${Usuario}</h6>
+							<h6 class="header-user-name">${sessionScope.Username}</h6>
 								<i class="fa fa-user-circle header-user-icon" aria-hidden="true"></i>
 						</li>
 				</ul>

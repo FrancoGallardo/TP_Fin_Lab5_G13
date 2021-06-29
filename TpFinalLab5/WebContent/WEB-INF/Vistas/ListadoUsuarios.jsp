@@ -4,36 +4,25 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="title-container" id="titulo">
-					<h1 class="title">Lista de Clientes</h1>
+					<h1 class="title">Lista de Usuario</h1>
 				</div>
 				<table id="bankTable">
 					<thead>
 						<tr>
-							<th>DNI</th>
-	                        <th>Usuario</th>
-	                        <th>Nombre</th>
-	                        <th>Apellido</th>
-	                        <th>Sexo</th>
-	                        <th>Nacionalidad</th>
-	                        <th>Fecha de Nacimiento</th>
-	                       	<th>Direccion</th>
-	                        <th>Localidad</th>
-	                        <th>Provincia</th>
+							<th>Id Usuario</th>
+	                        <th>Nombre de Usuario</th>
+	                        <th>Contrase�a</th>
+	                        <th>Tipo de Usuario</th>
+	                        <th>Estado</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${lstCliente}" var="cli">
+					<c:forEach items="${lstUsuarios}" var="user">
 						<tr>
-							<td>${cli.getDNI()}</td>
-							<td>${cli.getUsuario().getUsername()}</td>
-							<td>${cli.getNombre()}</td>
-							<td>${cli.getApellido()}</td>
-							<td>${cli.getSexo()}</td>
-							<td>${cli.getNacionalidad()}</td>
-							<td>${cli.getFecha()}</td>
-							<td>${cli.getDireccion()}</td>
-							<td>${cli.getLocalidad()}</td>
-							<td>${cli.getProvincia()}</td>
+							<td>${user.getIdUsuario()}</td>
+							<td>${user.getUsername()}</td>
+							<td>${user.getPassword()}</td>
+							<td>${user.getEstado()}</td>
 						</tr>
 					</c:forEach>
 					</tbody>
