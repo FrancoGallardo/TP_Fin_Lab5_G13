@@ -4,13 +4,15 @@ import java.util.List;
 
 import entidad.TipoCuenta;
 import negocio.TipoCuentaN;
+import funcionesDAOImp.TipoCunetaDAOImp;
 
 public class TipoCuentaNImp implements TipoCuentaN{
 
+	TipoCunetaDAOImp tipoCuentaDAO = new TipoCunetaDAOImp();
+	
 	@Override
-	public boolean insertarTipoCuenta(TipoCuenta transaccion) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insertarTipoCuenta(TipoCuenta tipoCuenta) {
+		return tipoCuentaDAO.insertarTipoCuenta(tipoCuenta);
 	}
 
 	@Override
@@ -21,12 +23,11 @@ public class TipoCuentaNImp implements TipoCuentaN{
 
 	@Override
 	public List<TipoCuenta> obtenerTipoCuentas() {
-		// TODO Auto-generated method stub
-		return null;
+		return tipoCuentaDAO.obtenerTipoCuenta();
 	}
 
 	@Override
-	public boolean modificar(TipoCuenta transaccion) {
+	public boolean modificar(TipoCuenta tipoCuenta) {
 		// TODO Auto-generated method stub
 		return false;
 	}

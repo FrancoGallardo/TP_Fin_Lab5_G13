@@ -92,11 +92,9 @@ public class UsuarioDAOImp implements UsuarioDAO{
 
 	@Override
 	public Usuario verificarUsuario(String Username) {
-		Conexion con = new Conexion();
-		Session session = con.abrirConexion();
-		session.beginTransaction();
+		Inicializar();
 		Usuario user = (Usuario)session.get(Usuario.class, Username);
-		con.cerrarSession();
+		Finalizar();
 		return user;
 	}
 	

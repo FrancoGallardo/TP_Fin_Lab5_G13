@@ -11,19 +11,24 @@
 						<tr>
 							<th>Id Usuario</th>
 	                        <th>Nombre de Usuario</th>
-	                        <th>Contraseï¿½a</th>
+	                        <th>Contraseña</th>
 	                        <th>Tipo de Usuario</th>
 	                        <th>Estado</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach items="${lstUsuarios}" var="user">
+						<c:choose>
+						 <c:when test = "${user.getTipoUsuario() != 'administrador'}">
 						<tr>
 							<td>${user.getIdUsuario()}</td>
 							<td>${user.getUsername()}</td>
 							<td>${user.getPassword()}</td>
+							<td>${user.getTipoUsuario()}</td>
 							<td>${user.getEstado()}</td>
 						</tr>
+						</c:when>    
+						</c:choose>
 					</c:forEach>
 					</tbody>
 				</table>

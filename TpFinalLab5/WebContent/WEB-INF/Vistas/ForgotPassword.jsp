@@ -22,10 +22,11 @@
 							 <input class="form-input" id="txtRepitContrasenia"
 								name="txtRepitContrasenia" type="password" placeholder="Repetir Contraseña" />
 						</div>
-						<input class="login-button" id="btnAceptar" type="button"
-							value="Aceptar" /> ${Msg}
+						<input class="login-button" id="btnAceptar" type="submit"
+							value="Aceptar" />
 					</div>
 				</form>
+				 ${Msg}
 			</div>
 			<div class="options-container">
 				<div class=" buttons-container">

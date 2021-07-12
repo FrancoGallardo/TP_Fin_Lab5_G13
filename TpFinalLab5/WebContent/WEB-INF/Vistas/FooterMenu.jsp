@@ -11,10 +11,17 @@
 			<div class="col-sm-4 footer-second-column">
 				<div>
 					<ul>
-						<li><h5><a href="#">Menu Principal</a></h5></li>
-						<li><h5><a href="#">Transferencias a clientes</a></h5></li>
-						<li><h5><a href="#">Transferencias a cuentas propias</a></h5></li>
-						<li><h5><a href="#">Operaciones por cuenta</a></h5></li>
+						<li><h5><a class="footer-anchor" href="redirectMenuPrincipal.do">Menu
+								Principal</a></h5></li>
+						<li><h5><a class="footer-anchor"
+								href="redirectTransferenciaCliente.do">Transferencias a
+								clientes</a></h5></li>
+						<li><h5><a class="footer-anchor"
+								href="redirectTransferenciaPropias.do">Transferencias a
+								cuentas propias</a></h5></li>
+						<li><h5><a class="footer-anchor" href="redirectOperacionesCuenta.do">Operaciones
+								por cuenta</a></h5></li>
+						<li><h5><a class="header-nav-anchor footer-anchor" href="redirectAltaCliente.do">Datos Cliente</a></h5></li>
 					</ul>
 				</div>
 			</div>

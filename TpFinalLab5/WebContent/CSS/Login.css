@@ -26,9 +26,15 @@
         color: #ffffff;
 }
 
+.login-button:hover{
+	background-color: #fff;
+    color: #308fb9;
+}
+
 .user-container,
 .password-container{
 	margin-bottom: 10px;
+	position: relative;
 }
 
 .login-container{
@@ -44,10 +50,19 @@
 font-size: 14px;
     border: none;
     background-color: #ededed;
-    padding: 5px 5px 5px 25px;
-    width: 280px;
+    padding: 5px 5px 5px 35px;
+  width: 320px;
     outline: none;
     border-bottom: 2px solid #ededed;
+}
+
+.user-icon,
+.pass-icon{
+    position: absolute;
+    z-index: 99;
+    left: 37%;
+    bottom: 30%;
+    color: black;
 }
 
 
@@ -80,8 +95,18 @@ input[type="button"],input[type="submit"]{
 	}
 	
 	.buttons-container a {
-	padding: 10px;
+padding: 10px;
     border: 1px solid;
     text-decoration: none;
     color: #ffffff;
+    width: 150px !important;
+    display: block;
+    text-align: center;
+    font-size: 13px;
+	}
+	
+	.buttons-container a:hover,
+	.buttons-container a:focus{
+	    color: black;
+	    text-decoration: none;
 	}

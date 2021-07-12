@@ -3,6 +3,7 @@ package negocioImp;
 import java.util.List;
 
 import entidad.Cliente;
+import entidad.Usuario;
 import negocio.ClienteN;
 import funcionesDAOImp.ClienteDAOImp;
 
@@ -34,8 +35,14 @@ public class ClienteNImp implements ClienteN{
 
 	@Override
 	public Cliente verificarCliente(int DNI) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Cliente cli = new Cliente();
+			cli = clientDAO.verificarCliente(DNI);
+			return cli;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 
 }

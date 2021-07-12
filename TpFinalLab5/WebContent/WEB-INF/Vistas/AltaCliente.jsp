@@ -25,12 +25,12 @@
 						<label>Sexo:</label> 
 						<select id="ddlSexo" name="ddlSexo"
 							style="margin-right: 1%; width: 6%; text-align: center">
-							<option value="Hombre" hidden>Masculino</option>
+							<option value="Hombre">Masculino</option>
 							<option value="Mujer">Femenino</option>
 						</select> 
 						<label>Fecha de nacimiento:</label> 
 						 <input type="date" id="dtFechaNac"
-							name="dtFechaNac" style="margin-right: 1%" min="1900-01-01">
+							name="dtFechaNac" min="1900-01-01">
 						 <label>Nacionalidad:</label> 
 						 <input type="text"
 							id="txtNacionalidad" name="txtNacionalidad"
@@ -38,15 +38,13 @@
 						<label>Dirección:</label> 
 						<input type="text" id="txtDireccion"
 							name="txtDireccion" style="margin-right: 1%"
-							placeholder="Dirección" /> <br> <br> <input
-							class="botoncargar" id="txtAgregar" name="txtAceptar"
-							type="submit" value="Agregar" /> 
+							placeholder="Dirección" />
 							<label>Localidad:</label> 
 						<select id="ddlLocalidad"
 							name="ddlLocalidad" placeholder="Localidad">
 							<option></option>
 							<c:forEach items="${lstLoc}" var="loc">
-								<option value="${loc.getIdLocalidad()}">${loc.getDescripcion()}</option>
+								<option value="${loc.getIdLocalidad()},${loc.getDescripcion()}">${loc.getDescripcion()}</option>
 							</c:forEach>
 						</select> 
 						<label>Provincia:</label> 
@@ -54,9 +52,12 @@
 							onchange="sacarHidden(this.value,0, -1)" placeholder="Provincia">
 							<option></option>
 							<c:forEach items="${lstProv}" var="prov">
-								<option value="${prov.getIdProvincia()}">${prov.getDescripcion()}</option>
+								<option value="${prov.getIdProvincia()},${prov.getDescripcion()}">${prov.getDescripcion()}</option>
 							</c:forEach>
 						</select> 
+						<input
+							class="botoncargar" id="txtAgregar" name="txtAceptar"
+							type="submit" value="Agregar" /> 
 					</form>
 					${Msg}
 				</div>

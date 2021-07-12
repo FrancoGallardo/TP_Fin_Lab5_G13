@@ -88,4 +88,12 @@ public class ClienteDAOImp implements ClienteDAO{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public Cliente verificarCliente(int DNI) {
+		Inicializar();
+		Cliente cli = (Cliente)session.get(Cliente.class, DNI);
+		Finalizar();
+		return cli;
+	}
 }

@@ -25,17 +25,17 @@
 					<tbody>
 					<c:forEach items="${ListadoClientes}" var="cli">
 							<tr>
-								<td>${cli.getDNI()}</td>
-								<td>${cli.getUsuario().getUsername()}</td>
-								<td>${cli.getNombre()}</td>
-								<td>${cli.getApellido()}</td>
-								<td>${cli.getSexo()}</td>
-								<td>${cli.getNacionalidad()}</td>
-								<td>${cli.getFecha()}</td>
-								<td>${cli.getDireccion()}</td>
-								<td>${cli.getLocalidad()}</td>
-								<td>${cli.getProvincia()}</td>
-								<td><a id="addAccount" href="#" class="addAccount" onclick="Agregar('bankTable',${ListadoClientes.indexOf(cli)},event)">Agregar</a></td>
+							<td>${cli.getDNI()}</td>
+							<td>${cli.getUsuario().getUsername()}</td>
+							<td>${cli.getNombre()}</td>
+							<td>${cli.getApellido()}</td>
+							<td>${cli.getSexo()}</td>
+							<td>${cli.getNacionalidad()}</td>
+							<td>${cli.getFecha()}</td>
+							<td>${cli.getDireccion()}</td>
+							<td>${cli.getLocalidad().getDescripcion()}</td>
+							<td>${cli.getProvincia().getDescripcion()}</td>
+								<td><a id="addAccount" href="#" class="addAccount" onclick="agregar('bankTable',${ListadoClientes.indexOf(cli)},event)">Agregar</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -52,7 +52,7 @@
 						<label>Tipo de Cuenta</label>
 						<select id="ddlTipoCuenta" name="ddlTipoCuenta">
 						<c:forEach items="${lstTipoCuenta}" var="TipoCuenta">
-						 <option value="${TipoCuenta.CodTipoCuenta()}">${TipoCuenta.getTipoCuenta()}</option>
+						 <option value="${TipoCuenta.getCodTipoCuenta()}">${TipoCuenta.getTipoCuenta()}</option>
 						</c:forEach>
 						</select>
 						<label>Saldo</label>

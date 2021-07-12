@@ -22,7 +22,7 @@
 						<tr>
 							<td>${cuenta.getCBU()}</td>
 							<td>${cuenta.getNumeroCuenta()}</td>
-							<td>${cuenta.getFecha()}</td>
+							<td>${cuenta.getFecha_Creacion()}</td>
 							<td>${cuenta.getCodTipoCuenta()}</td>
 							<td>${cuenta.getSaldo()}</td>
 							<td>${cuenta.getEstado()}</td>

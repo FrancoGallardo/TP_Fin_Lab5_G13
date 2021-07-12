@@ -45,7 +45,7 @@
 				<img src="Assets/img/logo-utn.png" alt="logo">
 			</div>
 			<div class="col-sm-9">
-				<ul>
+				<ul class="header-items-container">
 					<li class="home-nav-item"><h6>
 							<a class="header-nav-anchor" href="redirectMenuPrincipal.do">Menu
 								Principal</a>
@@ -68,8 +68,12 @@
 							<a class="header-nav-anchor" href="redirectAltaCliente.do">Datos Cliente</a>
 						</h6></li>
 						<li class="nav-user-item">
-							<h6 class="header-user-name">${sessionScope.Username}</h6>
-								<i class="fa fa-user-circle header-user-icon" aria-hidden="true"></i>
+							<h6 class="header-user-name">${sessionScope.Username}
+							<ul class="close-session-container">
+							<li><a href="cerrarSession.do">Cerrar session</a></li>
+							</ul>
+							</h6>	
+							<i class="fa fa-user-circle header-user-icon" aria-hidden="true"></i>
 						</li>
 				</ul>
 			</div>

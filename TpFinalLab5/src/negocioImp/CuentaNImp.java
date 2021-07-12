@@ -3,14 +3,16 @@ package negocioImp;
 import java.util.List;
 
 import entidad.Cuenta;
+import funcionesDAOImp.CuentaDAOImp;
 import negocio.CuentaN;
 
 public class CuentaNImp implements CuentaN{
 
+	CuentaDAOImp cuentaDAO = new CuentaDAOImp();
+	
 	@Override
 	public boolean insertarCuenta(Cuenta cuenta) {
-		// TODO Auto-generated method stub
-		return false;
+		return cuentaDAO.insertarCuenta(cuenta);
 	}
 
 	@Override
@@ -21,8 +23,7 @@ public class CuentaNImp implements CuentaN{
 
 	@Override
 	public List<Cuenta> obtenerCuentas() {
-		// TODO Auto-generated method stub
-		return null;
+		return cuentaDAO.obtenerCuentas();
 	}
 
 	@Override

@@ -8,6 +8,6 @@ public interface UsuarioN {
 	public boolean insertarAdministrador(Usuario user);
 	public boolean insertarUsuario(Usuario user);
 	public List<Usuario> obtenerUsuarios();
-	public boolean modificar(Usuario cli);
+	public boolean modificar(Usuario user);
 	public Usuario verificarUsuario(String Username);
 }

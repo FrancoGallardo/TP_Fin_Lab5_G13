@@ -32,8 +32,8 @@
 							<td>${cli.getNacionalidad()}</td>
 							<td>${cli.getFecha()}</td>
 							<td>${cli.getDireccion()}</td>
-							<td>${cli.getLocalidad()}</td>
-							<td>${cli.getProvincia()}</td>
+							<td>${cli.getLocalidad().getDescripcion()}</td>
+							<td>${cli.getProvincia().getDescripcion()}</td>
 						</tr>
 					</c:forEach>
 					</tbody>

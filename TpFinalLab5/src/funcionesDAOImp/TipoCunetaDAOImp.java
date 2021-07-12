@@ -10,6 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import configCapas.ConfigDAO;
 import entidad.TipoCuenta;
+import entidad.Usuario;
 import funcionesDAO.TipoCuentaDAO;
 
 public class TipoCunetaDAOImp implements TipoCuentaDAO{
@@ -20,9 +21,13 @@ public class TipoCunetaDAOImp implements TipoCuentaDAO{
 	private Query query;
 	
 	@Override
-	public boolean insertarTipoCuenta(TipoCuenta provincia) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insertarTipoCuenta(TipoCuenta tipoCuenta) {
+		Inicializar();
+		session.beginTransaction();
+		session.save(tipoCuenta);
+		session.getTransaction().commit();
+		Finalizar();
+		return true;
 	}
 
 	@Override
@@ -39,12 +44,24 @@ public class TipoCunetaDAOImp implements TipoCuentaDAO{
 
 	@Override
 	public List<TipoCuenta> obtenerTipoCuenta() {
-		// TODO Auto-generated method stub
-		return null;
+		Inicializar();
+		List<TipoCuenta> lstTipoCuenta;
+		try {
+		query=session.createQuery("FROM TipoCuenta");
+		lstTipoCuenta=query.list();
+		}
+		catch(Exception e){
+			lstTipoCuenta=null;
+			e.printStackTrace();
+		}
+		finally {
+			Finalizar();
+		}
+		return lstTipoCuenta;
 	}
 
 	@Override
-	public boolean modificar(TipoCuenta provincia) {
+	public boolean modificar(TipoCuenta tipoCuenta) {
 		// TODO Auto-generated method stub
 		return false;
 	}

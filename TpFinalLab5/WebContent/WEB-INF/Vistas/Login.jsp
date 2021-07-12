@@ -11,14 +11,14 @@
 				<form action="login.do" method="post">
 					<div id="divPadre">
 						<div class="user-container">
-							<label class="form-label" for="txtUsuario">Usuario :</label>
+							<i class="fa fa-user-circle-o user-icon" aria-hidden="true"></i>
 					<input
 								id="txtUsuario" class="form-input user-input" name="txtUsuario" type="text"
 								placeholder="Usuario" />
 						</div>
 						<div class="password-container">
-							<label class="form-label" for="txtContrasenia">Contraseña
-								:</label> <input class="form-input" id="txtContrasenia"
+						<i class="fa fa-unlock-alt pass-icon" aria-hidden="true"></i>
+						 <input class="form-input" id="txtContrasenia"
 								name="txtContrasenia" type="password" placeholder="Contraseña" />
 						</div>
 						<input class="login-button" id="btnAceptar" type="submit"

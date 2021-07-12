@@ -10,6 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import configCapas.ConfigDAO;
 import entidad.Cuenta;
+import entidad.Usuario;
 import funcionesDAO.CuentaDAO;
 
 public class CuentaDAOImp implements CuentaDAO{
@@ -20,9 +21,13 @@ public class CuentaDAOImp implements CuentaDAO{
 	private Query query;
 	
 	@Override
-	public boolean insertarCuenta(Cuenta user) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insertarCuenta(Cuenta cuenta) {
+		Inicializar();
+		session.beginTransaction();
+		session.save(cuenta);
+		session.getTransaction().commit();
+		Finalizar();
+		return true;
 	}
 
 	@Override
@@ -39,8 +44,20 @@ public class CuentaDAOImp implements CuentaDAO{
 
 	@Override
 	public List<Cuenta> obtenerCuentas() {
-		// TODO Auto-generated method stub
-		return null;
+		Inicializar();
+		List<Cuenta> lstCuenta;
+		try {
+		query=session.createQuery("FROM Cuenta");
+		lstCuenta=query.list();
+		}
+		catch(Exception e){
+			lstCuenta=null;
+			e.printStackTrace();
+		}
+		finally {
+			Finalizar();
+		}
+		return lstCuenta;
 	}
 
 	@Override
