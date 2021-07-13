@@ -81,33 +81,68 @@ public class LoginController {
 	// redireccionar al menu principal por el login
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public ModelAndView eventoRedirectMenu(String txtUsuario, String txtContrasenia) {
-		user = nUser.verificarUsuario(txtUsuario);
+		int x = UserExist(txtUsuario,  txtContrasenia);
+		System.out.println(x);
 		ModelAndView mv = new ModelAndView();
-		if (user.getUsername().equals("admin")) {
-			if (txtContrasenia.equals("admin")) {
-				List<Cliente> lstCliente = nCli.obtenerClientes();
-				mv.setViewName("ListadoClientes");
-				mv.addObject("ListadoClientes", lstCliente);
-				mv.addObject("PageTitle", "Listado Clientes");
-			} else {
-				mv.setViewName("Login");
-				mv.addObject("PageTitle", "Login");
-				mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
-			}
-		} else {
-			System.out.println(user);
-			if(user != null) 
-			{
-				System.out.println("else");
-				mv.setViewName("MenuPrincipal");
-				mv.addObject("PageTitle", "Menu Principal");
-			}
-
+		if (x==1)
+		{
+			List<Cliente> lstCliente = nCli.obtenerClientes();
+			mv.setViewName("ListadoClientes");
+			mv.addObject("ListadoClientes", lstCliente);
+			mv.addObject("PageTitle", "Listado Clientes");
+			mv.addObject("Username", user.getUsername());
+		} 
+		else if(x==2)
+		{
+			mv.setViewName("MenuPrincipal");
+			mv.addObject("PageTitle", "Menu Principal");
+			mv.addObject("Username", user.getUsername());
 		}
-		mv.addObject("Username", user.getUsername());
+		else if(x==0) 
+		{
+			mv.setViewName("Login");
+			mv.addObject("PageTitle", "Login");
+			mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
+		}
+
+		
 		return mv;
 	}
 
+	public int UserExist(String txtUsuario, String txtContrasenia) 
+	{
+		try 
+		{
+			user = nUser.verificarUsuario(txtUsuario);	
+			if(user != null && user.getPassword().equals(txtContrasenia)) 
+			{
+				if(user.getTipoUsuario().equals("administrador")) 
+				{
+					//Devuelve 1 si existe el usuario y es admin
+					return 1;
+				}
+				else 
+				{
+					//Devuelve 2 si existe el usuario y no es admin
+					return 2;
+				}
+
+			}
+			else 
+			{
+				//Devuelve 0 Si no existe esa combinacion o el usuario
+				return 0;
+			}
+
+		}
+		catch(Exception ex) 
+		{
+			return -1; 
+		}
+	}
+	
+	
+	
 	public boolean verificarCliente(String User, String txtDocumento, String txtNombre, String txtApellido,
 			String ddlSexo, String txtNacionalidad, String ddlProvincia, String ddlLocalidad, String txtDireccion,
 			String dtFechaNac) {
@@ -189,8 +224,11 @@ public class LoginController {
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
 	public ModelAndView eventoRegister(String txtUsuario, String txtContrasenia, String txtRepitPassword) {
 		ModelAndView mv = new ModelAndView();
-		if (txtContrasenia.equals(txtRepitPassword)) {
-			if (nUser.verificarUsuario(txtUsuario) == null) {
+		System.out.println("User: " + txtUsuario +"  pass: " + txtContrasenia + "  RPass: " + txtRepitPassword);
+		if (txtContrasenia.equals(txtRepitPassword)) 
+		{
+			if (nUser.verificarUsuario(txtUsuario) == null) 
+			{
 				user.setPassword(txtContrasenia);
 				user.setUsername(txtUsuario);
 				user.setEstado(true);
@@ -200,15 +238,19 @@ public class LoginController {
 				mv.addObject("PageTitle", "Menu Principal");
 				mv.addObject("Username", user.getUsername());
 				mv.addObject("Msg", "Usuario registrado correctamente.");
-			} else {
+			} 
+			else 
+			{
 				mv.setViewName("Register");
 				mv.addObject("PageTitle", "Registrarse");
 				mv.addObject("Msg", "Error, el usuario ingresado ya se encuentra registrado.");
 			}
-		} else {
+		} 
+		else 
+		{
 			mv.setViewName("Register");
 			mv.addObject("PageTitle", "Registrarse");
-			mv.addObject("Msg", "Error, las contrase�as ingresadas no son iguales.");
+			mv.addObject("Msg", "Error, las contraseñas ingresadas no son iguales.");
 		}
 		return mv;
 	}
