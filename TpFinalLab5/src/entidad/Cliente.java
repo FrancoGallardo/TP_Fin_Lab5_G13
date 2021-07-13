@@ -47,13 +47,15 @@ public class Cliente implements Serializable{
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="IdLocalidad")
 	private Localidad localidad;
+	@Column(name="Estado")
+	private int Estado;
 	
 	
 	public Cliente() {
 		
 	}
 	public Cliente(int dni, Usuario user , String nombre, String apellido, String sexo, String nacionalidad, Date fecha,
-			String direccion, Localidad localidad, Provincia provincia) {
+			String direccion, Localidad localidad, Provincia provincia , int estado) {
 		DNI = dni;
 		usuario = user;
 		Nombre = nombre;
@@ -64,6 +66,7 @@ public class Cliente implements Serializable{
 		Direccion = direccion;
 		this.localidad = localidad;
 		this.provincia = provincia;
+		Estado = estado;
 	}
 	public int getDNI() {
 		return DNI;
@@ -95,12 +98,6 @@ public class Cliente implements Serializable{
 	public void setNacionalidad(String nacionalidad) {
 		Nacionalidad = nacionalidad;
 	}
-	public Date getFecha() {
-		return Fecha_Nac;
-	}
-	public void setFecha(Date fecha) {
-			Fecha_Nac = fecha;
-	}
 	public String getDireccion() {
 		return Direccion;
 	}
@@ -124,6 +121,18 @@ public class Cliente implements Serializable{
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	public Date getFecha() {
+		return Fecha_Nac;
+	}
+	public void setFecha(Date fecha_Nac) {
+		Fecha_Nac = fecha_Nac;
+	}
+	public int getEstado() {
+		return Estado;
+	}
+	public void setEstado(int estado) {
+		Estado = estado;
 	}
 	
 }

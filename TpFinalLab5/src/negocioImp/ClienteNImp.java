@@ -2,6 +2,10 @@ package negocioImp;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import configCapas.ConfigDAO;
 import entidad.Cliente;
 import entidad.Usuario;
 import negocio.ClienteN;
@@ -9,7 +13,12 @@ import funcionesDAOImp.ClienteDAOImp;
 
 public class ClienteNImp implements ClienteN{
 
-	ClienteDAOImp clientDAO = new ClienteDAOImp();
+	private ApplicationContext appContext;
+	private ClienteDAOImp clientDAO;
+	
+	public ClienteNImp() {
+		Inicializar();
+	}
 
 	@Override
 	public boolean insertarCliente(Cliente cli) {
@@ -43,6 +52,12 @@ public class ClienteNImp implements ClienteN{
 			System.out.println(e);
 			return null;
 		}
+	}
+
+	@Override
+	public void Inicializar() {
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		clientDAO = (ClienteDAOImp) appContext.getBean("ClienteDAO");
 	}
 
 }

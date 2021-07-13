@@ -35,4 +35,4 @@
 		</div>
 	</div>
 </div>
-<%@ include file="FooterMenu.jsp"%>
+<%@ include file="FooterAdmin.jsp"%>

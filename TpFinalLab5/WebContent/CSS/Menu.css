@@ -109,8 +109,31 @@ margin-right: 5px
 
 /* Alta cuenta cliente */
 
+.client-content{
+	margin-top: 25px
+}
+
 .account-form{
 	display: none;
+}
+
+.create-client-label{
+	width: 100%;
+}
+
+.create-client-row{
+	margin-bottom: 20px
+}
+
+.create-client-row select,
+.create-client-row input{
+	width: 100%;
+}
+
+.botoncargar{
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px
 }
 
 /* Footer */

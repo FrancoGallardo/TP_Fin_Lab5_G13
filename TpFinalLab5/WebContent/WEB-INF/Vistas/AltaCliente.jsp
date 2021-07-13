@@ -8,56 +8,114 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row client-content">
 			<div class="col-sm-12">
 				<div class="client-data-container">
-					<form action="addClient.do?User=${sessionScope.Username}" method="post">
-						<label>Numero de Documento:</label> 
-						<input type="number"
-							id="txtDocumento" name="txtDocumento" style="margin-right: 1%"
-							placeholder="Documento" /> 
-						<label>Nombre:</label> 
-						<input type="text" id="txtNombre"
-							name="txtNombre" style="margin-right: 1%" placeholder="Nombre" />
-						<label>Apellido:</label> 	
-						<input type="text" id="txtApellido" name="txtApellido"
-							style="margin-right: 1%" placeholder="Apellido" />
-						<label>Sexo:</label> 
-						<select id="ddlSexo" name="ddlSexo"
-							style="margin-right: 1%; width: 6%; text-align: center">
-							<option value="Hombre">Masculino</option>
-							<option value="Mujer">Femenino</option>
-						</select> 
-						<label>Fecha de nacimiento:</label> 
-						 <input type="date" id="dtFechaNac"
-							name="dtFechaNac" min="1900-01-01">
-						 <label>Nacionalidad:</label> 
-						 <input type="text"
-							id="txtNacionalidad" name="txtNacionalidad"
-							style="margin-right: 1%" placeholder="Nacionalidad" />
-						<label>Dirección:</label> 
-						<input type="text" id="txtDireccion"
-							name="txtDireccion" style="margin-right: 1%"
-							placeholder="Dirección" />
-							<label>Localidad:</label> 
-						<select id="ddlLocalidad"
+					<form action="addClient.do?User=${sessionScope.Username}"
+						method="post">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Numero de
+											Documento:</label>
+									</div>
+									<div class="col-sm-6">
+										<input type="number" id="txtDocumento" name="txtDocumento"
+											placeholder="Documento" />
+									</div>
+								</div>
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Nombre:</label>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" id="txtNombre" name="txtNombre"
+											placeholder="Nombre" />
+									</div>
+								</div>
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Apellido:</label>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" id="txtApellido" name="txtApellido"
+											placeholder="Apellido" />
+									</div>
+								</div>
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Sexo:</label>
+									</div>
+									<div class="col-sm-6">
+										<select id="ddlSexo" name="ddlSexo">
+											<option value="Hombre">Masculino</option>
+											<option value="Mujer">Femenino</option>
+										</select>
+									</div>
+								</div>
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Fecha de
+											nacimiento:</label>
+									</div>
+									<div class="col-sm-6">
+										<input type="date" id="dtFechaNac" name="dtFechaNac"
+											min="1900-01-01">
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Nacionalidad:</label>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" id="txtNacionalidad" name="txtNacionalidad"
+											placeholder="Nacionalidad" />
+									</div>
+								</div>
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Dirección:</label>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" id="txtDireccion" name="txtDireccion"
+											placeholder="Dirección" />
+									</div>
+								</div>
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Localidad:</label>
+									</div>
+									<div class="col-sm-6">
+										<select id="ddlLocalidad"
 							name="ddlLocalidad" placeholder="Localidad">
 							<option value="-1">Seleccione...</option>
 							<c:forEach items="${lstLoc}" var="loc">
 								<option value="${loc.getIdLocalidad()},${loc.getDescripcion()}">${loc.getDescripcion()}</option>
 							</c:forEach>
 						</select> 
-						<label>Provincia:</label> 
-						<select id="ddlProvincia" name="ddlProvincia"
+									</div>
+								</div>
+								<div class="row create-client-row">
+									<div class="col-sm-6">
+										<label class="create-client-label">Provincia:</label>
+									</div>
+									<div class="col-sm-6">
+										<select id="ddlProvincia" name="ddlProvincia"
 							onchange="sacarHidden(this.value,0, -1)" placeholder="Provincia">
 							<option value="-1">Seleccione...</option>
 							<c:forEach items="${lstProv}" var="prov">
 								<option value="${prov.getIdProvincia()},${prov.getDescripcion()}">${prov.getDescripcion()}</option>
 							</c:forEach>
 						</select> 
-						<input
-							class="botoncargar" id="txtAgregar" name="txtAceptar"
-							type="submit" value="Agregar" /> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<input class="botoncargar" id="txtAgregar" name="txtAceptar"
+							type="submit" value="Agregar" />
 					</form>
 					${Msg}
 				</div>

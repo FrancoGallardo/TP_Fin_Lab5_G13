@@ -13,7 +13,7 @@ import entidad.TipoCuenta;
 import entidad.Usuario;
 import funcionesDAO.TipoCuentaDAO;
 
-public class TipoCunetaDAOImp implements TipoCuentaDAO{
+public class TipoCuentaDAOImp implements TipoCuentaDAO{
 
 	private ApplicationContext appContext;
 	private Conexion con;

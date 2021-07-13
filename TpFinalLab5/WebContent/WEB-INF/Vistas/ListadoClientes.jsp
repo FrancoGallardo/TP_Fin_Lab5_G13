@@ -19,6 +19,7 @@
 	                       	<th>Direccion</th>
 	                        <th>Localidad</th>
 	                        <th>Provincia</th>
+	                        <th>Estado</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -34,6 +35,17 @@
 							<td>${cli.getDireccion()}</td>
 							<td>${cli.getLocalidad().getDescripcion()}</td>
 							<td>${cli.getProvincia().getDescripcion()}</td>
+							<c:choose>
+						 	<c:when test = "${cli.getEstado() == 0}">
+							<td>Denegado</td>
+							</c:when>  
+							<c:when test="${cli.getEstado() == 1}">
+							<td>Activo</td>
+							</c:when>  
+							<c:when test="${cli.getEstado() == 2}">
+							<td>Pendiente</td>
+							</c:when>  
+						</c:choose>
 						</tr>
 					</c:forEach>
 					</tbody>
@@ -43,4 +55,4 @@
 		</div>
 	</div>
 </div>
-<%@ include file="FooterMenu.jsp"%>
+<%@ include file="FooterAdmin.jsp"%>

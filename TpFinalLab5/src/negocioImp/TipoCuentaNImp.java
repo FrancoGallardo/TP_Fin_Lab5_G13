@@ -4,11 +4,11 @@ import java.util.List;
 
 import entidad.TipoCuenta;
 import negocio.TipoCuentaN;
-import funcionesDAOImp.TipoCunetaDAOImp;
+import funcionesDAOImp.TipoCuentaDAOImp;
 
 public class TipoCuentaNImp implements TipoCuentaN{
 
-	TipoCunetaDAOImp tipoCuentaDAO = new TipoCunetaDAOImp();
+	TipoCuentaDAOImp tipoCuentaDAO = new TipoCuentaDAOImp();
 	
 	@Override
 	public boolean insertarTipoCuenta(TipoCuenta tipoCuenta) {

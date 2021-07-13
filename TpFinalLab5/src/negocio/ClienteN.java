@@ -11,4 +11,5 @@ public interface ClienteN {
 	public List<Cliente> obtenerClientes();
 	public boolean modificar(Cliente cli);
 	public Cliente verificarCliente(int DNI);
+	public void Inicializar();
 }
