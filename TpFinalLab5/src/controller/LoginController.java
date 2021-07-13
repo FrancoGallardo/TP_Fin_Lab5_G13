@@ -67,7 +67,7 @@ public class LoginController {
 		nProv.insertarProvincia(prov);
 		prov.setDescripcion("Cordoba");
 		nProv.insertarProvincia(prov);
-		prov.setDescripcion("Entre Ríos");
+		prov.setDescripcion("Entre Rï¿½os");
 		nProv.insertarProvincia(prov);
 	}
 
@@ -95,9 +95,14 @@ public class LoginController {
 				mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
 			}
 		} else {
-			System.out.println("else");
-			mv.setViewName("MenuPrincipal");
-			mv.addObject("PageTitle", "Menu Principal");
+			System.out.println(user);
+			if(user != null) 
+			{
+				System.out.println("else");
+				mv.setViewName("MenuPrincipal");
+				mv.addObject("PageTitle", "Menu Principal");
+			}
+
 		}
 		mv.addObject("Username", user.getUsername());
 		return mv;
@@ -203,7 +208,7 @@ public class LoginController {
 		} else {
 			mv.setViewName("Register");
 			mv.addObject("PageTitle", "Registrarse");
-			mv.addObject("Msg", "Error, las contraseñas ingresadas no son iguales.");
+			mv.addObject("Msg", "Error, las contraseï¿½as ingresadas no son iguales.");
 		}
 		return mv;
 	}
@@ -221,21 +226,21 @@ public class LoginController {
 				if (modificar) {
 					mv.setViewName("Login");
 					mv.addObject("PageTitle", "Login");
-					mv.addObject("Msg", "Contraseña modificada correctamente");
+					mv.addObject("Msg", "Contraseï¿½a modificada correctamente");
 				} else {
 					mv.setViewName("ForgotPassword");
-					mv.addObject("PageTitle", "Cambiar Contraseña");
-					mv.addObject("Msg", "Error, no se logro modificar la contraseña.");
+					mv.addObject("PageTitle", "Cambiar Contraseï¿½a");
+					mv.addObject("Msg", "Error, no se logro modificar la contraseï¿½a.");
 				}
 			} else {
 				mv.setViewName("ForgotPassword");
-				mv.addObject("PageTitle", "Cambiar Contraseña");
+				mv.addObject("PageTitle", "Cambiar Contraseï¿½a");
 				mv.addObject("Msg", "Error, el usuario ingresado no se encuentra registrado.");
 			}
 		} else {
 			mv.setViewName("ForgotPassword");
-			mv.addObject("PageTitle", "Cambiar Contraseña");
-			mv.addObject("Msg", "Error, las contraseñas no son iguales.");
+			mv.addObject("PageTitle", "Cambiar Contraseï¿½a");
+			mv.addObject("Msg", "Error, las contraseï¿½as no son iguales.");
 		}
 		return mv;
 	}
@@ -319,7 +324,7 @@ public class LoginController {
 	public ModelAndView eventoRedirectForgotPassword() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("ForgotPassword");
-		mv.addObject("PageTitle", "Cambiar Contraseña");
+		mv.addObject("PageTitle", "Cambiar Contraseï¿½a");
 		return mv;
 	}
 

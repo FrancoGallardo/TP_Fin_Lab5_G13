@@ -32,7 +32,8 @@
 }
 
 .user-container,
-.password-container{
+.password-container,
+.repeit-password-container{
 	margin-bottom: 10px;
 	position: relative;
 }
@@ -57,7 +58,8 @@ font-size: 14px;
 }
 
 .user-icon,
-.pass-icon{
+.pass-icon,
+.repitPass-icon{
     position: absolute;
     z-index: 99;
     left: 37%;

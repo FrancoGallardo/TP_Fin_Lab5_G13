@@ -17,7 +17,7 @@
 								placeholder="Usuario" />
 						</div>
 						<div class="password-container">
-						<i class="fa fa-unlock-alt pass-icon" aria-hidden="true"></i>
+						<i class="fa fa-lock pass-icon" aria-hidden="true"></i>
 						 <input class="form-input" id="txtContrasenia"
 								name="txtContrasenia" type="password" placeholder="Contraseña" />
 						</div>

@@ -8,26 +8,26 @@
 			</div>
 			<div class="form-container">
 				<form action="register.do" method="post">
-									<div id="divPadre">
+					<div id="divPadre">
+					
 						<div class="user-container">
-							<label class="form-label" for="txtUsuario">Nombre de Usuario :</label>
-					<input
-								id="txtUsuario" class="form-input user-input" name="txtUsuario" type="text"
-								placeholder="Usuario" />
+							<i class="fa fa-user-circle-o user-icon" aria-hidden="true"></i>
+							<input id="txtUsuario" class="form-input user-input" name="txtUsuario" type="text" placeholder="Usuario" />
 						</div>
+						
 						<div class="password-container">
-							<label class="form-label" for="txtContrasenia">Contraseña
-								:</label> <input class="form-input" id="txtContrasenia"
-								name="txtContrasenia" type="password" placeholder="Contraseña" />
+							<i class="fa fa-lock pass-icon" aria-hidden="true"></i>
+							<input class="form-input" id="txtContrasenia" name="txtContrasenia" type="password" placeholder="Contraseña" />
 						</div>
-							<div class="repeit-password-container">
-							<label class="form-label" for="txtRepitPassword">Repetir Contraseña
-								:</label> <input class="form-input" id="txtRepitPassword"
-								name="txtRepitPassword" type="password" placeholder="Repetir Contraseña" />
+						
+						<div class="repeit-password-container">
+							<i class="fa fa-lock repitPass-icon" aria-hidden="true"></i>
+							<input class="form-input" id="txtRepitPassword" name="txtRepitPassword" type="password" placeholder="Repetir Contraseña" />
+						
 						</div>
-						<input class="login-button" id="btnAceptar" type="submit"
-							value="Registrarse" /> 
-								</div>
+							<input class="login-button" id="btnAceptar" type="submit" value="Registrarse" /> 
+						</div>
+						
 				</form>
 				${Msg}
 			</div>

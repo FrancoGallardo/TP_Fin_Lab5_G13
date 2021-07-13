@@ -42,7 +42,7 @@
 							<label>Localidad:</label> 
 						<select id="ddlLocalidad"
 							name="ddlLocalidad" placeholder="Localidad">
-							<option></option>
+							<option value="-1">Seleccione...</option>
 							<c:forEach items="${lstLoc}" var="loc">
 								<option value="${loc.getIdLocalidad()},${loc.getDescripcion()}">${loc.getDescripcion()}</option>
 							</c:forEach>
@@ -50,7 +50,7 @@
 						<label>Provincia:</label> 
 						<select id="ddlProvincia" name="ddlProvincia"
 							onchange="sacarHidden(this.value,0, -1)" placeholder="Provincia">
-							<option></option>
+							<option value="-1">Seleccione...</option>
 							<c:forEach items="${lstProv}" var="prov">
 								<option value="${prov.getIdProvincia()},${prov.getDescripcion()}">${prov.getDescripcion()}</option>
 							</c:forEach>
