@@ -34,7 +34,9 @@
 .user-container,
 .password-container,
 .repeit-password-container{
-	margin-bottom: 10px;
+    width: 320px;
+    margin: 0 auto;
+    margin-bottom: 20px;
 	position: relative;
 }
 
@@ -62,9 +64,10 @@ font-size: 14px;
 .repitPass-icon{
     position: absolute;
     z-index: 99;
-    left: 37%;
-    bottom: 30%;
+left: 5%;
+    bottom: 10%;
     color: black;
+ transform: translate(-50%, -50%);
 }
 
 

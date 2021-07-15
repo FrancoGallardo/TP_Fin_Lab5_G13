@@ -60,7 +60,7 @@
 											nacimiento:</label>
 									</div>
 									<div class="col-sm-6">
-										<input type="date" id="dtFechaNac" name="dtFechaNac"
+										<input type="date" id="dtFechaNac" name="dtFechaNac" value="${fecha}"
 											min="1900-01-01">
 									</div>
 								</div>

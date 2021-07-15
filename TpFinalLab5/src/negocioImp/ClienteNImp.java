@@ -14,11 +14,8 @@ import funcionesDAOImp.ClienteDAOImp;
 public class ClienteNImp implements ClienteN{
 
 	private ApplicationContext appContext;
-	private ClienteDAOImp clientDAO;
+	private ClienteDAOImp clientDAO = new ClienteDAOImp();
 	
-	public ClienteNImp() {
-		Inicializar();
-	}
 
 	@Override
 	public boolean insertarCliente(Cliente cli) {
@@ -26,8 +23,8 @@ public class ClienteNImp implements ClienteN{
 	}
 
 	@Override
-	public boolean buscarCliente(int DNI) {
-		// TODO Auto-generated method stub
+	public boolean verificarCliente(int DNI) {
+		clientDAO.verificarCliente(DNI);
 		return false;
 	}
 
@@ -43,10 +40,10 @@ public class ClienteNImp implements ClienteN{
 	}
 
 	@Override
-	public Cliente verificarCliente(int DNI) {
+	public Cliente buscarCliente(int DNI) {
 		try {
 			Cliente cli = new Cliente();
-			cli = clientDAO.verificarCliente(DNI);
+			cli = clientDAO.obtenerCliente(DNI);
 			return cli;
 		} catch (Exception e) {
 			System.out.println(e);

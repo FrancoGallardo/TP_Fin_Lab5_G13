@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 import java.util.List;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -152,7 +153,7 @@ public class LoginController {
 				|| ddlProvincia.trim().isEmpty() || ddlLocalidad == null || ddlLocalidad.trim().isEmpty()
 				|| txtDireccion.trim().isEmpty() || dtFechaNac.trim().isEmpty())) {
 			if (Integer.parseInt(txtDocumento) >= 0) {
-				if (nCli.verificarCliente(Integer.parseInt(txtDocumento)) == null) {
+				if (nCli.buscarCliente(Integer.parseInt(txtDocumento)) == null) {
 					user.setUsername(User);
 					Date FechaNac = null;
 					Provincia prov = new Provincia();
@@ -181,6 +182,7 @@ public class LoginController {
 					cli.setProvincia(prov);
 					cli.setDireccion(txtDireccion);
 					cli.setFecha(FechaNac);
+					cli.setEstado(2);
 					verificar = true;
 				} else {
 					verificar = false;
@@ -340,6 +342,28 @@ public class LoginController {
 		mv.addObject("PageTitle", "Alta Cuenta");
 		return mv;
 	}
+	
+	
+	@RequestMapping("modifyState.do")
+	public ModelAndView eventoModificarEstado() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("ListadoClientes");
+		List<Cliente> lstCliente = nCli.obtenerClientes();
+		mv.addObject("ListadoClientes", lstCliente);
+		mv.addObject("PageTitle", "Listado Clientes");
+		return mv;
+	}
+	
+	@RequestMapping("redirectDetails.do")
+	public ModelAndView eventoRedireccionarDetalles(String DNI) {
+		ModelAndView mv = new ModelAndView();
+		cli = nCli.buscarCliente(Integer.parseInt(DNI));
+		mv.setViewName("DatosCliente");
+		mv.addObject("PageTitle", "Datos Cliente");
+		mv.addObject("cliente", cli);
+		return mv;
+	}
+	
 
 	// redireccionar a login
 	@RequestMapping("redirectLogin.do")
@@ -413,14 +437,6 @@ public class LoginController {
 		return mv;
 	}
 
-	@RequestMapping("redirectListadoClientes.do")
-	public ModelAndView eventoRedirectListadoClientes() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("ListadoClientes");
-		mv.addObject("PageTitle", "Listado Clientes");
-		return mv;
-	}
-
 	@RequestMapping("redirectAltaCuentaCliente.do")
 	public ModelAndView eventoRedirectAltaCuentaCliente() {
 		ModelAndView mv = new ModelAndView();
@@ -442,6 +458,7 @@ public class LoginController {
 		mv.addObject("PageTitle", "Listado Clientes");
 		return mv;
 	}
+
 
 	@RequestMapping("redirectListaUsuarios.do")
 	public ModelAndView eventoRedirectListaUsuarios() {
@@ -466,10 +483,13 @@ public class LoginController {
 	@RequestMapping("redirectAltaCliente.do")
 	public ModelAndView eventoRedirectAltaCliente() {
 		ModelAndView mv = new ModelAndView();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
 		List<Localidad> lstLoc = nLoc.obtenerLocalidades();
 		List<Provincia> lstProv = nProv.obtenerProvincias();
 		mv.addObject("lstLoc", lstLoc);
 		mv.addObject("lstProv", lstProv);
+		mv.addObject("fecha", dateFormat.format(date));
 		mv.setViewName("AltaCliente");
 		mv.addObject("PageTitle", "Registrar Cliente");
 		return mv;

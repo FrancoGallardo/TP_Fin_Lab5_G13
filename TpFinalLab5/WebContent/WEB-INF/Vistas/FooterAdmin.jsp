@@ -26,14 +26,6 @@
 							<a class="header-nav-anchor"
 								href="redirectAltaCuentaCliente.do">Alta Cuenta</a>
 						</h6></li>
-						<li class="nav-user-item">
-							<h6 class="header-user-name">${sessionScope.Username}
-							<ul class="close-session-container">
-							<li><a href="cerrarSession.do">Cerrar session</a></li>
-							</ul>
-							</h6>	
-								<i class="fa fa-user-circle header-user-icon" aria-hidden="true"></i>
-						</li>
 				</ul>
 				</div>
 			</div>

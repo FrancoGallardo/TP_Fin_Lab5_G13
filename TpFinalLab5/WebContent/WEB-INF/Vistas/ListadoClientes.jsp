@@ -13,13 +13,9 @@
 	                        <th>Usuario</th>
 	                        <th>Nombre</th>
 	                        <th>Apellido</th>
-	                        <th>Sexo</th>
-	                        <th>Nacionalidad</th>
-	                        <th>Fecha de Nacimiento</th>
-	                       	<th>Direccion</th>
-	                        <th>Localidad</th>
-	                        <th>Provincia</th>
 	                        <th>Estado</th>
+	                        <th></th>
+	                        <th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -29,12 +25,6 @@
 							<td>${cli.getUsuario().getUsername()}</td>
 							<td>${cli.getNombre()}</td>
 							<td>${cli.getApellido()}</td>
-							<td>${cli.getSexo()}</td>
-							<td>${cli.getNacionalidad()}</td>
-							<td>${cli.getFecha()}</td>
-							<td>${cli.getDireccion()}</td>
-							<td>${cli.getLocalidad().getDescripcion()}</td>
-							<td>${cli.getProvincia().getDescripcion()}</td>
 							<c:choose>
 						 	<c:when test = "${cli.getEstado() == 0}">
 							<td>Denegado</td>
@@ -45,7 +35,16 @@
 							<c:when test="${cli.getEstado() == 2}">
 							<td>Pendiente</td>
 							</c:when>  
-						</c:choose>
+							</c:choose>
+								<c:choose>
+						 	<c:when test = "${cli.getEstado() == 0}">
+							<td><a href="modifyState.do?DNI=${cli.getDNI()}">Activar</a></td>
+							</c:when>  
+							<c:when test="${cli.getEstado() == 1}">
+							<td><a href="modifyState.do?DNI=${cli.getDNI()}">Desactivar</a></td>
+							</c:when>  
+							</c:choose>
+							<td><a href="redirectDetails.do?DNI=${cli.getDNI()}">Detalle</a></td>
 						</tr>
 					</c:forEach>
 					</tbody>
