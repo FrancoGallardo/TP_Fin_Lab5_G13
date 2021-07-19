@@ -87,7 +87,7 @@
 								</div>
 							</div>
 						</div>
-						<input type="hidden" id="txtUsuario"> <input type="submit"
+						<input type="hidden" id="txtUsuario" name="txtUsuario"> <input type="submit"
 							value="Agregar" />
 					</form>
 				</div>

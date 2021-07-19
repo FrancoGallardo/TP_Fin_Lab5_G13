@@ -6,8 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import entidad.Cliente;
@@ -24,6 +29,7 @@ import negocioImp.TipoCuentaNImp;
 import negocioImp.UsuarioNImp;
 
 @Controller
+@SessionAttributes("name")
 public class ClienteController {
 	
 	UsuarioNImp nUser = new UsuarioNImp();
@@ -40,11 +46,16 @@ public class ClienteController {
 	Cuenta cuenta = new Cuenta();
 	TipoCuenta tCuenta = new TipoCuenta();
 	
-	@RequestMapping("/redirectTransferenciaCliente.do")
-	public ModelAndView eventoRedirectTransferenciaClientes() {
+	@RequestMapping(value="/redirectTransferenciaCliente.do" , method = RequestMethod.GET)
+	public ModelAndView eventoRedirectTransferenciaClientes(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
+		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
+		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
+		//List<Cuenta> cuentaDestino = nCuenta.ob
 		mv.setViewName("TransferenciaClientes");
 		mv.addObject("PageTitle", "Transferencia a Clientes");
+		mv.addObject("cuentas", cuentas);
+		//mv.addObject("cuentaDestino", cuentaDestino);
 		return mv;
 	}
 
@@ -66,34 +77,26 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("/transferClient.do")
-	public ModelAndView eventoTrasferClient(String txtCBU , String txtMonto) {
+	public ModelAndView eventoTrasferClient(String txtCBU , String txtMonto , String ddlCBUOrigen) {
 		ModelAndView mv = new ModelAndView();
-		if(nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
-			
-			mv.addObject("Msg", "Transferencia realizada exitosamente");
+		Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(txtCBU));
+		if(cuentaDestino != null) {
+			cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
+			if(cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
+				cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
+				nCuenta.modificar(cuenta);
+				cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
+				nCuenta.modificar(cuentaDestino);
+				mv.addObject("Msg", "Transferencia realizada exitosamente");
+			} else {
+				mv.addObject("Msg", "No posee suficiente saldo para realizar la transaccion");
+			}
+		
 		} else {
 			mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
 		}
 		mv.setViewName("TransferenciaClientes");
 		mv.addObject("PageTitle", "Transferencia a Clientes");
-		return mv;
-	}
-	
-	@RequestMapping("/registerAccount.do")
-	public ModelAndView eventoRegistrarCuenta(String txtCBU, String txtFechaCreacion, String ddlTipoCuenta,
-			String txtSaldo) {
-		ModelAndView mv = new ModelAndView();
-		boolean verificar = verificarCuenta(txtCBU, txtFechaCreacion, ddlTipoCuenta, txtSaldo);
-		if (verificar) {
-			nCuenta.insertarCuenta(cuenta);
-			mv.addObject("Msg", "Cuenta registrada correctamente.");
-		} else {
-			mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
-		}
-		List<Cliente> lstCliente = nCli.obtenerClientes();
-		mv.addObject("ListadoClientes", lstCliente);
-		mv.setViewName("AltaCuentaCliente");
-		mv.addObject("PageTitle", "Alta Cuenta");
 		return mv;
 	}
 	
@@ -189,41 +192,6 @@ public class ClienteController {
 		}
 		return verificar;
 	}
-	
-	public boolean verificarCuenta(String txtCBU, String txtFechaCreacion, String ddlTipoCuenta, String txtSaldo) {
-		boolean verificar = false;
-		if (Integer.parseInt(txtCBU) > 0) {
-			if (!nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
-				cuenta.setCBU(Integer.parseInt(txtCBU));
-				if (ddlTipoCuenta != "") {
-					cuenta.setCodTipoCuenta(Integer.parseInt(ddlTipoCuenta));
-					if (Double.parseDouble(txtSaldo) > 0) {
-						cuenta.setSaldo(Double.parseDouble(txtSaldo));
-						verificar = true;
-						Date FechaNac = null;
-						try {
-							FechaNac = new SimpleDateFormat("yyyy-mm-dd").parse(txtFechaCreacion);
-							cli.setFecha(FechaNac);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							verificar = false;
-						}
-						cuenta.setFecha_Creacion(FechaNac);
-						cuenta.setEstado(true);
-					} else {
-						verificar = false;
-					}
-				} else {
-					verificar = false;
-				}
-			} else {
-				verificar = false;
-			}
-		} else {
-			verificar = false;
-		}
-		return verificar;
-	}
+
 
 }

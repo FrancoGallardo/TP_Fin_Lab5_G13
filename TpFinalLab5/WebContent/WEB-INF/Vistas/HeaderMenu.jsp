@@ -68,7 +68,7 @@
 							<a class="header-nav-anchor" href="redirectAltaCliente.do">Datos Cliente</a>
 						</h6></li>
 						<li class="nav-user-item">
-							<h6 class="header-user-name">${sessionScope.Username}
+							<h6 class="header-user-name">${sessionScope.name}
 							<ul class="close-session-container">
 							<li><a href="cerrarSession.do">Cerrar session</a></li>
 							</ul>

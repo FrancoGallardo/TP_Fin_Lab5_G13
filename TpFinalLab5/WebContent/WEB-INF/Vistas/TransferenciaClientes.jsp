@@ -9,11 +9,19 @@
 		<div class="row">
 			<form method="get" action=""
 				class="form-content-container text-center">
-				<div class="form-content col-md-6">
+						<div class="form-content col-md-4">
+				<label for="txtCBUOrigen" class="label-cbu">Seleccione Cuenta Origen</label>
+					<select id="ddlCBUOrigen" name="ddlCBUOrigen"  class="label-cbu">
+							<c:forEach items="${cuentas}" var="cuenta">
+						<option id="txtCBU" value="${cuenta.getCBU()}" >${cuenta.getCBU()}</option>
+						</c:forEach>
+					</select> 
+				</div>
+				<div class="form-content col-md-4">
 					<label for="txtCBU" class="label-cbu">Ingrese el CBU</label> <input
 						class="form-input" id="txtCBU" name="txtCBU" type="number" />
 				</div>
-				<div class="form-content col-md-6">
+				<div class="form-content col-md-4">
 					<label for="txtMonto" class="label-cbu">Ingrese el Monto</label> <input
 						class="form-input" id="txtMonto" name="txtMonto" type="number" />
 				</div>

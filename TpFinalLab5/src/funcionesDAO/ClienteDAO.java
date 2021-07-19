@@ -12,6 +12,7 @@ public interface ClienteDAO {
 	public List<Cliente> obtenerClientes();
 	public boolean modificar(Cliente cli);
 	public Cliente obtenerCliente(int DNI);
+	public List<Cliente> obtenerClientexUsuario(String Usuario);
 	public void Finalizar();
 	public void Inicializar();
 	

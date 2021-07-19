@@ -57,4 +57,15 @@ public class ClienteNImp implements ClienteN{
 		clientDAO = (ClienteDAOImp) appContext.getBean("ClienteDAO");
 	}
 
+	@Override
+	public Cliente obtenerClientexUsuario(String Usuario) {
+		List<Cliente> lstCliente = clientDAO.obtenerClientexUsuario(Usuario);
+		if(lstCliente != null) {
+			for (Cliente cliente : lstCliente) {
+				return cliente;
+			}
+		} 
+		return null;
+	}
+
 }

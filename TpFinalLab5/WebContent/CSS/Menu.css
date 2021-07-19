@@ -96,10 +96,11 @@ margin-right: 5px
 	padding-right: 10px;
 }
 
+/*
 .dataTables_wrapper .dataTables_filter,
 .dataTables_paginate{
 	display: none;
-}
+}*/
 
 .paid-button{
 	width: 30%;

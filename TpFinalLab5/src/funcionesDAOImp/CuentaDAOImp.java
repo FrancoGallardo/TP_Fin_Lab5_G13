@@ -31,7 +31,7 @@ public class CuentaDAOImp implements CuentaDAO{
 	}
 
 	@Override
-	public Cuenta obtenerCuenta(int id) {
+	public Cuenta obtenerCuenta(int CBU) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,6 +42,24 @@ public class CuentaDAOImp implements CuentaDAO{
 		List<Cuenta> lstCuenta;
 		try {
 		query=session.createQuery("FROM Cuenta");
+		lstCuenta=query.list();
+		}
+		catch(Exception e){
+			lstCuenta=null;
+			e.printStackTrace();
+		}
+		finally {
+			Finalizar();
+		}
+		return lstCuenta;
+	}
+	
+	@Override
+	public List<Cuenta> obtenerCuentasCliente(int DNI) {
+		Inicializar();
+		List<Cuenta> lstCuenta;
+		try {
+		query=session.createQuery("FROM Cuenta WHERE DNI = " + DNI);
 		lstCuenta=query.list();
 		}
 		catch(Exception e){
@@ -84,6 +102,8 @@ public class CuentaDAOImp implements CuentaDAO{
 		con = (Conexion) appContext.getBean("ConexionBD");
 		session=con.abrirConexion();
 	}
+
+
 
 
 

@@ -20,8 +20,8 @@ public class Cuenta implements Serializable{
 	@Id
 	@Column(name="CBU")
 	private int CBU;
-	@Column(name="Usuario")
-	private Usuario Usuario;
+	@Column(name="DNI")
+	private int DNI;
 	@Column(name="Fecha_Creacion")
 	@Type(type="date")
 	private Date Fecha_Creacion;
@@ -88,12 +88,12 @@ public class Cuenta implements Serializable{
 		Estado = estado;
 	}
 
-	public Usuario getUsuario() {
-		return Usuario;
+	public int getDNI() {
+		return DNI;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		Usuario = usuario;
+	public void setDNI(int dni) {
+		DNI = dni;
 	}
 
 	public Date getFecha_Creacion() {
@@ -106,10 +106,9 @@ public class Cuenta implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cuenta [CBU=" + CBU + ", Usuario=" + Usuario + ", Fecha_Creacion=" + Fecha_Creacion + ", CodTipoCuenta="
+		return "Cuenta [CBU=" + CBU + ", DNI=" + DNI + ", Fecha_Creacion=" + Fecha_Creacion + ", CodTipoCuenta="
 				+ CodTipoCuenta + ", NumeroCuenta=" + NumeroCuenta + ", Saldo=" + Saldo + ", Estado=" + Estado + "]";
 	}
 
-	
 	
 }

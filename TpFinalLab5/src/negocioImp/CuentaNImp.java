@@ -38,4 +38,9 @@ public class CuentaNImp implements CuentaN{
 		return false;
 	}
 
+	@Override
+	public List<Cuenta> obtenerCuentasCliente(int DNI) {
+		return cuentaDAO.obtenerCuentasCliente(DNI);
+	}
+
 }

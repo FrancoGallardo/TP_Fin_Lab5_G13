@@ -111,4 +111,22 @@ public class ClienteDAOImp implements ClienteDAO{
 		Finalizar();
 		return cli;
 	}
+
+	@Override
+	public List<Cliente> obtenerClientexUsuario(String Usuario) {
+		Inicializar();
+		List<Cliente> lstClientes;
+		try {
+			query=session.createQuery("FROM Cliente WHERE Username = '" + Usuario + "'");
+			lstClientes=query.list();
+		}
+		catch(Exception e) {
+			lstClientes=null;
+			e.printStackTrace();
+		}
+		finally {
+			Finalizar();
+		}
+		return lstClientes;
+	}
 }

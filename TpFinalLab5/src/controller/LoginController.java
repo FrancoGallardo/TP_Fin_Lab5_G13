@@ -1,11 +1,15 @@
 package controller;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import negocioImp.ClienteNImp;
 import negocioImp.CuentaNImp;
@@ -22,7 +26,8 @@ import entidad.TipoCuenta;
 import entidad.Usuario;
 
 @Controller
-@SessionAttributes("Username")
+@SessionAttributes("name")
+@Scope()
 public class LoginController {
 	UsuarioNImp nUser = new UsuarioNImp();
 	ClienteNImp nCli = new ClienteNImp();
@@ -102,9 +107,12 @@ public class LoginController {
 	
 	// redireccionar al menu principal por el login
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView eventoRedirectMenu(String txtUsuario, String txtContrasenia) {
+	public ModelAndView eventoRedirectMenu(String txtUsuario, String txtContrasenia, HttpServletRequest request) {
 		int x = UserExist(txtUsuario,  txtContrasenia);
-		System.out.println(x);
+		request.getSession().setAttribute("name", "");
+		request.getSession().invalidate();
+		System.out.println(request.getSession().getAttribute("name"));
+		System.out.println(txtUsuario);
 		ModelAndView mv = new ModelAndView();
 		if (x==1)
 		{
@@ -112,13 +120,13 @@ public class LoginController {
 			mv.setViewName("ListadoClientes");
 			mv.addObject("ListadoClientes", lstCliente);
 			mv.addObject("PageTitle", "Listado Clientes");
-			mv.addObject("Username", user.getUsername());
+			request.getSession().setAttribute("name", txtUsuario);
 		} 
 		else if(x==2)
 		{
 			mv.setViewName("MenuPrincipal");
-			mv.addObject("PageTitle", "Menu Principal");
-			mv.addObject("Username", user.getUsername());
+			mv.addObject("PageTitle", "Menu Principal");	
+			request.getSession().setAttribute("name", txtUsuario);
 		}
 		else if(x==0) 
 		{
@@ -126,16 +134,13 @@ public class LoginController {
 			mv.addObject("PageTitle", "Login");
 			mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
 		}
-
-		
 		return mv;
 	}
 
 	// redireccionar al menu principal tras registrarse
 	@RequestMapping(value = "/register.do", method = RequestMethod.POST)
-	public ModelAndView eventoRegister(String txtUsuario, String txtContrasenia, String txtRepitPassword) {
+	public ModelAndView eventoRegister(String txtUsuario, String txtContrasenia, String txtRepitPassword, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("User: " + txtUsuario +"  pass: " + txtContrasenia + "  RPass: " + txtRepitPassword);
 		if (txtContrasenia.equals(txtRepitPassword)) 
 		{
 			if (nUser.verificarUsuario(txtUsuario) == null) 
@@ -147,8 +152,8 @@ public class LoginController {
 				nUser.insertarUsuario(user);
 				mv.setViewName("MenuPrincipal");
 				mv.addObject("PageTitle", "Menu Principal");
-				mv.addObject("Username", user.getUsername());
 				mv.addObject("Msg", "Usuario registrado correctamente.");
+				request.getSession().setAttribute("name", user.getUsername());
 			} 
 			else 
 			{
@@ -236,9 +241,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/cerrarSession.do", method = RequestMethod.GET)
-	public ModelAndView eventoCerrarSesion() {
+	public ModelAndView eventoCerrarSesion(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("Username", "");
+		HttpSession session=request.getSession(); 
+		session.removeAttribute("name");
 		mv.setViewName("Login");
 		mv.addObject("PageTitle", "Login");
 		return mv;

@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -77,6 +78,61 @@ public class AdminController {
 		mv.addObject("lstCuentas", lstCuentas);
 		mv.setViewName("ListadoCuentas");
 		mv.addObject("PageTitle", "Listado Cuentas");
+		return mv;
+	}
+	
+	public boolean verificarCuenta(String txtCBU, String txtFechaCreacion, String ddlTipoCuenta, String txtSaldo, String txtUsuario) {
+		boolean verificar = false;
+		if (Integer.parseInt(txtCBU) > 0) {
+			if (!nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
+				cuenta.setCBU(Integer.parseInt(txtCBU));
+				if (ddlTipoCuenta != "") {
+					cuenta.setCodTipoCuenta(Integer.parseInt(ddlTipoCuenta));
+					if (Double.parseDouble(txtSaldo) > 0) {
+						cuenta.setSaldo(Double.parseDouble(txtSaldo));
+						verificar = true;
+						Date FechaNac = null;
+						try {
+							FechaNac = new SimpleDateFormat("yyyy-mm-dd").parse(txtFechaCreacion);
+							cli.setFecha(FechaNac);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							verificar = false;
+						}
+						cuenta.setFecha_Creacion(FechaNac);
+						cuenta.setEstado(true);
+						cuenta.setDNI(Integer.parseInt(txtUsuario));
+					} else {
+						verificar = false;
+					}
+				} else {
+					verificar = false;
+				}
+			} else {
+				verificar = false;
+			}
+		} else {
+			verificar = false;
+		}
+		return verificar;
+	}
+	
+	@RequestMapping("/registerAccount.do")
+	public ModelAndView eventoRegistrarCuenta(String txtUsuario, String txtCBU, String txtFechaCreacion, String ddlTipoCuenta,
+			String txtSaldo) {
+		ModelAndView mv = new ModelAndView();
+		boolean verificar = verificarCuenta(txtCBU, txtFechaCreacion, ddlTipoCuenta, txtSaldo, txtUsuario);
+		if (verificar) {
+			nCuenta.insertarCuenta(cuenta);
+			mv.addObject("Msg", "Cuenta registrada correctamente.");
+		} else {
+			mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
+		}
+		List<Cliente> lstCliente = nCli.obtenerClientes();
+		mv.addObject("ListadoClientes", lstCliente);
+		mv.setViewName("AltaCuentaCliente");
+		mv.addObject("PageTitle", "Alta Cuenta");
 		return mv;
 	}
 	
