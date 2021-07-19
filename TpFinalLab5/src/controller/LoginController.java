@@ -240,7 +240,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/cerrarSession.do", method = RequestMethod.GET)
-	public String eventoCerrarSesion(HttpServletRequest request) {
+	public ModelAndView eventoCerrarSesion(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		request.getSession().invalidate();
 		request.getSession(false);
@@ -248,7 +248,7 @@ public class LoginController {
 	    session.invalidate();  
 		mv.setViewName("Login");
 		mv.addObject("PageTitle", "Login");
-	    return "redirect:/";
+	    return mv;
 	}
 
 }
