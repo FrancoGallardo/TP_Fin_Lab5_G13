@@ -16,9 +16,9 @@ public class CuentaNImp implements CuentaN{
 	}
 
 	@Override
-	public boolean buscarCuenta(int CBU) {
+	public Cuenta buscarCuenta(int CBU) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class CuentaNImp implements CuentaN{
 	}
 
 	@Override
-	public Cuenta verificarCuenta(int CBU) {
+	public boolean verificarCuenta(int CBU) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 }

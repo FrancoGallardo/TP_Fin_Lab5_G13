@@ -85,8 +85,23 @@ public class ClienteDAOImp implements ClienteDAO{
 
 	@Override
 	public boolean modificar(Cliente cli) {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean res=false;
+		Inicializar();
+		
+		try {
+			session.beginTransaction();
+			session.update(cli);
+			session.getTransaction().commit();
+			res=true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			res=false;
+		}
+		finally {
+			Finalizar();
+		}
+		return res;
 	}
 
 	@Override

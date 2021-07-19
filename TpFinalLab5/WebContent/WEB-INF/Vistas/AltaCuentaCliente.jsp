@@ -61,7 +61,7 @@
 									</div>
 									<div class="col-sm-6">
 										<input id="txtFechaCreacion" class="" name="txtFechaCreacion"
-											type="date" placeholder="Fecha de creación" />
+											type="date" value="${fecha}" placeholder="Fecha de creación" />
 									</div>
 								</div>
 								<div class="row create-client-row">

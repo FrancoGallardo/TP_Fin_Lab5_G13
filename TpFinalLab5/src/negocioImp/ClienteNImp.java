@@ -34,8 +34,8 @@ public class ClienteNImp implements ClienteN{
 	}
 
 	@Override
-	public boolean modificar(Cliente usuario) {
-		// TODO Auto-generated method stub
+	public boolean modificar(Cliente cliente) {
+		clientDAO.modificar(cliente);
 		return false;
 	}
 

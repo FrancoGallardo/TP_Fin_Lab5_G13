@@ -37,12 +37,6 @@ public class CuentaDAOImp implements CuentaDAO{
 	}
 
 	@Override
-	public boolean buscarCuenta(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public List<Cuenta> obtenerCuentas() {
 		Inicializar();
 		List<Cuenta> lstCuenta;
@@ -58,6 +52,18 @@ public class CuentaDAOImp implements CuentaDAO{
 			Finalizar();
 		}
 		return lstCuenta;
+	}
+	
+	@Override
+	public boolean verificarCuenta(int cbu) {
+		Inicializar();
+		Cuenta cuenta = (Cuenta)session.get(Cuenta.class, cbu);
+		Finalizar();
+		if(cuenta != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -78,5 +84,7 @@ public class CuentaDAOImp implements CuentaDAO{
 		con = (Conexion) appContext.getBean("ConexionBD");
 		session=con.abrirConexion();
 	}
+
+
 
 }

@@ -137,6 +137,18 @@ margin-right: 5px
 	margin-top: 20px
 }
 
+.changeState{
+	    background-color: white;
+    border: unset;
+    color: #428bca;
+    margin: 0 auto;
+}
+
+.changeState:hover{
+	color: #2a6496;
+    text-decoration: underline;
+}
+
 /* Footer */
 
 .footer-container,

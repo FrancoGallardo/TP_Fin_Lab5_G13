@@ -16,11 +16,13 @@
 	                        <th>Estado</th>
 	                        <th></th>
 	                        <th></th>
+	                        <th></th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach items="${ListadoClientes}" var="cli">
 						<tr>
+						<form method="post" action="modifyState.do?DNI=${cli.getDNI()}">
 							<td>${cli.getDNI()}</td>
 							<td>${cli.getUsuario().getUsername()}</td>
 							<td>${cli.getNombre()}</td>
@@ -36,15 +38,18 @@
 							<td>Pendiente</td>
 							</c:when>  
 							</c:choose>
-								<c:choose>
-						 	<c:when test = "${cli.getEstado() == 0}">
-							<td><a href="modifyState.do?DNI=${cli.getDNI()}">Activar</a></td>
-							</c:when>  
-							<c:when test="${cli.getEstado() == 1}">
-							<td><a href="modifyState.do?DNI=${cli.getDNI()}">Desactivar</a></td>
-							</c:when>  
-							</c:choose>
-							<td><a href="redirectDetails.do?DNI=${cli.getDNI()}">Detalle</a></td>
+							<td>
+							<select id="ddlState" name="ddlState">
+							<option value="2">Pendiente</option>
+							<option value="1">Activar</option>
+							<option value="0">Desactivar</option>
+							</select>
+								</td>
+									<td><a href="redirectDetails.do?DNI=${cli.getDNI()}">Detalle</a></td>
+								<td>
+								<input name="btnModificar" type="submit" class="changeState" value="Cambiar Estado">
+								</td>
+							</form>
 						</tr>
 					</c:forEach>
 					</tbody>

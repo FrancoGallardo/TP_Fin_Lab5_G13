@@ -292,7 +292,7 @@ public class LoginController {
 	public boolean verificarCuenta(String txtCBU, String txtFechaCreacion, String ddlTipoCuenta, String txtSaldo) {
 		boolean verificar = false;
 		if (Integer.parseInt(txtCBU) > 0) {
-			if (nCuenta.verificarCuenta(Integer.parseInt(txtCBU)) == null) {
+			if (!nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
 				cuenta.setCBU(Integer.parseInt(txtCBU));
 				if (ddlTipoCuenta != "") {
 					cuenta.setCodTipoCuenta(Integer.parseInt(ddlTipoCuenta));
@@ -343,10 +343,28 @@ public class LoginController {
 		return mv;
 	}
 	
+	public void verificarEstadoCliente(String ddlState) {
+		switch(cli.getEstado()) {
+		case 0:
+			cli.setEstado(1);
+			break;
+		case 1:
+			cli.setEstado(0);
+			break;
+		case 2:
+			cli.setEstado(1);
+			break;
+		}
+	}
+	
 	
 	@RequestMapping("modifyState.do")
-	public ModelAndView eventoModificarEstado() {
+	public ModelAndView eventoModificarEstado(String DNI , String ddlState) {
 		ModelAndView mv = new ModelAndView();
+		cli = nCli.buscarCliente(Integer.parseInt(DNI));
+		System.out.println(ddlState);
+		verificarEstadoCliente(ddlState);
+		nCli.modificar(cli);
 		mv.setViewName("ListadoClientes");
 		List<Cliente> lstCliente = nCli.obtenerClientes();
 		mv.addObject("ListadoClientes", lstCliente);
@@ -354,6 +372,21 @@ public class LoginController {
 		return mv;
 	}
 	
+	@RequestMapping("transferClient.do")
+	public ModelAndView eventoTrasferClient(String txtCBU , String txtMonto) {
+		ModelAndView mv = new ModelAndView();
+		if(nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
+			
+			mv.addObject("Msg", "Transferencia realizada exitosamente");
+		} else {
+			mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
+		}
+		mv.setViewName("TransferenciaClientes");
+		mv.addObject("PageTitle", "Transferencia a Clientes");
+		return mv;
+	}
+	
+
 	@RequestMapping("redirectDetails.do")
 	public ModelAndView eventoRedireccionarDetalles(String DNI) {
 		ModelAndView mv = new ModelAndView();
@@ -440,9 +473,12 @@ public class LoginController {
 	@RequestMapping("redirectAltaCuentaCliente.do")
 	public ModelAndView eventoRedirectAltaCuentaCliente() {
 		ModelAndView mv = new ModelAndView();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
 		mv.setViewName("AltaCuentaCliente");
 		List<TipoCuenta> lstTipoCuenta = nTipoCuenta.obtenerTipoCuentas();
 		List<Cliente> lstCliente = nCli.obtenerClientes();
+		mv.addObject("fecha", dateFormat.format(date));
 		mv.addObject("ListadoClientes", lstCliente);
 		mv.addObject("lstTipoCuenta", lstTipoCuenta);
 		mv.addObject("PageTitle", "Alta Cuenta");
