@@ -33,7 +33,6 @@
 	});
 </script>
 
-
 <title>${PageTitle}</title>
 </head>
 

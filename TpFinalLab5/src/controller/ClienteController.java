@@ -29,7 +29,8 @@ import negocioImp.TipoCuentaNImp;
 import negocioImp.UsuarioNImp;
 
 @Controller
-@SessionAttributes("name")
+@SessionAttributes(value="name")
+@Scope()
 public class ClienteController {
 	
 	UsuarioNImp nUser = new UsuarioNImp();

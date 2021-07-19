@@ -26,7 +26,7 @@ import entidad.TipoCuenta;
 import entidad.Usuario;
 
 @Controller
-@SessionAttributes("name")
+@SessionAttributes(value="name")
 @Scope()
 public class LoginController {
 	UsuarioNImp nUser = new UsuarioNImp();
@@ -111,7 +111,6 @@ public class LoginController {
 		int x = UserExist(txtUsuario,  txtContrasenia);
 		request.getSession().setAttribute("name", "");
 		request.getSession().invalidate();
-		System.out.println(request.getSession().getAttribute("name"));
 		System.out.println(txtUsuario);
 		ModelAndView mv = new ModelAndView();
 		if (x==1)
@@ -120,13 +119,13 @@ public class LoginController {
 			mv.setViewName("ListadoClientes");
 			mv.addObject("ListadoClientes", lstCliente);
 			mv.addObject("PageTitle", "Listado Clientes");
-			request.getSession().setAttribute("name", txtUsuario);
+			mv.addObject("name", user.getUsername());
 		} 
 		else if(x==2)
 		{
 			mv.setViewName("MenuPrincipal");
 			mv.addObject("PageTitle", "Menu Principal");	
-			request.getSession().setAttribute("name", txtUsuario);
+			mv.addObject("name", user.getUsername());
 		}
 		else if(x==0) 
 		{
@@ -241,13 +240,15 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/cerrarSession.do", method = RequestMethod.GET)
-	public ModelAndView eventoCerrarSesion(HttpServletRequest request) {
+	public String eventoCerrarSesion(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		HttpSession session=request.getSession(); 
-		session.removeAttribute("name");
+		request.getSession().invalidate();
+		request.getSession(false);
+		HttpSession session=request.getSession();  
+	    session.invalidate();  
 		mv.setViewName("Login");
 		mv.addObject("PageTitle", "Login");
-		return mv;
+	    return "redirect:/";
 	}
 
 }
