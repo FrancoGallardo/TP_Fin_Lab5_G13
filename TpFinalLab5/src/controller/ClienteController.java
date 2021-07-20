@@ -169,6 +169,49 @@ public class ClienteController {
 		return mv;
 	}
 
+	
+	@RequestMapping("/transferMyAccount.do")
+	public ModelAndView eventoTrasferMyAccount(String ddlCBUDestino, String txtMonto, String ddlCBUOrigen,
+			String txtDescription) {
+		ModelAndView mv = new ModelAndView();
+		cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
+		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cuenta.getDNI());
+		if (!ddlCBUDestino.isEmpty() && !txtMonto.isEmpty()) {
+			if(!ddlCBUDestino.equals(ddlCBUOrigen)) {
+				if(nCuenta.verificarCuenta(Integer.parseInt(ddlCBUDestino))) {
+				Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUDestino));
+					if (cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
+						cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
+						nCuenta.modificar(cuenta);
+						cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
+						nCuenta.modificar(cuentaDestino);
+						
+						if (saveTransaction(ddlCBUDestino, txtMonto, cuenta.getCBU(), txtDescription)) {
+							mv.addObject("Msg", "Transferencia realizada exitosamente");
+						} else {
+							mv.addObject("Msg", "Transferencia realizada exitosamente");
+						}
+					} else {
+						mv.addObject("Msg", "No posee suficiente saldo para realizar la transaccion");
+					}
+	
+				} else {
+					mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
+				}
+			}
+			else {
+				mv.addObject("Msg", "No puede transferirse a la misma cuenta");
+			}
+		} else {
+			mv.addObject("Msg", "Error en los datos ingresados");
+		}
+		mv.addObject("cuentas", cuentas);
+		mv.setViewName("TransferenciaPropias");
+		mv.addObject("PageTitle", "Transferencia Propias");
+		return mv;
+	}
+
+	
 	@RequestMapping("/redirectAltaCliente.do")
 	public ModelAndView eventoRedirectAltaCliente() {
 		ModelAndView mv = new ModelAndView();

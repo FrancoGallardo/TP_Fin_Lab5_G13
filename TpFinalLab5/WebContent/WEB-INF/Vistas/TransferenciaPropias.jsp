@@ -12,7 +12,7 @@
 			</div>
 			<div class="col-sm-6">
 				<h3 class="right-column-title">Enviar Tranferencia</h3>
-				<form method="post" action="redirectTransferenciaPropias.do"
+				<form method="post" action="transferMyAccount.do"
 					class="form-content-container">
 					<div class="row">
 						<div class="col-sm-6 right-column-content">
