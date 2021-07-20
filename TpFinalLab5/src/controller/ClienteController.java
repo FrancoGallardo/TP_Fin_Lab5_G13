@@ -72,38 +72,15 @@ public class ClienteController {
 	}
 
 	@RequestMapping("/redirectTransferenciaPropias.do")
-	public ModelAndView eventoRedirectTransferenciaPropias(String ddlCBUDestino, String txtMonto, String ddlCBUOrigen,
-			String txtDescription) {
+	public ModelAndView eventoRedirectTransferenciaPropias(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
-		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cuenta.getDNI());
-		if (!ddlCBUDestino.isEmpty() && !txtMonto.isEmpty()) {
-			if(nCuenta.verificarCuenta(Integer.parseInt(ddlCBUDestino))) {
-			Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUDestino));
-				if (cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
-					cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
-					nCuenta.modificar(cuenta);
-					cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
-					nCuenta.modificar(cuentaDestino);
-					
-					if (saveTransaction(ddlCBUDestino, txtMonto, cuenta.getCBU(), txtDescription)) {
-						mv.addObject("Msg", "Transferencia realizada exitosamente");
-					} else {
-						mv.addObject("Msg", "Transferencia realizada exitosamente");
-					}
-				} else {
-					mv.addObject("Msg", "No posee suficiente saldo para realizar la transaccion");
-				}
-
-			} else {
-				mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
-			}
-		} else {
-			mv.addObject("Msg", "Error en los datos ingresados");
-		}
-		mv.addObject("cuentas", cuentas);
+		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
+		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
+		// List<Cuenta> cuentaDestino = nCuenta.ob
 		mv.setViewName("TransferenciaPropias");
-		mv.addObject("PageTitle", "Transferencias a Cuentas Propias");
+		mv.addObject("PageTitle", "Transferencia Propias");
+		mv.addObject("cuentas", cuentas);
+		// mv.addObject("cuentaDestino", cuentaDestino);
 		return mv;
 	}
 
