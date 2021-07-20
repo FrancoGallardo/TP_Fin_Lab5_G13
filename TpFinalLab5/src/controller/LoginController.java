@@ -255,8 +255,8 @@ public class LoginController {
 		request.getSession(false);
 		HttpSession session=request.getSession();  
 	    session.invalidate();  
-		mv.setViewName("Login");
-		mv.addObject("PageTitle", "Login");
+		mv.setViewName("Index");
+		mv.addObject("PageTitle", "Index");
 	    return mv;
 	}
 
