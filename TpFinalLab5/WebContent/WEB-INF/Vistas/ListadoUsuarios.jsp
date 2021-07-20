@@ -25,7 +25,14 @@
 							<td>${user.getUsername()}</td>
 							<td>${user.getPassword()}</td>
 							<td>${user.getTipoUsuario()}</td>
-							<td>${user.getEstado()}</td>
+							<c:choose>
+							 <c:when test = "${user.getEstado() == true}">
+							<td>Activo</td>
+							</c:when>
+							 <c:when test = "${user.getEstado() == false}">
+							<td>Desactivado</td>
+							</c:when>
+							</c:choose>
 						</tr>
 						</c:when>    
 						</c:choose>

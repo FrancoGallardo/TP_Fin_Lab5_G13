@@ -12,22 +12,36 @@
 							<th>CBU</th>
 							<th>Nombre de la Cuenta</th>
 							<th>Fecha de la operación</th>
-							<th>Tipo de Cuenta</th>							
+							<th>Tipo de Cuenta</th>
 							<th>Saldo</th>
 							<th>Estado</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${lstCuentas}" var="cuenta">
-						<tr>
-							<td>${cuenta.getCBU()}</td>
-							<td>${cuenta.getNumeroCuenta()}</td>
-							<td>${cuenta.getFecha_Creacion()}</td>
-							<td>${cuenta.getCodTipoCuenta()}</td>
-							<td>${cuenta.getSaldo()}</td>
-							<td>${cuenta.getEstado()}</td>
-						</tr>
-					</c:forEach>
+						<c:forEach items="${lstCuentas}" var="cuenta">
+							<tr>
+								<td>${cuenta.getCBU()}</td>
+								<td>${cuenta.getNumeroCuenta()}</td>
+								<td>${cuenta.getFecha_Creacion()}</td>
+								<c:choose>
+									<c:when test="${cuenta.getCodTipoCuenta() == 1}">
+										<td>Pesos</td>
+									</c:when>
+									<c:when test="${cuenta.getCodTipoCuenta() == 2}">
+										<td>Dolares</td>
+									</c:when>
+								</c:choose>
+								<td>${cuenta.getSaldo()}</td>
+							<c:choose>
+									<c:when test="${cuenta.getEstado() == true}">
+										<td>Activo</td>
+									</c:when>
+									<c:when test="${cuenta.getEstado() == false}">
+										<td>Desactivado</td>
+									</c:when>
+								</c:choose>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				${Msg}

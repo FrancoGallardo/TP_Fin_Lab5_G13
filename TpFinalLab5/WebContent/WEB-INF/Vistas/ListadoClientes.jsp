@@ -16,7 +16,6 @@
 	                        <th>Estado</th>
 	                        <th></th>
 	                        <th></th>
-	                        <th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,22 +26,32 @@
 							<td>${cli.getUsuario().getUsername()}</td>
 							<td>${cli.getNombre()}</td>
 							<td>${cli.getApellido()}</td>
-							<c:choose>
-						 	<c:when test = "${cli.getEstado() == 0}">
-							<td>Denegado</td>
-							</c:when>  
-							<c:when test="${cli.getEstado() == 1}">
-							<td>Activo</td>
-							</c:when>  
-							<c:when test="${cli.getEstado() == 2}">
-							<td>Pendiente</td>
-							</c:when>  
-							</c:choose>
 							<td>
 							<select id="ddlState" name="ddlState">
+							<c:choose>
+							<c:when test = "${cli.getEstado() == 2}">
+							<option value="2" selected="selected">Pendiente</option>
+							</c:when> 
+							<c:otherwise>
 							<option value="2">Pendiente</option>
-							<option value="1">Activar</option>
-							<option value="0">Desactivar</option>
+							 </c:otherwise>
+							 	</c:choose>
+							 			<c:choose>
+							<c:when test = "${cli.getEstado() == 1}">
+							<option value="1" selected="selected">Activar</option>
+									</c:when> 
+											<c:otherwise>
+											<option value="1">Activar</option>
+							 </c:otherwise>
+							 	</c:choose>
+							 			<c:choose>
+								<c:when test = "${cli.getEstado() == 0}">
+							<option value="0" selected="selected">Denegado</option>
+									</c:when> 
+									<c:otherwise>
+										<option value="0">Denegado</option>
+									 </c:otherwise>
+									 		 	</c:choose>
 							</select>
 								</td>
 									<td><a href="redirectDetails.do?DNI=${cli.getDNI()}">Detalle</a></td>

@@ -195,11 +195,11 @@ public class LoginController {
 				if (modificar) {
 					mv.setViewName("Login");
 					mv.addObject("PageTitle", "Login");
-					mv.addObject("Msg", "Contraseï¿½a modificada correctamente");
+					mv.addObject("Msg", "Contraseña modificada correctamente");
 				} else {
 					mv.setViewName("ForgotPassword");
 					mv.addObject("PageTitle", "Cambiar Contraseï¿½a");
-					mv.addObject("Msg", "Error, no se logro modificar la contraseï¿½a.");
+					mv.addObject("Msg", "Error, no se logro modificar la Contraseña.");
 				}
 			} else {
 				mv.setViewName("ForgotPassword");
@@ -208,8 +208,8 @@ public class LoginController {
 			}
 		} else {
 			mv.setViewName("ForgotPassword");
-			mv.addObject("PageTitle", "Cambiar Contraseï¿½a");
-			mv.addObject("Msg", "Error, las contraseï¿½as no son iguales.");
+			mv.addObject("PageTitle", "Cambiar Contraseña");
+			mv.addObject("Msg", "Error, las Contraseñas no son iguales.");
 		}
 		return mv;
 	}

@@ -62,12 +62,23 @@ public class ClienteController {
 	public ModelAndView eventoRedirectTransferenciaClientes(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
-		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
-		// List<Cuenta> cuentaDestino = nCuenta.ob
-		mv.setViewName("TransferenciaClientes");
-		mv.addObject("PageTitle", "Transferencia a Clientes");
-		mv.addObject("cuentas", cuentas);
-		// mv.addObject("cuentaDestino", cuentaDestino);
+		if (cli != null) {
+			if (cli.getEstado() == 1) {
+				List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
+				// List<Cuenta> cuentaDestino = nCuenta.ob
+				mv.setViewName("TransferenciaClientes");
+				mv.addObject("PageTitle", "Transferencia a Clientes");
+				mv.addObject("cuentas", cuentas);
+			} else {
+				mv.setViewName("MenuPrincipal");
+				mv.addObject("PageTitle", "Menu Principal");
+				mv.addObject("Msg", "Error el cliente aun no se aprobo");
+			}
+		} else {
+			mv.setViewName("MenuPrincipal");
+			mv.addObject("PageTitle", "Menu Principal");
+			mv.addObject("Msg", "Error el cliente no se encuentra registrado");
+		}
 		return mv;
 	}
 
@@ -75,12 +86,23 @@ public class ClienteController {
 	public ModelAndView eventoRedirectTransferenciaPropias(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
-		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
-		// List<Cuenta> cuentaDestino = nCuenta.ob
-		mv.setViewName("TransferenciaPropias");
-		mv.addObject("PageTitle", "Transferencia Propias");
-		mv.addObject("cuentas", cuentas);
-		// mv.addObject("cuentaDestino", cuentaDestino);
+		if (cli != null) {
+			if (cli.getEstado() == 1) {
+				List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
+				// List<Cuenta> cuentaDestino = nCuenta.ob
+				mv.setViewName("TransferenciaPropias");
+				mv.addObject("PageTitle", "Transferencia Propias");
+				mv.addObject("cuentas", cuentas);
+			} else {
+				mv.setViewName("MenuPrincipal");
+				mv.addObject("PageTitle", "Menu Principal");
+				mv.addObject("Msg", "Error el cliente aun no se aprobo");
+			}
+		} else {
+			mv.setViewName("MenuPrincipal");
+			mv.addObject("PageTitle", "Menu Principal");
+			mv.addObject("Msg", "Error el cliente no se encuentra registrado");
+		}
 		return mv;
 	}
 
@@ -140,14 +162,14 @@ public class ClienteController {
 		cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
 		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cuenta.getDNI());
 		if (!txtCBU.isEmpty() && !txtMonto.isEmpty()) {
-			if(nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
-			Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(txtCBU));
+			if (nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
+				Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(txtCBU));
 				if (cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
 					cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
 					nCuenta.modificar(cuenta);
 					cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
 					nCuenta.modificar(cuentaDestino);
-					
+
 					if (saveTransaction(txtCBU, txtMonto, cuenta.getCBU(), txtDescription)) {
 						mv.addObject("Msg", "Transferencia realizada exitosamente");
 					} else {
@@ -169,7 +191,6 @@ public class ClienteController {
 		return mv;
 	}
 
-	
 	@RequestMapping("/transferMyAccount.do")
 	public ModelAndView eventoTrasferMyAccount(String ddlCBUDestino, String txtMonto, String ddlCBUOrigen,
 			String txtDescription) {
@@ -177,15 +198,15 @@ public class ClienteController {
 		cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
 		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cuenta.getDNI());
 		if (!ddlCBUDestino.isEmpty() && !txtMonto.isEmpty()) {
-			if(!ddlCBUDestino.equals(ddlCBUOrigen)) {
-				if(nCuenta.verificarCuenta(Integer.parseInt(ddlCBUDestino))) {
-				Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUDestino));
+			if (!ddlCBUDestino.equals(ddlCBUOrigen)) {
+				if (nCuenta.verificarCuenta(Integer.parseInt(ddlCBUDestino))) {
+					Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUDestino));
 					if (cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
 						cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
 						nCuenta.modificar(cuenta);
 						cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
 						nCuenta.modificar(cuentaDestino);
-						
+
 						if (saveTransaction(ddlCBUDestino, txtMonto, cuenta.getCBU(), txtDescription)) {
 							mv.addObject("Msg", "Transferencia realizada exitosamente");
 						} else {
@@ -194,12 +215,11 @@ public class ClienteController {
 					} else {
 						mv.addObject("Msg", "No posee suficiente saldo para realizar la transaccion");
 					}
-	
+
 				} else {
 					mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
 				}
-			}
-			else {
+			} else {
 				mv.addObject("Msg", "No puede transferirse a la misma cuenta");
 			}
 		} else {
@@ -211,7 +231,6 @@ public class ClienteController {
 		return mv;
 	}
 
-	
 	@RequestMapping("/redirectAltaCliente.do")
 	public ModelAndView eventoRedirectAltaCliente() {
 		ModelAndView mv = new ModelAndView();
