@@ -82,7 +82,7 @@
 									</div>
 									<div class="col-sm-6">
 										<input id="txtSaldo" class="" name="txtSaldo" type="number"
-											placeholder="Saldo" />
+											placeholder="Saldo" value="10000" ReadOnly/>
 									</div>
 								</div>
 							</div>
