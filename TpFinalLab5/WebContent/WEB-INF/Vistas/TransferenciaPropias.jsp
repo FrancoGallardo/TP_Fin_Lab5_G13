@@ -41,7 +41,7 @@
 						</div>
 						<div class="col-sm-6 right-column-content">
 							<input class="form-input transfer-input" id="txtMonto"
-								name="txtMonto" type="number" />
+								name="txtMonto" type="number"  min="1" max="2147483647"/>
 						</div>
 						<div class="col-sm-6 right-column-content">
 							<label for="txtMonto" class="label-cbu">Ingrese una

@@ -22,7 +22,7 @@
 									</div>
 									<div class="col-sm-6">
 										<input type="number" id="txtDocumento" name="txtDocumento"
-											placeholder="Documento" />
+											placeholder="Documento" min="1" max="2147483647"/>
 									</div>
 								</div>
 								<div class="row create-client-row">

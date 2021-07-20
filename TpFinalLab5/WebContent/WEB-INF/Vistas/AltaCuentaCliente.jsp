@@ -51,7 +51,7 @@
 										<label>CBU</label>
 									</div>
 									<div class="col-sm-6">
-										<input id="txtCBU" class="" name="txtCBU" type="text"
+										<input id="txtCBU" class="" name="txtCBU" type="number" min="1000" max="2147483647"
 											placeholder="CBU" />
 									</div>
 								</div>
