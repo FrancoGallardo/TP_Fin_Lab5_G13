@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import configCapas.ConfigEnt;
+import configCapas.ConfigNeg;
 import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.Localidad;
@@ -36,21 +40,23 @@ import negocioImp.UsuarioNImp;
 @Scope()
 public class ClienteController {
 
-	UsuarioNImp nUser = new UsuarioNImp();
-	ClienteNImp nCli = new ClienteNImp();
-	LocalidadNImp nLoc = new LocalidadNImp();
-	ProvinciaNImp nProv = new ProvinciaNImp();
-	CuentaNImp nCuenta = new CuentaNImp();
-	TipoCuentaNImp nTipoCuenta = new TipoCuentaNImp();
-	TransaccionNImp nTransaccion = new TransaccionNImp();
+	private ApplicationContext appContext = new AnnotationConfigApplicationContext(ConfigNeg.class);
+	UsuarioNImp nUser = (UsuarioNImp) appContext.getBean("usuarioNImp");
+	ClienteNImp nCli = (ClienteNImp) appContext.getBean("clienteNImp");
+	LocalidadNImp nLoc = (LocalidadNImp) appContext.getBean("localidadNImp");
+	ProvinciaNImp nProv = (ProvinciaNImp) appContext.getBean("provinciaNImp");
+	CuentaNImp nCuenta = (CuentaNImp) appContext.getBean("cuentaNImp");
+	TipoCuentaNImp nTipoCuenta = (TipoCuentaNImp) appContext.getBean("tipoCuentaNImp");
+	TransaccionNImp nTransaccion = (TransaccionNImp) appContext.getBean("transaccionNImp");
 
-	Usuario user = new Usuario();
-	Cliente cli = new Cliente();
-	Localidad loc = new Localidad();
-	Provincia prov = new Provincia();
-	Cuenta cuenta = new Cuenta();
-	TipoCuenta tCuenta = new TipoCuenta();
-	Transaccion transaccion = new Transaccion();
+	private ApplicationContext appContextEntidad = new AnnotationConfigApplicationContext(ConfigEnt.class);
+	Usuario user = (Usuario) appContextEntidad.getBean("usuario");
+	Cliente cli = (Cliente) appContextEntidad.getBean("cliente");
+	Localidad loc = (Localidad) appContextEntidad.getBean("localidad");
+	Provincia prov = (Provincia) appContextEntidad.getBean("provincia");
+	Cuenta cuenta = (Cuenta) appContextEntidad.getBean("cuenta");
+	TipoCuenta tCuenta = (TipoCuenta) appContextEntidad.getBean("tipoCuenta");
+	Transaccion transaccion = (Transaccion) appContextEntidad.getBean("transaccion");
 
 	@RequestMapping(value = "/redirectTransferenciaCliente.do", method = RequestMethod.GET)
 	public ModelAndView eventoRedirectTransferenciaClientes(HttpServletRequest request) {
@@ -74,7 +80,7 @@ public class ClienteController {
 	}
 
 	@RequestMapping("/changeAccount.do")
-	public ModelAndView eventoCambiarCuenta(HttpServletRequest request , String ddlCBUOrigen) {
+	public ModelAndView eventoCambiarCuenta(HttpServletRequest request, String ddlCBUOrigen) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("OperacionesCuenta");
 		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
@@ -126,29 +132,33 @@ public class ClienteController {
 	public ModelAndView eventoTrasferClient(String txtCBU, String txtMonto, String ddlCBUOrigen,
 			String txtDescription) {
 		ModelAndView mv = new ModelAndView();
-		Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(txtCBU));
-		if (cuentaDestino != null) {
-			cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
-			if (cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
-				cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
-				nCuenta.modificar(cuenta);
-				cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
-				nCuenta.modificar(cuentaDestino);
-				List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cuenta.getDNI());
-				if (saveTransaction(txtCBU, txtMonto, cuenta.getCBU(), txtDescription)) {
-					mv.addObject("Msg", "Transferencia realizada exitosamente");
+		cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
+		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cuenta.getDNI());
+		if (!txtCBU.isEmpty() && !txtMonto.isEmpty()) {
+			if(nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
+			Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(txtCBU));
+				if (cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
+					cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
+					nCuenta.modificar(cuenta);
+					cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
+					nCuenta.modificar(cuentaDestino);
+					
+					if (saveTransaction(txtCBU, txtMonto, cuenta.getCBU(), txtDescription)) {
+						mv.addObject("Msg", "Transferencia realizada exitosamente");
+					} else {
+						mv.addObject("Msg", "Transferencia realizada exitosamente");
+					}
 				} else {
-					mv.addObject("Msg", "Transferencia realizada exitosamente");
+					mv.addObject("Msg", "No posee suficiente saldo para realizar la transaccion");
 				}
-				mv.addObject("cuentas", cuentas);
 
 			} else {
-				mv.addObject("Msg", "No posee suficiente saldo para realizar la transaccion");
+				mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
 			}
-
 		} else {
-			mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
+			mv.addObject("Msg", "Error en los datos ingresados");
 		}
+		mv.addObject("cuentas", cuentas);
 		mv.setViewName("TransferenciaClientes");
 		mv.addObject("PageTitle", "Transferencia a Clientes");
 		return mv;

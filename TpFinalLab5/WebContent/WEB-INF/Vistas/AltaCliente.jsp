@@ -11,7 +11,7 @@
 		<div class="row client-content">
 			<div class="col-sm-12">
 				<div class="client-data-container">
-					<form action="addClient.do?User=${sessionScope.Username}"
+					<form action="addClient.do?User=${sessionScope.name}"
 						method="post">
 						<div class="row">
 							<div class="col-sm-6">

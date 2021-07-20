@@ -10,13 +10,18 @@ import entidad.Cliente;
 import entidad.Usuario;
 import negocio.ClienteN;
 import funcionesDAOImp.ClienteDAOImp;
+import funcionesDAOImp.Conexion;
 
 public class ClienteNImp implements ClienteN{
 
 	private ApplicationContext appContext;
-	private ClienteDAOImp clientDAO = new ClienteDAOImp();
+	private ClienteDAOImp clientDAO;
 	
-
+	public ClienteNImp() {
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		clientDAO = (ClienteDAOImp) appContext.getBean("ClienteDAO");
+	}
+	
 	@Override
 	public boolean insertarCliente(Cliente cli) {
 		return clientDAO.insertarCliente(cli);

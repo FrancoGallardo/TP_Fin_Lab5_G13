@@ -121,9 +121,15 @@ margin-right: 5px
 	margin-bottom: 30px;
 }
 
-.index-right-column-row{
+.index-right-column-row,
+.index-register-column{
 		display: flex;
 	align-items: center;
+}
+
+.index-register-column{
+	height: 210px;
+	    border-left: 1px solid;
 }
 
 .opertation-row{

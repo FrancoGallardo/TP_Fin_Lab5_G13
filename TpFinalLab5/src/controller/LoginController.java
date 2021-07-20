@@ -1,11 +1,18 @@
 package controller;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import configCapas.ConfigDAO;
+import configCapas.ConfigEnt;
+import configCapas.ConfigNeg;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,24 +31,28 @@ import entidad.Localidad;
 import entidad.Provincia;
 import entidad.TipoCuenta;
 import entidad.Usuario;
+import funcionesDAOImp.TransaccionesDAOImp;
 
 @Controller
 @SessionAttributes(value="name")
 @Scope()
 public class LoginController {
-	UsuarioNImp nUser = new UsuarioNImp();
-	ClienteNImp nCli = new ClienteNImp();
-	LocalidadNImp nLoc = new LocalidadNImp();
-	ProvinciaNImp nProv = new ProvinciaNImp();
-	CuentaNImp nCuenta = new CuentaNImp();
-	TipoCuentaNImp nTipoCuenta = new TipoCuentaNImp();
+	
+	private ApplicationContext appContext = new AnnotationConfigApplicationContext(ConfigNeg.class);
+	UsuarioNImp nUser = (UsuarioNImp) appContext.getBean("usuarioNImp");
+	ClienteNImp nCli = (ClienteNImp) appContext.getBean("clienteNImp");
+	LocalidadNImp nLoc = (LocalidadNImp) appContext.getBean("localidadNImp");
+	ProvinciaNImp nProv = (ProvinciaNImp) appContext.getBean("provinciaNImp");
+	CuentaNImp nCuenta = (CuentaNImp) appContext.getBean("cuentaNImp");
+	TipoCuentaNImp nTipoCuenta = (TipoCuentaNImp) appContext.getBean("tipoCuentaNImp");
 
-	Usuario user = new Usuario();
-	Cliente cli = new Cliente();
-	Localidad loc = new Localidad();
-	Provincia prov = new Provincia();
-	Cuenta cuenta = new Cuenta();
-	TipoCuenta tCuenta = new TipoCuenta();
+	private ApplicationContext appContextEntidad = new AnnotationConfigApplicationContext(ConfigEnt.class);
+	Usuario user = (Usuario) appContextEntidad.getBean("usuario");
+	Cliente cli = (Cliente) appContextEntidad.getBean("cliente");
+	Localidad loc = (Localidad) appContextEntidad.getBean("localidad");
+	Provincia prov = (Provincia) appContextEntidad.getBean("provincia");
+	Cuenta cuenta = (Cuenta) appContextEntidad.getBean("cuenta");
+	TipoCuenta tCuenta = (TipoCuenta) appContextEntidad.getBean("tipoCuenta");
 
 	public void insertarLocalidades() {
 		prov.setIdProvincia(1);
@@ -153,6 +164,7 @@ public class LoginController {
 				mv.addObject("PageTitle", "Menu Principal");
 				mv.addObject("Msg", "Usuario registrado correctamente.");
 				request.getSession().setAttribute("name", user.getUsername());
+				mv.addObject("name", user.getUsername());
 			} 
 			else 
 			{

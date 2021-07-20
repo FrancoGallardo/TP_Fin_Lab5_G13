@@ -2,13 +2,24 @@ package negocioImp;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import configCapas.ConfigDAO;
 import entidad.Cuenta;
+import funcionesDAOImp.ClienteDAOImp;
 import funcionesDAOImp.CuentaDAOImp;
 import negocio.CuentaN;
 
 public class CuentaNImp implements CuentaN{
 
-	CuentaDAOImp cuentaDAO = new CuentaDAOImp();
+	CuentaDAOImp cuentaDAO;
+	private ApplicationContext appContext;
+	
+	public CuentaNImp() {
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		cuentaDAO = (CuentaDAOImp) appContext.getBean("CuentaDAO");
+	}
 	
 	@Override
 	public boolean insertarCuenta(Cuenta cuenta) {
@@ -27,14 +38,12 @@ public class CuentaNImp implements CuentaN{
 
 	@Override
 	public boolean modificar(Cuenta cuenta) {
-		// TODO Auto-generated method stub
-		return false;
+		return cuentaDAO.modificar(cuenta);
 	}
 
 	@Override
 	public boolean verificarCuenta(int CBU) {
-		// TODO Auto-generated method stub
-		return false;
+		return cuentaDAO.verificarCuenta(CBU);
 	}
 
 	@Override

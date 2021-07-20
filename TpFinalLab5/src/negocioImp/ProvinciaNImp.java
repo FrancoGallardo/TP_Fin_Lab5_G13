@@ -2,13 +2,24 @@ package negocioImp;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import configCapas.ConfigDAO;
 import entidad.Provincia;
 import negocio.ProvinciaN;
+import funcionesDAOImp.LocalidadDAOImp;
 import funcionesDAOImp.ProvinciaDAOImp;
 
 public class ProvinciaNImp implements ProvinciaN{
 
 	ProvinciaDAOImp provDAO = new ProvinciaDAOImp();
+	private ApplicationContext appContext;
+	
+	public ProvinciaNImp() {
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		provDAO = (ProvinciaDAOImp) appContext.getBean("ProvinciaDAO");
+	}
 	
 	@Override
 	public Provincia verificarProvincia(int id) {

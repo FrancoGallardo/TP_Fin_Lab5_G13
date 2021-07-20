@@ -1,6 +1,10 @@
 package negocioImp;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import configCapas.ConfigDAO;
 import entidad.Usuario;
 import negocio.UsuarioN;
 import funcionesDAOImp.UsuarioDAOImp;
@@ -8,7 +12,13 @@ import funcionesDAOImp.UsuarioDAOImp;
 
 public class UsuarioNImp implements UsuarioN{
 
-	UsuarioDAOImp userDAO = new UsuarioDAOImp();
+	UsuarioDAOImp userDAO;
+	private ApplicationContext appContext;
+	
+	public UsuarioNImp(){
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		userDAO = (UsuarioDAOImp) appContext.getBean("UsuarioDAO");
+	}
 	
 	@Override
 	public Usuario verificarUsuario(String Username) {

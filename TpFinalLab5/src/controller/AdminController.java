@@ -6,12 +6,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import configCapas.ConfigEnt;
+import configCapas.ConfigNeg;
 import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.Localidad;
@@ -30,19 +34,21 @@ import negocioImp.UsuarioNImp;
 @Scope()
 public class AdminController {
 
-	UsuarioNImp nUser = new UsuarioNImp();
-	ClienteNImp nCli = new ClienteNImp();
-	LocalidadNImp nLoc = new LocalidadNImp();
-	ProvinciaNImp nProv = new ProvinciaNImp();
-	CuentaNImp nCuenta = new CuentaNImp();
-	TipoCuentaNImp nTipoCuenta = new TipoCuentaNImp();
+	private ApplicationContext appContext = new AnnotationConfigApplicationContext(ConfigNeg.class);
+	UsuarioNImp nUser = (UsuarioNImp) appContext.getBean("usuarioNImp");
+	ClienteNImp nCli = (ClienteNImp) appContext.getBean("clienteNImp");
+	LocalidadNImp nLoc = (LocalidadNImp) appContext.getBean("localidadNImp");
+	ProvinciaNImp nProv = (ProvinciaNImp) appContext.getBean("provinciaNImp");
+	CuentaNImp nCuenta = (CuentaNImp) appContext.getBean("cuentaNImp");
+	TipoCuentaNImp nTipoCuenta = (TipoCuentaNImp) appContext.getBean("tipoCuentaNImp");
 
-	Usuario user = new Usuario();
-	Cliente cli = new Cliente();
-	Localidad loc = new Localidad();
-	Provincia prov = new Provincia();
-	Cuenta cuenta = new Cuenta();
-	TipoCuenta tCuenta = new TipoCuenta();
+	private ApplicationContext appContextEntidad = new AnnotationConfigApplicationContext(ConfigEnt.class);
+	Usuario user = (Usuario) appContextEntidad.getBean("usuario");
+	Cliente cli = (Cliente) appContextEntidad.getBean("cliente");
+	Localidad loc = (Localidad) appContextEntidad.getBean("localidad");
+	Provincia prov = (Provincia) appContextEntidad.getBean("provincia");
+	Cuenta cuenta = (Cuenta) appContextEntidad.getBean("cuenta");
+	TipoCuenta tCuenta = (TipoCuenta) appContextEntidad.getBean("tipoCuenta");
 	
 	
 	@RequestMapping("/redirectListaClientes.do")

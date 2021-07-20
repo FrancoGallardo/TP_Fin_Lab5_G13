@@ -69,12 +69,14 @@
 						<div class="col-sm-5">
 							<img src="Assets/img/logo-index.png" width="210" alt="index">
 						</div>
-						<div class="col-sm-7">
+						<div class="col-sm-7 index-register-column">
+						<div style="">
 							<h4>Se parte de nuestro emprendimiento</h4>
 							<span>Comienza
 							<a class="header-nav-anchor"
 								href="redirectTransferenciaPropias.do">registrandote</a> para empezar a realizar transferencias
 								</span>
+								</div>
 						</div>
 					</div>
 				</div>

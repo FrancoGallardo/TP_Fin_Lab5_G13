@@ -2,13 +2,24 @@ package negocioImp;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import configCapas.ConfigDAO;
 import entidad.Localidad;
+import funcionesDAOImp.CuentaDAOImp;
 import funcionesDAOImp.LocalidadDAOImp;
 import negocio.LocalidadN;
 
 public class LocalidadNImp implements LocalidadN{
 
-	LocalidadDAOImp locDAO = new LocalidadDAOImp();
+	LocalidadDAOImp locDAO;
+	private ApplicationContext appContext;
+	
+	public LocalidadNImp() {
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		locDAO = (LocalidadDAOImp) appContext.getBean("LocalidadDAO");
+	}
 	
 	@Override
 	public Localidad verificarLocalidad(int id) {

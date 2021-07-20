@@ -2,13 +2,24 @@ package negocioImp;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import configCapas.ConfigDAO;
 import entidad.Transaccion;
+import funcionesDAOImp.TipoCuentaDAOImp;
 import funcionesDAOImp.TransaccionesDAOImp;
 import negocio.TransaccionN;
 
 public class TransaccionNImp implements TransaccionN{
 
-	TransaccionesDAOImp transaccionDAO = new TransaccionesDAOImp();
+	TransaccionesDAOImp transaccionDAO;
+	private ApplicationContext appContext;
+	
+	public TransaccionNImp(){
+		appContext = new AnnotationConfigApplicationContext(ConfigDAO.class);
+		transaccionDAO = (TransaccionesDAOImp) appContext.getBean("TransaccionDAO");
+	}
 	
 	@Override
 	public boolean insertarTransaccion(Transaccion transaccion) {

@@ -99,8 +99,23 @@ public class CuentaDAOImp implements CuentaDAO{
 
 	@Override
 	public boolean modificar(Cuenta cuenta) {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean res=false;
+		Inicializar();
+		
+		try {
+			session.beginTransaction();
+			session.update(cuenta);
+			session.getTransaction().commit();
+			res=true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			res=false;
+		}
+		finally {
+			Finalizar();
+		}
+		return res;
 	}
 
 	@Override
