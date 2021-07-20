@@ -204,12 +204,21 @@ public class LoginController {
 
 	// redireccionar a login
 	@RequestMapping("/redirectLogin.do")
-	public ModelAndView eventoInicarAplicacion() {
+	public ModelAndView eventoRedirectLogin() {
 		ModelAndView mv = new ModelAndView();
 		// insertarProvincias();
 		// insertarLocalidades();
 		mv.setViewName("Login");
 		mv.addObject("PageTitle", "Login");
+		return mv;
+	}
+	
+	// redireccionar a index
+	@RequestMapping("/redirectIndex.do")
+	public ModelAndView eventoInicarAplicacion() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("Index");
+		mv.addObject("PageTitle", "Index");
 		return mv;
 	}
 

@@ -9,6 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import configCapas.ConfigDAO;
+import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.Usuario;
 import funcionesDAO.CuentaDAO;
@@ -32,8 +33,20 @@ public class CuentaDAOImp implements CuentaDAO{
 
 	@Override
 	public Cuenta obtenerCuenta(int CBU) {
-		// TODO Auto-generated method stub
-		return null;
+		Inicializar();
+		Cuenta cuenta;
+		try {
+			session.beginTransaction();
+			cuenta = (Cuenta) session.get(Cuenta.class, CBU);
+		}
+		catch(Exception e) {
+			cuenta=null;
+			e.printStackTrace();
+		}
+		finally {
+			Finalizar();
+		}
+		return cuenta;
 	}
 
 	@Override

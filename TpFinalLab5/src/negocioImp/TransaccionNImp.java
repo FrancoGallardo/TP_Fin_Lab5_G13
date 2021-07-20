@@ -3,14 +3,16 @@ package negocioImp;
 import java.util.List;
 
 import entidad.Transaccion;
+import funcionesDAOImp.TransaccionesDAOImp;
 import negocio.TransaccionN;
 
 public class TransaccionNImp implements TransaccionN{
 
+	TransaccionesDAOImp transaccionDAO = new TransaccionesDAOImp();
+	
 	@Override
 	public boolean insertarTransaccion(Transaccion transaccion) {
-		// TODO Auto-generated method stub
-		return false;
+		return transaccionDAO.insertarTransaccion(transaccion);
 	}
 
 	@Override
@@ -35,6 +37,11 @@ public class TransaccionNImp implements TransaccionN{
 	public Transaccion verificarTransaccion(int idTransaccion) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Transaccion> obtenerTransaccionesCuenta(int cbu) {
+		return transaccionDAO.obtenerTransaccionesCuenta(cbu);
 	}
 
 }

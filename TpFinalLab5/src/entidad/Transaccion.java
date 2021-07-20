@@ -36,7 +36,7 @@ public class Transaccion implements Serializable{
 	private Boolean Estado;
 	
 	public Transaccion() {
-		
+		Estado = true;
 	}
 	
 	public Transaccion(int idTransaccion, int cBU_Egreso, int cBU_Ingresa, String descripcion, Double monto, Date fecha,

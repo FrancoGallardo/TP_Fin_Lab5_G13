@@ -11,4 +11,5 @@ public interface TransaccionN {
 	public List<Transaccion> obtenerTransacciones();
 	public boolean modificar(Transaccion transaccion);
 	public Transaccion verificarTransaccion(int idTransaccion);
+	public List<Transaccion> obtenerTransaccionesCuenta(int cbu);
 }

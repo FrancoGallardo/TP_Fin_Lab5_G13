@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,25 +21,28 @@ import entidad.Cuenta;
 import entidad.Localidad;
 import entidad.Provincia;
 import entidad.TipoCuenta;
+import entidad.Transaccion;
 import entidad.Usuario;
 import negocioImp.ClienteNImp;
 import negocioImp.CuentaNImp;
 import negocioImp.LocalidadNImp;
 import negocioImp.ProvinciaNImp;
 import negocioImp.TipoCuentaNImp;
+import negocioImp.TransaccionNImp;
 import negocioImp.UsuarioNImp;
 
 @Controller
-@SessionAttributes(value="name")
+@SessionAttributes(value = "name")
 @Scope()
 public class ClienteController {
-	
+
 	UsuarioNImp nUser = new UsuarioNImp();
 	ClienteNImp nCli = new ClienteNImp();
 	LocalidadNImp nLoc = new LocalidadNImp();
 	ProvinciaNImp nProv = new ProvinciaNImp();
 	CuentaNImp nCuenta = new CuentaNImp();
 	TipoCuentaNImp nTipoCuenta = new TipoCuentaNImp();
+	TransaccionNImp nTransaccion = new TransaccionNImp();
 
 	Usuario user = new Usuario();
 	Cliente cli = new Cliente();
@@ -46,17 +50,18 @@ public class ClienteController {
 	Provincia prov = new Provincia();
 	Cuenta cuenta = new Cuenta();
 	TipoCuenta tCuenta = new TipoCuenta();
-	
-	@RequestMapping(value="/redirectTransferenciaCliente.do" , method = RequestMethod.GET)
+	Transaccion transaccion = new Transaccion();
+
+	@RequestMapping(value = "/redirectTransferenciaCliente.do", method = RequestMethod.GET)
 	public ModelAndView eventoRedirectTransferenciaClientes(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
 		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
-		//List<Cuenta> cuentaDestino = nCuenta.ob
+		// List<Cuenta> cuentaDestino = nCuenta.ob
 		mv.setViewName("TransferenciaClientes");
 		mv.addObject("PageTitle", "Transferencia a Clientes");
 		mv.addObject("cuentas", cuentas);
-		//mv.addObject("cuentaDestino", cuentaDestino);
+		// mv.addObject("cuentaDestino", cuentaDestino);
 		return mv;
 	}
 
@@ -67,32 +72,80 @@ public class ClienteController {
 		mv.addObject("PageTitle", "Transferencias a Cuentas Propias");
 		return mv;
 	}
-	
-	// redireccionar a operaciones cuenta
-	@RequestMapping("/redirectOperacionesCuenta.do")
-	public ModelAndView eventoRedirectOperecionesCuenta() {
+
+	@RequestMapping("/changeAccount.do")
+	public ModelAndView eventoCambiarCuenta(HttpServletRequest request , String ddlCBUOrigen) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("OperacionesCuenta");
+		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
+		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
+		mv.addObject("cuentas", cuentas);
+		List<Transaccion> transacciones = nTransaccion.obtenerTransaccionesCuenta(Integer.parseInt(ddlCBUOrigen));
+		mv.addObject("cuentas", cuentas);
+		mv.addObject("transacciones", transacciones);
 		mv.addObject("PageTitle", "Operaciones Cuenta");
 		return mv;
 	}
-	
+
+	// redireccionar a operaciones cuenta
+	@RequestMapping("/redirectOperacionesCuenta.do")
+	public ModelAndView eventoRedirectOperecionesCuenta(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("OperacionesCuenta");
+		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
+		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
+		mv.addObject("cuentas", cuentas);
+		Cuenta primeraCuenta = new Cuenta();
+		for (Cuenta cuenta : cuentas) {
+			primeraCuenta = cuenta;
+			break;
+		}
+		List<Transaccion> transacciones = nTransaccion.obtenerTransaccionesCuenta(primeraCuenta.getCBU());
+		mv.addObject("cuentas", cuentas);
+		mv.addObject("transacciones", transacciones);
+		mv.addObject("PageTitle", "Operaciones Cuenta");
+		return mv;
+	}
+
+	public boolean saveTransaction(String txtCBU, String txtMonto, int CBUOrigen, String txtDescription) {
+		Date date = new Date();
+		transaccion.setCBU_Egreso(CBUOrigen);
+		transaccion.setCBU_Ingresa(Integer.parseInt(txtCBU));
+		transaccion.setDescripcion(txtDescription);
+		transaccion.setMonto(Double.parseDouble(txtMonto));
+		transaccion.setFecha(date);
+		if (nTransaccion.insertarTransaccion(transaccion)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 	@RequestMapping("/transferClient.do")
-	public ModelAndView eventoTrasferClient(String txtCBU , String txtMonto , String ddlCBUOrigen) {
+	public ModelAndView eventoTrasferClient(String txtCBU, String txtMonto, String ddlCBUOrigen,
+			String txtDescription) {
 		ModelAndView mv = new ModelAndView();
 		Cuenta cuentaDestino = nCuenta.buscarCuenta(Integer.parseInt(txtCBU));
-		if(cuentaDestino != null) {
+		if (cuentaDestino != null) {
 			cuenta = nCuenta.buscarCuenta(Integer.parseInt(ddlCBUOrigen));
-			if(cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
+			if (cuenta.getSaldo() >= Double.parseDouble(txtMonto)) {
 				cuenta.setSaldo((cuenta.getSaldo() - Double.parseDouble(txtMonto)));
 				nCuenta.modificar(cuenta);
 				cuentaDestino.setSaldo(cuentaDestino.getSaldo() + Double.parseDouble(txtMonto));
 				nCuenta.modificar(cuentaDestino);
-				mv.addObject("Msg", "Transferencia realizada exitosamente");
+				List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cuenta.getDNI());
+				if (saveTransaction(txtCBU, txtMonto, cuenta.getCBU(), txtDescription)) {
+					mv.addObject("Msg", "Transferencia realizada exitosamente");
+				} else {
+					mv.addObject("Msg", "Transferencia realizada exitosamente");
+				}
+				mv.addObject("cuentas", cuentas);
+
 			} else {
 				mv.addObject("Msg", "No posee suficiente saldo para realizar la transaccion");
 			}
-		
+
 		} else {
 			mv.addObject("Msg", "El cbu ingresado no pertenece a ninguna cuenta existente");
 		}
@@ -100,7 +153,7 @@ public class ClienteController {
 		mv.addObject("PageTitle", "Transferencia a Clientes");
 		return mv;
 	}
-	
+
 	@RequestMapping("/redirectAltaCliente.do")
 	public ModelAndView eventoRedirectAltaCliente() {
 		ModelAndView mv = new ModelAndView();
@@ -193,6 +246,5 @@ public class ClienteController {
 		}
 		return verificar;
 	}
-
 
 }

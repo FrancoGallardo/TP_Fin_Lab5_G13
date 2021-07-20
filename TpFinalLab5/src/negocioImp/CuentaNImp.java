@@ -17,8 +17,7 @@ public class CuentaNImp implements CuentaN{
 
 	@Override
 	public Cuenta buscarCuenta(int CBU) {
-		// TODO Auto-generated method stub
-		return null;
+		return cuentaDAO.obtenerCuenta(CBU);
 	}
 
 	@Override

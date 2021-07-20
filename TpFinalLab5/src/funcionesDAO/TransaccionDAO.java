@@ -10,6 +10,7 @@ public interface TransaccionDAO {
 	public boolean buscarTransaccion(int id);
 	public List<Transaccion> obtenerTransaccion();
 	public boolean modificar(Transaccion transaccion);
+	public List<Transaccion> obtenerTransaccionesCuenta(int cbu);
 	public void Finalizar();
 	public void Inicializar();
 }

@@ -6,28 +6,56 @@
 				<h1 class="title">Transacciones</h1>
 			</div>
 		</div>
-		<div class="row">
-			<form method="get" action=""
-				class="form-content-container text-center">
-						<div class="form-content col-md-4">
-				<label for="txtCBUOrigen" class="label-cbu">Seleccione Cuenta Origen</label>
-					<select id="ddlCBUOrigen" name="ddlCBUOrigen"  class="label-cbu">
-							<c:forEach items="${cuentas}" var="cuenta">
-						<option id="txtCBU" value="${cuenta.getCBU()}" >${cuenta.getCBU()}</option>
-						</c:forEach>
-					</select> 
-				</div>
-				<div class="form-content col-md-4">
-					<label for="txtCBU" class="label-cbu">Ingrese el CBU</label> <input
-						class="form-input" id="txtCBU" name="txtCBU" type="number" />
-				</div>
-				<div class="form-content col-md-4">
-					<label for="txtMonto" class="label-cbu">Ingrese el Monto</label> <input
-						class="form-input" id="txtMonto" name="txtMonto" type="number" />
-				</div>
-				<input class="form-input paid-button" id="paid-button"
-					name="paid-button" type="submit" />
-			</form>
+		<div class="row tranference-content-row">
+			<div class="col-sm-6">
+				<img src="Assets/img/transaccion.jpg" class="">
+			</div>
+			<div class="col-sm-6">
+				<h3 class="right-column-title">Enviar Tranferencia</h3>
+				<form method="post" action="transferClient.do"
+					class="form-content-container">
+					<div class="row">
+						<div class="col-sm-6 right-column-content">
+							<label for="txtCBUOrigen" class="label-cbu">Seleccione
+								Cuenta Origen</label>
+						</div>
+						<div class="col-sm-6 right-column-content">
+							<select id="ddlCBUOrigen" name="ddlCBUOrigen" class="selecter-account">
+								<c:forEach items="${cuentas}" var="cuenta">
+									<option id="txtCBU" value="${cuenta.getCBU()}">${cuenta.getCBU()}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-sm-6 right-column-content">
+							<label for="txtCBU" class="label-cbu">Ingrese el CBU</label>
+						</div>
+						<div class="col-sm-6 right-column-content">
+							<input class="form-input transfer-input" id="txtCBU"
+								name="txtCBU" type="number" />
+						</div>
+						<div class="col-sm-6 right-column-content">
+							<label for="txtMonto" class="label-cbu">Ingrese el Monto</label>
+						</div>
+						<div class="col-sm-6 right-column-content">
+							<input class="form-input transfer-input" id="txtMonto"
+								name="txtMonto" type="number" />
+						</div>
+						<div class="col-sm-6 right-column-content">
+							<label for="txtMonto" class="label-cbu">Ingrese una
+								descripción</label>
+						</div>
+						<div class="col-sm-6 right-column-content">
+							<textarea class="form-input transfer-input" id="txtDescription"
+								name="txtDescription"></textarea>
+						</div>
+					</div>
+					<div class="col-sm-12 text-center">
+						<input class="form-input paid-button" id="paid-button"
+							name="paid-button" type="submit" />
+					</div>
+				</form>
+				${Msg}
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
@@ -55,8 +83,7 @@
 							<td>21/06/2021</td>
 							<td>Realizado</td>
 					</tbody>
-				</table>
-				${Msg}
+				</table>	
 			</div>
 		</div>
 	</div>
