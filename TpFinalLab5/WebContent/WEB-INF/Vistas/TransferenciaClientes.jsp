@@ -1,11 +1,16 @@
 <%@ include file="HeaderMenu.jsp"%>
 <div class="main-container">
 	<div class="container content-container">
-		<div class="row">
-			<div class="title-container col-sm-12" id="titulo">
-				<h1 class="title">Transacciones</h1>
+	<div class="row title-row-container">
+			<div class="icon-container">
+				<i class="fa fa-usd bank-icon" aria-hidden="true"></i>
+					</div>
+								<div class="col-sm-11">
+				<div class="home-title-container title-container">
+					<h1>Transferencia Cliente</h1>
+				</div>
 			</div>
-		</div>
+			</div>
 		<div class="row tranference-content-row">
 			<div class="col-sm-6">
 				<img src="Assets/img/transaccion.jpg" class="">

@@ -51,4 +51,10 @@ public class CuentaNImp implements CuentaN{
 		return cuentaDAO.obtenerCuentasCliente(DNI);
 	}
 
+	@Override
+	public int contarCuentas(int DNI) {
+		return cuentaDAO.contarCuentas(DNI);
+	}
+	
+
 }

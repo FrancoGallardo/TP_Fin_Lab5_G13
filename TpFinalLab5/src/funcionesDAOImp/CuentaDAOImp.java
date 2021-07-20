@@ -131,6 +131,25 @@ public class CuentaDAOImp implements CuentaDAO{
 		session=con.abrirConexion();
 	}
 
+	@Override
+	public int contarCuentas(int DNI) {
+		Inicializar();
+		List<Cuenta> lstCuenta;
+		try {
+		query=session.createQuery("FROM Cuenta WHERE DNI = " + DNI);
+		lstCuenta=query.list();
+		}
+		catch(Exception e){
+			lstCuenta=null;
+			e.printStackTrace();
+		}
+		finally {
+			Finalizar();
+		}
+		return lstCuenta.size();
+		
+	}
+
 
 
 

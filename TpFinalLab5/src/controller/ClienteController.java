@@ -126,6 +126,7 @@ public class ClienteController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("OperacionesCuenta");
 		cli = nCli.obtenerClientexUsuario(request.getSession().getAttribute("name").toString());
+		if (cli != null) {
 		List<Cuenta> cuentas = nCuenta.obtenerCuentasCliente(cli.getDNI());
 		mv.addObject("cuentas", cuentas);
 		Cuenta primeraCuenta = new Cuenta();
@@ -137,6 +138,11 @@ public class ClienteController {
 		mv.addObject("cuentas", cuentas);
 		mv.addObject("transacciones", transacciones);
 		mv.addObject("PageTitle", "Operaciones Cuenta");
+		} else {
+			mv.setViewName("MenuPrincipal");
+			mv.addObject("PageTitle", "Menu Principal");
+			mv.addObject("Msg", "Error el cliente no se encuentra registrado");
+		}
 		return mv;
 	}
 
@@ -262,13 +268,17 @@ public class ClienteController {
 		} else {
 			List<Localidad> lstLoc = nLoc.obtenerLocalidades();
 			List<Provincia> lstProv = nProv.obtenerProvincias();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
 			mv.addObject("lstLoc", lstLoc);
 			mv.addObject("lstProv", lstProv);
 			mv.setViewName("AltaCliente");
 			mv.addObject("PageTitle", "Registrar Cliente");
+			mv.addObject("fecha", dateFormat.format(date));
 			mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
 		}
 		mv.addObject("Usuario", user.getUsername());
+		
 		return mv;
 	}
 

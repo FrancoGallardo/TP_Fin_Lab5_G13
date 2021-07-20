@@ -49,11 +49,16 @@
 	</header>
 	<div class="main-container">
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
+		<div class="row title-row-container">
+			<div class="icon-container">
+					<i class="fa fa-university bank-icon" aria-hidden="true"></i>
+					</div>
+								<div class="col-sm-11">
+				<div class="home-title-container title-container">
 					<h1>Banco UTN</h1>
 				</div>
 			</div>
+			</div>	
 			<div class="row index-content-row">
 				<div class="col-sm-6">
 					<p>Quis tristique ultrices a aenean conubia in, nullam quam

@@ -1,18 +1,26 @@
 <%@ include file="HeaderMenu.jsp"%>
 <div class="main-container">
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="title-container">
+		<div class="row title-row-container">
+			<div class="icon-container">
+				<i class="fa fa-user bank-icon" aria-hidden="true"></i>
+			</div>
+			<div class="col-sm-11">
+				<div class="home-title-container title-container">
 					<h1>Registrar Cliente</h1>
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>Una vez terminado el registro el administrador verificara los
+					datos y habilitara la cuenta.</p>
 			</div>
 		</div>
 		<div class="row client-content">
 			<div class="col-sm-12">
 				<div class="client-data-container">
-					<form action="addClient.do?User=${sessionScope.name}"
-						method="post">
+					<form action="addClient.do?User=${sessionScope.name}" method="post">
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="row create-client-row">
@@ -22,7 +30,7 @@
 									</div>
 									<div class="col-sm-6">
 										<input type="number" id="txtDocumento" name="txtDocumento"
-											placeholder="Documento" min="1" max="2147483647"/>
+											placeholder="Documento" min="1" max="2147483647" />
 									</div>
 								</div>
 								<div class="row create-client-row">
@@ -60,8 +68,8 @@
 											nacimiento:</label>
 									</div>
 									<div class="col-sm-6">
-										<input type="date" id="dtFechaNac" name="dtFechaNac" value="${fecha}"
-											min="1900-01-01">
+										<input type="date" id="dtFechaNac" name="dtFechaNac"
+											value="${fecha}" min="1900-01-01">
 									</div>
 								</div>
 							</div>
@@ -89,13 +97,14 @@
 										<label class="create-client-label">Localidad:</label>
 									</div>
 									<div class="col-sm-6">
-										<select id="ddlLocalidad"
-							name="ddlLocalidad" placeholder="Localidad">
-							<option value="-1">Seleccione...</option>
-							<c:forEach items="${lstLoc}" var="loc">
-								<option value="${loc.getIdLocalidad()},${loc.getDescripcion()}">${loc.getDescripcion()}</option>
-							</c:forEach>
-						</select> 
+										<select id="ddlLocalidad" name="ddlLocalidad"
+											placeholder="Localidad">
+											<option value="-1">Seleccione...</option>
+											<c:forEach items="${lstLoc}" var="loc">
+												<option
+													value="${loc.getIdLocalidad()},${loc.getDescripcion()}">${loc.getDescripcion()}</option>
+											</c:forEach>
+										</select>
 									</div>
 								</div>
 								<div class="row create-client-row">
@@ -104,12 +113,14 @@
 									</div>
 									<div class="col-sm-6">
 										<select id="ddlProvincia" name="ddlProvincia"
-							onchange="sacarHidden(this.value,0, -1)" placeholder="Provincia">
-							<option value="-1">Seleccione...</option>
-							<c:forEach items="${lstProv}" var="prov">
-								<option value="${prov.getIdProvincia()},${prov.getDescripcion()}">${prov.getDescripcion()}</option>
-							</c:forEach>
-						</select> 
+											onchange="sacarHidden(this.value,0, -1)"
+											placeholder="Provincia">
+											<option value="-1">Seleccione...</option>
+											<c:forEach items="${lstProv}" var="prov">
+												<option
+													value="${prov.getIdProvincia()},${prov.getDescripcion()}">${prov.getDescripcion()}</option>
+											</c:forEach>
+										</select>
 									</div>
 								</div>
 							</div>

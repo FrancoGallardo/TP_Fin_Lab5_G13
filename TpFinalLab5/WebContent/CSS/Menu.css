@@ -88,6 +88,25 @@ margin-right: 5px
 	padding-bottom: 3%;
 }
 
+.title-row-container{
+	padding: 20px 0;
+	display: flex;
+    align-items: center;
+}
+
+.icon-container{
+	width: 6%;
+	padding-left: 15px;
+}
+
+.title-container h1{
+	margin: 0;
+}
+
+.bank-icon{
+	font-size: 50px !important;
+}
+
 .form-content-container{
 	padding: 20px 0
 }
@@ -135,6 +154,24 @@ margin-right: 5px
 .opertation-row{
 	    margin-bottom: 15px;
     margin-top: 20px;
+}
+
+.details-row{
+	padding: 10px 0;
+}
+
+.return-anchor{
+	border: 1px solid #428bca;
+    padding: 10px;
+    background-color: #428bca;
+    color: #ffffff;
+    text-decoration: none !important;
+}
+
+.return-anchor:hover,
+.return-anchor:focus{
+	 background-color: #ffffff;
+	     color: #428bca;
 }
 
 /*

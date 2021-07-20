@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="title-container" id="titulo">
-					<h1 class="title">Alta de Clientes</h1>
+					<h1 class="title">Alta de Cuenta</h1>
 				</div>
 				<table id="bankTable">
 					<thead>

@@ -28,7 +28,6 @@ public class Cuenta implements Serializable{
 	@Column(name="CodTipoCuenta")
 	private int CodTipoCuenta;
 	@Column(name = "NumeroCuenta")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int NumeroCuenta;
 	@Column(name="Saldo")
 	private Double Saldo;

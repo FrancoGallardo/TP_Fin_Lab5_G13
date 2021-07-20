@@ -24,9 +24,6 @@ public class Usuario implements Serializable{
 	private String TipoUsuario;
 	@Column(name="Estado")
 	private Boolean Estado;
-	@Column(name="idUsuario")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idUsuario;
 	
 	
 	public Usuario(String username, String password, String tipoUsuario, Boolean estado) {
@@ -71,20 +68,11 @@ public class Usuario implements Serializable{
 		Estado = estado;
 	}
 	
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "Usuario [Username=" + Username + ", Password=" + Password + ", TipoUsuario=" + TipoUsuario + ", Estado="
-				+ Estado + ", idUsuario=" + idUsuario + "]";
+				+ Estado + "]";
 	}
 
 	public boolean equals(Usuario user) {

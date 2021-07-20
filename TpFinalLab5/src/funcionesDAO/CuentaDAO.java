@@ -14,5 +14,5 @@ public interface CuentaDAO {
 	public boolean modificar(Cuenta cuenta);
 	public void Finalizar();
 	public void Inicializar();
-	
+	public int contarCuentas(int DNI);
 }

@@ -12,4 +12,5 @@ public interface CuentaN {
 	public List<Cuenta> obtenerCuentasCliente(int id);
 	public boolean modificar(Cuenta cuenta);
 	public boolean verificarCuenta(int CBU);
+	public int contarCuentas(int DNI);
 }

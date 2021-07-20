@@ -5,11 +5,11 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="title-container" id="titulo">
-					<h1 class="title">Datos Cliente</h1>
+					<h1 class="title" style="padding: 30px 0;">Datos Cliente</h1>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>DNI</span>
 							</div>
@@ -17,7 +17,7 @@
 								<span>${cliente.getDNI()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Usuario</span>
 							</div>
@@ -25,7 +25,7 @@
 								<span>${cliente.getUsuario().getUsername()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Nombre</span>
 							</div>
@@ -33,7 +33,7 @@
 								<span>${cliente.getNombre()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Apellido</span>
 							</div>
@@ -41,7 +41,7 @@
 								<span>${cliente.getApellido()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Sexo</span>
 							</div>
@@ -49,7 +49,7 @@
 								<span>${cliente.getSexo()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Nacionalidad</span>
 							</div>
@@ -57,7 +57,7 @@
 								<span>${cliente.getNacionalidad()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Direccion</span>
 							</div>
@@ -65,7 +65,7 @@
 								<span>${cliente.getDireccion()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Localidad</span>
 							</div>
@@ -73,7 +73,7 @@
 								<span>${cliente.getLocalidad().getDescripcion()}</span>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row details-row">
 							<div class="col-sm-6">
 								<span>Provincia</span>
 							</div>
@@ -84,9 +84,12 @@
 					</div>
 				</div>
 				${Msg}
+					</div>
 			</div>
-			<div>
-			<a href="redirectListaClientes.do">Regresar</a>
+			<div class="row" style="margin-top: 20px">
+			<div class="col-sm-12">
+			<a class="return-anchor" href="redirectListaClientes.do">Regresar</a>
+			</div>
 			</div>
 		</div>
 	</div>

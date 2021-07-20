@@ -30,7 +30,7 @@ import negocioImp.TipoCuentaNImp;
 import negocioImp.UsuarioNImp;
 
 @Controller
-@SessionAttributes(value="name")
+@SessionAttributes(value = "name")
 @Scope()
 public class AdminController {
 
@@ -49,8 +49,7 @@ public class AdminController {
 	Provincia prov = (Provincia) appContextEntidad.getBean("provincia");
 	Cuenta cuenta = (Cuenta) appContextEntidad.getBean("cuenta");
 	TipoCuenta tCuenta = (TipoCuenta) appContextEntidad.getBean("tipoCuenta");
-	
-	
+
 	@RequestMapping("/redirectListaClientes.do")
 	public ModelAndView eventoRedirectListaClientes() {
 		ModelAndView mv = new ModelAndView();
@@ -80,7 +79,7 @@ public class AdminController {
 		mv.addObject("PageTitle", "Listado Cuentas");
 		return mv;
 	}
-	
+
 	@RequestMapping("/redirectListadoCuentas.do")
 	public ModelAndView eventoRedirectListadoCuentas() {
 		ModelAndView mv = new ModelAndView();
@@ -90,29 +89,34 @@ public class AdminController {
 		mv.addObject("PageTitle", "Listado Cuentas");
 		return mv;
 	}
-	
-	public boolean verificarCuenta(String txtCBU, String txtFechaCreacion, String ddlTipoCuenta, String txtSaldo, String txtUsuario) {
+
+	public boolean verificarCuenta(String txtCBU, String txtFechaCreacion, String ddlTipoCuenta, String txtSaldo,
+			String txtUsuario) {
 		boolean verificar = false;
-		if (Integer.parseInt(txtCBU) > 0) {
-			if (!nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
-				cuenta.setCBU(Integer.parseInt(txtCBU));
-				if (ddlTipoCuenta != "") {
-					cuenta.setCodTipoCuenta(Integer.parseInt(ddlTipoCuenta));
-					if (Double.parseDouble(txtSaldo) > 0) {
-						cuenta.setSaldo(Double.parseDouble(txtSaldo));
-						verificar = true;
-						Date FechaNac = null;
-						try {
-							FechaNac = new SimpleDateFormat("yyyy-mm-dd").parse(txtFechaCreacion);
-							cli.setFecha(FechaNac);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+		if (nCuenta.contarCuentas(Integer.parseInt(txtUsuario)) < 4) {
+			if (Integer.parseInt(txtCBU) > 0) {
+				if (!nCuenta.verificarCuenta(Integer.parseInt(txtCBU))) {
+					cuenta.setCBU(Integer.parseInt(txtCBU));
+					if (ddlTipoCuenta != "") {
+						cuenta.setCodTipoCuenta(Integer.parseInt(ddlTipoCuenta));
+						if (Double.parseDouble(txtSaldo) > 0) {
+							cuenta.setSaldo(Double.parseDouble(txtSaldo));
+							verificar = true;
+							Date FechaNac = null;
+							try {
+								FechaNac = new SimpleDateFormat("yyyy-mm-dd").parse(txtFechaCreacion);
+								cli.setFecha(FechaNac);
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								verificar = false;
+							}
+							cuenta.setFecha_Creacion(FechaNac);
+							cuenta.setEstado(true);
+							cuenta.setDNI(Integer.parseInt(txtUsuario));
+						} else {
 							verificar = false;
 						}
-						cuenta.setFecha_Creacion(FechaNac);
-						cuenta.setEstado(true);
-						cuenta.setDNI(Integer.parseInt(txtUsuario));
 					} else {
 						verificar = false;
 					}
@@ -127,11 +131,13 @@ public class AdminController {
 		}
 		return verificar;
 	}
-	
+
 	@RequestMapping("/registerAccount.do")
-	public ModelAndView eventoRegistrarCuenta(String txtUsuario, String txtCBU, String txtFechaCreacion, String ddlTipoCuenta,
-			String txtSaldo) {
+	public ModelAndView eventoRegistrarCuenta(String txtUsuario, String txtCBU, String txtFechaCreacion,
+			String ddlTipoCuenta, String txtSaldo) {
 		ModelAndView mv = new ModelAndView();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
 		boolean verificar = verificarCuenta(txtCBU, txtFechaCreacion, ddlTipoCuenta, txtSaldo, txtUsuario);
 		if (verificar) {
 			nCuenta.insertarCuenta(cuenta);
@@ -139,13 +145,16 @@ public class AdminController {
 		} else {
 			mv.addObject("Msg", "Error, los datos ingresados no son correctos.");
 		}
+		List<TipoCuenta> lstTipoCuenta = nTipoCuenta.obtenerTipoCuentas();
+		mv.addObject("fecha", dateFormat.format(date));
 		List<Cliente> lstCliente = nCli.obtenerClientes();
 		mv.addObject("ListadoClientes", lstCliente);
+		mv.addObject("lstTipoCuenta", lstTipoCuenta);
 		mv.setViewName("AltaCuentaCliente");
 		mv.addObject("PageTitle", "Alta Cuenta");
 		return mv;
 	}
-	
+
 	@RequestMapping("/redirectAltaCuentaCliente.do")
 	public ModelAndView eventoRedirectAltaCuentaCliente() {
 		ModelAndView mv = new ModelAndView();
@@ -159,7 +168,7 @@ public class AdminController {
 		mv.addObject("lstTipoCuenta", lstTipoCuenta);
 		mv.addObject("PageTitle", "Alta Cuenta");
 		return mv;
-	}	
+	}
 
 	@RequestMapping("/redirectDetails.do")
 	public ModelAndView eventoRedireccionarDetalles(String DNI) {
@@ -172,7 +181,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/modifyState.do")
-	public ModelAndView eventoModificarEstado(String DNI , String ddlState) {
+	public ModelAndView eventoModificarEstado(String DNI, String ddlState) {
 		ModelAndView mv = new ModelAndView();
 		cli = nCli.buscarCliente(Integer.parseInt(DNI));
 		System.out.println(ddlState);
@@ -184,9 +193,9 @@ public class AdminController {
 		mv.addObject("PageTitle", "Listado Clientes");
 		return mv;
 	}
-	
+
 	public void verificarEstadoCliente(String ddlState) {
-		switch(cli.getEstado()) {
+		switch (cli.getEstado()) {
 		case 0:
 			cli.setEstado(1);
 			break;
